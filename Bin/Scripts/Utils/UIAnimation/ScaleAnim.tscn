@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bw3oxdov0cvwn"]
-
-[ext_resource type="Script" path="res://Scripts/Utils/UIAnimation/ScaleAnim.cs" id="1_fwdq6"]
-
-[node name="ScaleAnim" type="Node"]
-script = ExtResource("1_fwdq6")

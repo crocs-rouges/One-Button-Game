@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One Button Game", "One Button Game.csproj", "{51D778F8-E55A-2582-785F-C5F53701070D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51D778F8-E55A-2582-785F-C5F53701070D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51D778F8-E55A-2582-785F-C5F53701070D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51D778F8-E55A-2582-785F-C5F53701070D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51D778F8-E55A-2582-785F-C5F53701070D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07FCAAC0-EFE3-4AC3-B6B8-B9A88576FBEF}
+	EndGlobalSection
+EndGlobal

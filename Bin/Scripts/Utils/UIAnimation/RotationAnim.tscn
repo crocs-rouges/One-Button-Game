@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://db24fias7ohqd"]
-
-[ext_resource type="Script" path="res://Scripts/Utils/UIAnimation/RotationAnim.cs" id="1_dnmlu"]
-
-[node name="RotationAnim" type="Node"]
-script = ExtResource("1_dnmlu")
