@@ -67,11 +67,12 @@ namespace Com.IsartDigital.OBG
 			foreach (Node lChild in pParent.GetChildren())
 				lChild.QueueFree();
 		}
-		public override void _Process(double pDelta)
-		{
-			base._Process(pDelta);
-			float lDelta = (float)pDelta;
-		}
+		public bool IsInLevel()
+        {
+            if (gameContainer.GetChildCount() > 0)
+                return true;
+            return false;
+        }
 		protected override void Dispose(bool pDisposing)
 		{
 			instance = null;

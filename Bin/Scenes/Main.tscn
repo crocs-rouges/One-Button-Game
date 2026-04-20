@@ -2,5 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_4l0qp"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("gameContainer", "uiContainer")]
 script = ExtResource("1_4l0qp")
+gameContainer = NodePath("GameContainer")
+uiContainer = NodePath("UiContainer")
+
+[node name="UiContainer" type="CanvasLayer" parent="."]
+
+[node name="GameContainer" type="Node2D" parent="."]
