@@ -41,7 +41,7 @@ namespace Com.IsartDigital.OBG.Menus
             //reset modulate and change scene
             lTweenLoadingScreen.TweenProperty(lControlNode, Utils.TWEEN_MODULATE,
                 Utils.colorWhite, 0.1f);
-            lTweenLoadingScreen.Finished += Main.GetInstance().GoToLogin;
+            lTweenLoadingScreen.Finished += Main.GetInstance().GoToMainMenu;
         }
     }
 }
