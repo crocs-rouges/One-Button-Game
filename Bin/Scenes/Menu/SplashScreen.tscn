@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://27k7i5s3ix5m"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/SplashScreen.cs" id="1_g8wk7"]
+[ext_resource type="Texture2D" uid="uid://l620ovkwyvdf" path="res://Assets/SplashScreen/LOGO-ISART_baselineEN_150DPI_white.png" id="2_ntubo"]
+
+[node name="SplashScreen" type="Control" node_paths=PackedStringArray("isartLogo")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g8wk7")
+isartLogo = NodePath("ISARTlogo")
+
+[node name="BackGround" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.133333, 0.160784, 0.270588, 1)
+
+[node name="ISARTlogo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -386.5
+offset_top = -194.5
+offset_right = 386.5
+offset_bottom = 194.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.25, 1.25)
+pivot_offset = Vector2(386, 194)
+texture = ExtResource("2_ntubo")
