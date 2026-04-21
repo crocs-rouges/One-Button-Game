@@ -15,6 +15,15 @@ run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=6
+window/vsync/vsync_mode=0
+
 [dotnet]
 
 project/assembly_name="One Button Game"
@@ -25,4 +34,12 @@ folder_colors={
 "res://Assets/": "green",
 "res://Scenes/": "yellow",
 "res://Scripts/": "blue"
+}
+
+[input]
+
+Press={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(102, 19),"global_position":Vector2(106, 60),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
 }

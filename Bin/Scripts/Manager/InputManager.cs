@@ -20,9 +20,6 @@ namespace Com.IsartDigital.OBG
         #endregion
         [ExportGroup("Input")]
         private const string RESET = "Reset";
-
-        public event Action<Vector2I> OnMoveInput;
-        public event Action OnClick;
         public event Action OnUiNext;
         public event Action OnResetInput;
 
@@ -35,6 +32,20 @@ namespace Com.IsartDigital.OBG
         private const int LANDSCAPE = 1;
         private int currentOrientation = -1;
         public Action onSizeChanged;
+
+        [ExportGroup("Screen Input")]
+        private const float HOLD_TIME_ACTIVATION = 0.5f;
+        private const float DOUBLE_TAP_RESET_TIME = 0.2f;
+        private bool hasTap;
+        private float tapTimer;
+        private float holdTimer;
+        private bool isHolding;
+        public event Action OnTap;
+        public event Action OnDoubleTap;
+        public event Action OnHold;
+
+
+
 
         [ExportGroup("Swipe")]
         private const float SWIPE_LENGTH = 100f; //length in pixel of the swipe
@@ -65,29 +76,24 @@ namespace Com.IsartDigital.OBG
 
             OnSizeChanged();
             GetViewport().SizeChanged += OnSizeChanged;
+            holdTimer = HOLD_TIME_ACTIVATION;
+            tapTimer = DOUBLE_TAP_RESET_TIME;
         }
 
         public override void _Process(double pDelta)
         {
             base._Process(pDelta);
+            float lDelta = (float)pDelta;
             CheckGesture();
+            CheckScreenInput(lDelta);
         }
 
         public override void _Input(InputEvent pEvent)
         {
             if (pEvent.IsActionPressed(UI_NEXT))
                 OnUiNext?.Invoke();
-            Vector2I lDirection = Vector2I.Zero;
-
-            if (pEvent.IsActionPressed(Utils.MOVE_UP)) lDirection = Vector2I.Up;
-            if (pEvent.IsActionPressed(Utils.MOVE_DOWN)) lDirection = Vector2I.Down;
-            if (pEvent.IsActionPressed(Utils.MOVE_LEFT)) lDirection = Vector2I.Left;
-            if (pEvent.IsActionPressed(Utils.MOVE_RIGHT)) lDirection = Vector2I.Right;
-
-            if (lDirection != Vector2I.Zero) OnMoveInput?.Invoke(lDirection);
-
-            if (pEvent.IsActionPressed(RESET))
-                OnResetInput?.Invoke();
+            // if (pEvent.IsActionPressed(RESET))
+            //     OnResetInput?.Invoke();
         }
 
         /// <summary>
@@ -105,6 +111,53 @@ namespace Com.IsartDigital.OBG
             }
             currentOrientation = lNewOrientation;
         }
+        #region Screen Input
+        private void CheckScreenInput(float pDelta)
+        {
+            if (Input.IsActionJustReleased(PRESS))
+            {
+                if (isHolding) isHolding = false;
+                if (hasTap) DoubleTap();
+                else if (holdTimer > 0) hasTap = true;
+                holdTimer = DOUBLE_TAP_RESET_TIME;
+                tapTimer = DOUBLE_TAP_RESET_TIME;
+
+            }
+            if (Input.IsActionPressed(PRESS))
+            {
+                isHolding = true;
+                holdTimer -= pDelta;
+                if (holdTimer <= 0)
+                {
+                    GD.Print("hold");
+                    OnHold?.Invoke();
+                    isHolding = false;
+                }
+            }
+            tapTimer -= pDelta;
+            if (tapTimer <= 0)
+            {
+                tapTimer = DOUBLE_TAP_RESET_TIME;
+                if (hasTap) SingleTap();
+                hasTap = false;
+            }
+        }
+        private void SingleTap()
+        {
+            GD.Print("single tap");
+            OnTap?.Invoke();
+            tapTimer = DOUBLE_TAP_RESET_TIME;
+            holdTimer = DOUBLE_TAP_RESET_TIME;
+        }
+        private void DoubleTap()
+        {
+            GD.Print("double tap");
+            OnDoubleTap?.Invoke();
+            hasTap = false;
+            tapTimer = DOUBLE_TAP_RESET_TIME;
+            holdTimer = DOUBLE_TAP_RESET_TIME;
+        }
+        #endregion
         #region Swipe Gesture
         private void CheckGesture()
         {
@@ -146,10 +199,7 @@ namespace Com.IsartDigital.OBG
         }
         private void GameSwipeMovement(Vector2I pDir)
         {
-            Vector2I lFinalDir = pDir;
-            // Apply camera rotation offset
-            OnMoveInput?.Invoke(lFinalDir);
-            GD.Print(lFinalDir);
+            //do nothing if in game
         }
         private void MenuSwipeMovement(Vector2I pDir)
         {

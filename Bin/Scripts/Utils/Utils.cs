@@ -18,12 +18,6 @@ namespace Com.IsartDigital.OBG.Tools
         public const string ADD_CHILD = "add_child";
         public const string GRAB_FOCUS = "grab_focus";
 
-        [ExportGroup("Input")]
-        public const string MOVE_UP = "Up";
-        public const string MOVE_DOWN = "Down";
-        public const string MOVE_LEFT = "Left";
-        public const string MOVE_RIGHT = "Right";
-
         [ExportGroup("Tweens")]
         public const string TWEEN_POSITION = "position";
         public const string TWEEN_GLOBALPOSITION = "global_position";
@@ -45,10 +39,8 @@ namespace Com.IsartDigital.OBG.Tools
         [ExportGroup("Utils")]
         public static RandomNumberGenerator rdG = new RandomNumberGenerator();
         public Vector2 screenSize;
+        public float middleScreenVertical;
         public const float ONE_SECOND = 1f;
-
-        [ExportGroup("Node")]
-        [Export] public Node2D gameContainer;
 
         public static Utils GetInstance()
         {
@@ -63,6 +55,7 @@ namespace Com.IsartDigital.OBG.Tools
         public Vector2 GetResolution()
         {
             screenSize = GetWindow().Size;
+            middleScreenVertical = screenSize.Y / 2f;
             GD.Print("Screen Size : " + screenSize);
             return screenSize;
         }
@@ -79,7 +72,7 @@ namespace Com.IsartDigital.OBG.Tools
         {
             if (pParticle == null) return null;
             GpuParticles2D lParticle = pParticle.Duplicate() as GpuParticles2D;
-            GetInstance().gameContainer.AddChild(lParticle);
+            Main.GetInstance().gameContainer.AddChild(lParticle);
             lParticle.Emitting = true;
             lParticle.Finished += () => lParticle.QueueFree();
             lParticle.GlobalPosition = pPos;
@@ -105,13 +98,6 @@ namespace Com.IsartDigital.OBG.Tools
             lTimer.OneShot = true;
             lTimer.Start();
             return lTimer;
-        }
-        public static void RotateVector2I(ref Vector2I pVectorI, float pRotation)
-        {
-            Vector2 lVectorF = new Vector2(pVectorI.X, pVectorI.Y);
-            lVectorF = lVectorF.Rotated(pRotation);
-
-            pVectorI = new Vector2I(Mathf.RoundToInt(lVectorF.X), Mathf.RoundToInt(lVectorF.Y));
         }
         public static T GetRandomElementFromList<T>(List<T> pList)
         {
@@ -154,55 +140,6 @@ namespace Com.IsartDigital.OBG.Tools
             else GD.Print("Folder does not exist.");
             return lList;
         }
-        #region Animation
-        public static Tween GloabalPositionAnim(ref Tween pTween, GodotObject pObject, float pDuration, Vector2 pTargetPos, float pDelay = 0, Tween.EaseType pEasing = Tween.EaseType.InOut, Tween.TransitionType pTransition = Tween.TransitionType.Quad)
-        {
-            if (pTween == null) return null;
-
-            pTween.TweenProperty(pObject, TWEEN_GLOBALPOSITION, pTargetPos, pDuration)
-                .SetEase(pEasing).SetTrans(pTransition).SetDelay(pDelay);
-            return pTween;
-        }
-        public static Tween GloabalPositionAnim(ref Tween pTween, GodotObject pObject, float pDuration, Vector2 pTargetPos, float pDelay = 0)
-        {
-            if (pTween == null) return null;
-            pTween.TweenProperty(pObject, TWEEN_GLOBALPOSITION, pTargetPos, pDuration).SetDelay(pDelay);
-            return pTween;
-        }
-        public static Tween PositionAnim(ref Tween pTween, GodotObject pObject, float pDuration, Vector2 pTargetPos, float pDelay = 0, Tween.EaseType pEasing = Tween.EaseType.InOut, Tween.TransitionType pTransition = Tween.TransitionType.Quad)
-        {
-            pTween.TweenProperty(pObject, TWEEN_POSITION, pTargetPos, pDuration)
-                .SetEase(pEasing).SetTrans(pTransition).SetDelay(pDelay);
-            return pTween;
-        }
-        public static Tween PositionAnim(ref Tween pTween, GodotObject pObject, float pDuration, Vector2 pTargetPos, float pDelay = 0)
-        {
-            pTween.TweenProperty(pObject, TWEEN_POSITION, pTargetPos, pDuration).SetDelay(pDelay);
-            return pTween;
-        }
-        public static Tween ScaleAnim(ref Tween pTween, GodotObject pObject, float pDuration, Vector2 pTargetScale, float pDelay = 0, Tween.EaseType pEasing = Tween.EaseType.InOut, Tween.TransitionType pTransition = Tween.TransitionType.Quad)
-        {
-            pTween.TweenProperty(pObject, TWEEN_SCALE, pTargetScale, pDuration)
-                .SetEase(pEasing).SetTrans(pTransition).SetDelay(pDelay);
-            return pTween;
-        }
-        public static Tween ScaleAnim(ref Tween pTween, GodotObject pObject, float pDuration, Vector2 pTargetScale, float pDelay)
-        {
-            pTween.TweenProperty(pObject, TWEEN_SCALE, pTargetScale, pDuration).SetDelay(pDelay);
-            return pTween;
-        }
-        public static Tween RotationAnim(ref Tween pTween, GodotObject pObject, float pDuration, float pTargetRotation, float pDelay = 0, Tween.EaseType pEasing = Tween.EaseType.InOut, Tween.TransitionType pTransition = Tween.TransitionType.Quad)
-        {
-            pTween.TweenProperty(pObject, TWEEN_ROTATION, pTargetRotation, pDuration)
-                .SetEase(pEasing).SetTrans(pTransition).SetDelay(pDelay);
-            return pTween;
-        }
-        public static Tween RotationAnim(ref Tween pTween, GodotObject pObject, float pDuration, float pTargetRotation, float pDelay)
-        {
-            pTween.TweenProperty(pObject, TWEEN_ROTATION, pTargetRotation, pDuration).SetDelay(pDelay);
-            return pTween;
-        }
-        #endregion
         protected override void Dispose(bool pDisposing)
         {
             instance = null;

@@ -9,21 +9,11 @@ namespace Com.IsartDigital.OBG
 	{
 		static private Main instance;
 
-		[Export] private Node gameContainer;
+		[Export] public Node gameContainer;
 		[Export] private CanvasLayer uiContainer;
 		[Export] private bool skipSplashScreen;
-
-
 		static private PackedScene factory = GD.Load<PackedScene>("res://Scenes/Main.tscn");
-		private static readonly PackedScene scnMainMenu = GD.Load<PackedScene>("res://Scenes/Menus/MainMenu.tscn");
-
-
-
-
-
-
-
-
+		private static readonly PackedScene scnMainMenu = GD.Load<PackedScene>("res://Scenes/Menu/MainMenu.tscn");
 
 
 		private Main() : base()
@@ -68,11 +58,11 @@ namespace Com.IsartDigital.OBG
 				lChild.QueueFree();
 		}
 		public bool IsInLevel()
-        {
-            if (gameContainer.GetChildCount() > 0)
-                return true;
-            return false;
-        }
+		{
+			if (gameContainer.GetChildCount() > 0)
+				return true;
+			return false;
+		}
 		protected override void Dispose(bool pDisposing)
 		{
 			instance = null;
