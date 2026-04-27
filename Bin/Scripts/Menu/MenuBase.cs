@@ -4,7 +4,7 @@ using Godot;
 
 namespace Com.IsartDigital.OBG.Menus
 {
-    public partial class MenuBase : CanvasLayer
+    public partial class MenuBase : Control
     {
         [Export] protected Label menuNameLabel;
         protected Vector2 labelInitialPos;

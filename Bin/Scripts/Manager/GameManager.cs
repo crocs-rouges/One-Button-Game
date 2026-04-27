@@ -1,3 +1,4 @@
+using Com.IsartDigital.OBG.Manager;
 using Godot;
 
 // Author : Romain Chevalier
@@ -34,18 +35,15 @@ namespace Com.IsartDigital.OBG
         {
             InputManager.GetInstance().OnResetInput += Reset;
         }
-        public void Setup(int pLevelIndex, int pPar)
+        public void SetupGame()
         {
         }
-
-        public void ReplayLevel()
+        public void ResetOnCheckpoint()
         {
         }
-
         public void Reset()
         {
         }
-
         protected override void Dispose(bool pDisposing)
         {
             instance = null;

@@ -52,6 +52,10 @@ namespace Com.IsartDigital.OBG.Tools
             instance = this;
             GetResolution();
         }
+        /// <summary>
+        /// get resolution and middle in vertical
+        /// </summary>
+        /// <returns>the screen size</returns>
         public Vector2 GetResolution()
         {
             screenSize = GetWindow().Size;

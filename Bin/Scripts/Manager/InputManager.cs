@@ -5,7 +5,7 @@ using Godot;
 
 // Author : Romain Chevalier
 
-namespace Com.IsartDigital.OBG
+namespace Com.IsartDigital.OBG.Manager
 {
     public partial class InputManager : Node2D
     {

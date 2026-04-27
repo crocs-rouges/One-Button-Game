@@ -1,408 +1,56 @@
-[gd_scene load_steps=20 format=3 uid="uid://c8df5lynn8qvp"]
+[gd_scene load_steps=2 format=3 uid="uid://dcddx7ackxagh"]
 
-[ext_resource type="Script" path="res://Scripts/Menus/MainMenu.cs" id="1_m168r"]
-[ext_resource type="Texture2D" uid="uid://1kmemwmjni0n" path="res://Assets/UI/Flags/EnglandToken.png" id="3_4fdxf"]
-[ext_resource type="PackedScene" uid="uid://bunyjqe4jt3fy" path="res://Scenes/Menus/CardBtn.tscn" id="4_78spi"]
-[ext_resource type="Texture2D" uid="uid://dfxp53kxggbp4" path="res://Assets/UI/background.png" id="4_hul53"]
-[ext_resource type="Texture2D" uid="uid://v63rkcy6yr4i" path="res://Assets/logo SokoDice.png" id="5_5jqs5"]
-[ext_resource type="Script" path="res://Scripts/Utils/UIAnimation/PositionAnim.cs" id="5_hwvag"]
-[ext_resource type="Texture2D" uid="uid://cso4yvog33ng1" path="res://Assets/UI/Icons/audioOffGold.png" id="5_lqn7w"]
-[ext_resource type="Script" path="res://Scripts/Utils/UIAnimation/RotationAnim.cs" id="6_yhc74"]
-[ext_resource type="Texture2D" uid="uid://bh3q3yhtk1sec" path="res://Assets/UI/Cards/GoldBlackCardFrontRotated.png" id="7_8qwxc"]
-[ext_resource type="Texture2D" uid="uid://ufghh1jbfjmg" path="res://Assets/UI/Cards/BackBlackCard.png" id="10_1na1k"]
-[ext_resource type="Script" path="res://Scripts/UI/BaseButton.cs" id="10_ceuqs"]
-[ext_resource type="Texture2D" uid="uid://4w1vmwfrjgyx" path="res://Assets/UI/Icons/leaderboardsComplexGold.png" id="10_od4sd"]
-[ext_resource type="Texture2D" uid="uid://cd01268pcs6x7" path="res://Assets/UI/Flags/FranceToken.png" id="11_30t2s"]
-[ext_resource type="Texture2D" uid="uid://dv4e112xbgcfo" path="res://Assets/UI/Icons/playGold.png" id="11_dab0u"]
-[ext_resource type="Texture2D" uid="uid://b0o68mfm16c6m" path="res://Assets/UI/Icons/exitGold.png" id="12_aciii"]
-[ext_resource type="Texture2D" uid="uid://bwpnqa72u6bci" path="res://Assets/UI/Icons/helpGold.png" id="12_gqbd7"]
-[ext_resource type="PackedScene" uid="uid://byu1l3nj34ome" path="res://Scripts/Utils/UIAnimation/PositionAnim.tscn" id="13_pprfj"]
-[ext_resource type="Texture2D" uid="uid://dkx2w613tyxbd" path="res://Assets/UI/BlackToken.png" id="19_2buaw"]
-[ext_resource type="Texture2D" uid="uid://c6u4wub1yb7rv" path="res://Assets/UI/Icons/audioOnGold.png" id="20_xka84"]
+[ext_resource type="Script" path="res://Scripts/Menu/MainMenu.cs" id="1_tmmm4"]
 
-[node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("playButton", "highScoreButton", "helpButton", "quitButton", "languageBtn", "soundBtn", "soundTexture")]
-offset = Vector2(0, -1500)
-transform = Transform2D(1, 0, 0, 1, 0, -1500)
-script = ExtResource("1_m168r")
-playButton = NodePath("Control/BtnContainer/PlayBtn")
-highScoreButton = NodePath("Control/BtnContainer/HighScoreBtn")
-helpButton = NodePath("Control/BtnContainer/HelpBtn")
-quitButton = NodePath("Control/BtnContainer/QuitBtn")
-languageBtn = NodePath("Control/LanguageBtn")
-frTexture = ExtResource("11_30t2s")
-enTexture = ExtResource("3_4fdxf")
-soundBtn = NodePath("Control/SoundBtn")
-soundTexture = NodePath("Control/SoundBtn/TextureRect")
-soundOnTexture = ExtResource("20_xka84")
-soundOffTexture = ExtResource("5_lqn7w")
-
-[node name="Control" type="Control" parent="."]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("menuNameLabel", "backButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1500.0
-offset_bottom = 1500.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_tmmm4")
+menuNameLabel = NodePath("Label")
+backButton = NodePath("quit")
 
-[node name="BG" type="TextureRect" parent="Control"]
-z_index = -50
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_hul53")
-expand_mode = 1
-
-[node name="TitleCard" type="TextureRect" parent="Control"]
+[node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -204.0
-offset_top = 32.0
-offset_right = 207.0
-offset_bottom = 244.0
+offset_left = -49.5
+offset_right = 49.5
+offset_bottom = 23.0
 grow_horizontal = 2
-pivot_offset = Vector2(205, 106)
-texture = ExtResource("7_8qwxc")
-expand_mode = 1
+theme_override_font_sizes/font_size = 86
+text = "HELLO TEAM"
 
-[node name="TextureRect" type="TextureRect" parent="Control/TitleCard"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_right = 6.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_5jqs5")
-expand_mode = 1
-
-[node name="PosAnim" type="Node" parent="Control/TitleCard"]
-script = ExtResource("5_hwvag")
-initialOffset = Vector2(0, 2500)
-enteringAnimDelay = 0.4
-enteringAnimDuration = 1.5
-enteringEasing = 1
-enteringTransition = 5
-visibleWhenStartingAnim = true
-enteringSound = 9
-exitOffset = Vector2(0, -500)
-exitAnimDelay = 1.0
-exitAnimDuration = 0.4
-exitSound = 9
-
-[node name="RotationAnim" type="Node" parent="Control/TitleCard"]
-script = ExtResource("6_yhc74")
-enteringRotationOffset = 720.0
-enteringAnimDelay = 0.4
-enteringAnimDuration = 1.5
-enteringEasing = 1
-enteringTransition = 5
-
-[node name="CardStack" type="TextureRect" parent="Control"]
-z_index = 2
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -250.0
-offset_top = 50.0
-offset_right = -50.0
-offset_bottom = 330.0
-grow_horizontal = 0
-texture = ExtResource("10_1na1k")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="PositionAnim" parent="Control/CardStack" node_paths=PackedStringArray("animToWaitToExit") instance=ExtResource("13_pprfj")]
-initialOffset = Vector2(300, 0)
-enteringAnimDelay = 0.2
-enteringAnimDuration = 1.0
-enteringTransition = 0
-visibleWhenStartingAnim = true
-exitOffset = Vector2(300, 0)
-animToWaitToExit = NodePath("../../BtnContainer/HighScoreBtn/PosAnim")
-exitAnimDelay = 0.1
-exitAnimDuration = 1.0
-exitTransition = 0
-IsTheLastAnim = true
-
-[node name="BtnContainer" type="Control" parent="Control"]
+[node name="play" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -490.0
-offset_top = -140.0
-offset_right = 490.0
-offset_bottom = 140.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 200
+text = "ID_PLAY"
 
-[node name="HighScoreBtn" parent="Control/BtnContainer" node_paths=PackedStringArray("lastAnim") instance=ExtResource("4_78spi")]
-visible = false
-custom_minimum_size = Vector2(200, 280)
-layout_mode = 1
-anchors_preset = 4
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = 0.0
-offset_right = 200.0
-grow_horizontal = 1
-focus_neighbor_right = NodePath("../PlayBtn")
-focus_neighbor_bottom = NodePath("../../LanguageBtn")
-disabled = true
-ignore_texture_size = true
-stretch_mode = 4
-textKey = "ID_HIGH_SCORE"
-icon = ExtResource("10_od4sd")
-lastAnim = NodePath("PosAnim")
-blinkValue = Vector2(1.2, 1.2)
-blinkInDuration = 0.1
-blinkOutDuration = 0.1
-sfxButtonClicked = 10
-
-[node name="PosAnim" type="Node" parent="Control/BtnContainer/HighScoreBtn" node_paths=PackedStringArray("target", "startingPoint", "animToWaitToEnter", "exitPoint")]
-script = ExtResource("5_hwvag")
-target = NodePath("..")
-startingPoint = NodePath("../../../CardStack")
-animToWaitToEnter = NodePath("../../../CardStack/PositionAnim")
-enteringAnimDelay = 0.2
-enteringAnimDuration = 0.4
-visibleWhenStartingAnim = true
-enteringSound = 9
-focusOffset = Vector2(0, -50)
-focusAnimDuration = 0.4
-focusChangedSound = 10
-exitPoint = NodePath("../../../CardStack")
-exitAnimDelay = 0.8
-exitAnimDuration = 0.4
-hidenWhenFinishingAnim = true
-exitSound = 9
-
-[node name="PlayBtn" parent="Control/BtnContainer" node_paths=PackedStringArray("lastAnim") instance=ExtResource("4_78spi")]
-visible = false
-custom_minimum_size = Vector2(200, 280)
-layout_mode = 1
-offset_left = -230.0
-offset_right = -30.0
-focus_neighbor_left = NodePath("../HighScoreBtn")
-focus_neighbor_right = NodePath("../HelpBtn")
-focus_neighbor_bottom = NodePath("../../LanguageBtn")
-disabled = true
-ignore_texture_size = true
-stretch_mode = 5
-textKey = "ID_PLAY"
-icon = ExtResource("11_dab0u")
-lastAnim = NodePath("PosAnim")
-blinkValue = Vector2(1.2, 1.2)
-blinkInDuration = 0.1
-blinkOutDuration = 0.1
-sfxButtonClicked = 10
-
-[node name="PosAnim" type="Node" parent="Control/BtnContainer/PlayBtn" node_paths=PackedStringArray("target", "startingPoint", "animToWaitToEnter", "exitPoint")]
-script = ExtResource("5_hwvag")
-target = NodePath("..")
-startingPoint = NodePath("../../../CardStack")
-animToWaitToEnter = NodePath("../../../CardStack/PositionAnim")
-enteringAnimDelay = 0.3
-enteringAnimDuration = 0.4
-visibleWhenStartingAnim = true
-grabFocusWhenFinishedAnim = true
-enteringSound = 9
-focusOffset = Vector2(0, -50)
-focusAnimDuration = 0.4
-focusChangedSound = 10
-exitPoint = NodePath("../../../CardStack")
-exitAnimDelay = 0.6
-exitAnimDuration = 0.4
-hidenWhenFinishingAnim = true
-exitSound = 9
-
-[node name="HelpBtn" parent="Control/BtnContainer" node_paths=PackedStringArray("lastAnim") instance=ExtResource("4_78spi")]
-visible = false
-custom_minimum_size = Vector2(200, 280)
-layout_mode = 1
-offset_left = 30.0
-offset_right = 230.0
-focus_neighbor_left = NodePath("../PlayBtn")
-focus_neighbor_right = NodePath("../QuitBtn")
-focus_neighbor_bottom = NodePath("../../SoundBtn")
-disabled = true
-ignore_texture_size = true
-stretch_mode = 5
-textKey = "ID_HELP"
-icon = ExtResource("12_gqbd7")
-lastAnim = NodePath("PosAnim")
-blinkValue = Vector2(1.2, 1.2)
-blinkInDuration = 0.1
-blinkOutDuration = 0.1
-sfxButtonClicked = 10
-
-[node name="PosAnim" type="Node" parent="Control/BtnContainer/HelpBtn" node_paths=PackedStringArray("target", "startingPoint", "animToWaitToEnter", "exitPoint")]
-script = ExtResource("5_hwvag")
-target = NodePath("..")
-startingPoint = NodePath("../../../CardStack")
-animToWaitToEnter = NodePath("../../../CardStack/PositionAnim")
-enteringAnimDelay = 0.4
-enteringAnimDuration = 0.4
-visibleWhenStartingAnim = true
-enteringSound = 9
-focusOffset = Vector2(0, -50)
-focusAnimDuration = 0.4
-focusChangedSound = 10
-exitPoint = NodePath("../../../CardStack")
-exitAnimDelay = 0.4
-exitAnimDuration = 0.4
-hidenWhenFinishingAnim = true
-exitSound = 9
-
-[node name="QuitBtn" parent="Control/BtnContainer" node_paths=PackedStringArray("lastAnim") instance=ExtResource("4_78spi")]
-visible = false
-custom_minimum_size = Vector2(200, 280)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -200.0
-offset_right = 0.0
-grow_horizontal = 0
-focus_neighbor_left = NodePath("../HelpBtn")
-focus_neighbor_right = NodePath("../../SoundBtn")
-focus_neighbor_bottom = NodePath("../../SoundBtn")
-disabled = true
-ignore_texture_size = true
-stretch_mode = 5
-textKey = "ID_QUIT"
-icon = ExtResource("12_aciii")
-lastAnim = NodePath("PosAnim")
-blinkValue = Vector2(1.2, 1.2)
-blinkInDuration = 0.1
-blinkOutDuration = 0.1
-sfxButtonClicked = 10
-
-[node name="PosAnim" type="Node" parent="Control/BtnContainer/QuitBtn" node_paths=PackedStringArray("target", "startingPoint", "animToWaitToEnter", "exitPoint")]
-script = ExtResource("5_hwvag")
-target = NodePath("..")
-startingPoint = NodePath("../../../CardStack")
-animToWaitToEnter = NodePath("../../../CardStack/PositionAnim")
-enteringAnimDelay = 0.5
-enteringAnimDuration = 0.4
-visibleWhenStartingAnim = true
-enteringSound = 9
-focusOffset = Vector2(0, -50)
-focusAnimDuration = 0.4
-focusChangedSound = 10
-exitPoint = NodePath("../../../CardStack")
-exitAnimDelay = 0.2
-exitAnimDuration = 0.4
-hidenWhenFinishingAnim = true
-exitSound = 9
-
-[node name="LanguageBtn" type="TextureButton" parent="Control" node_paths=PackedStringArray("elementsToAffect")]
-z_index = -1
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = -200.0
-offset_right = 200.0
-offset_bottom = -50.0
-grow_vertical = 0
-pivot_offset = Vector2(75, 75)
-focus_neighbor_top = NodePath("../BtnContainer/PlayBtn")
-focus_neighbor_right = NodePath("../SoundBtn")
-focus_next = NodePath("../SoundBtn")
-focus_previous = NodePath("../BtnContainer/QuitBtn")
-texture_normal = ExtResource("11_30t2s")
-ignore_texture_size = true
-stretch_mode = 5
-script = ExtResource("10_ceuqs")
-elementsToAffect = []
-blinkValue = Vector2(0, 1)
-blinkInDuration = 0.1
-blinkOutDuration = 0.1
-sfxButtonClicked = 11
-sfxButtonFocused = 11
-
-[node name="PosAnim" type="Node" parent="Control/LanguageBtn" node_paths=PackedStringArray("target")]
-script = ExtResource("5_hwvag")
-target = NodePath("..")
-initialOffset = Vector2(-300, 0)
-enteringAnimDelay = 0.5
-enteringAnimDuration = 0.4
-visibleWhenStartingAnim = true
-enteringSound = 9
-focusOffset = Vector2(75, -75)
-focusAnimDuration = 0.4
-exitOffset = Vector2(-300, 0)
-exitAnimDelay = 1.0
-exitAnimDuration = 0.4
-
-[node name="SoundBtn" type="TextureButton" parent="Control" node_paths=PackedStringArray("elementsToAffect")]
-custom_minimum_size = Vector2(100, 100)
+[node name="quit" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -200.0
-offset_right = -50.0
-offset_bottom = -50.0
+offset_left = -489.0
+offset_top = -281.0
 grow_horizontal = 0
 grow_vertical = 0
-pivot_offset = Vector2(75, 75)
-focus_neighbor_left = NodePath("../LanguageBtn")
-focus_neighbor_top = NodePath("../BtnContainer/QuitBtn")
-focus_neighbor_right = NodePath("../LanguageBtn")
-focus_neighbor_bottom = NodePath("../BtnContainer/QuitBtn")
-focus_next = NodePath("../BtnContainer/HighScoreBtn")
-focus_previous = NodePath("../BtnContainer/QuitBtn")
-texture_normal = ExtResource("19_2buaw")
-ignore_texture_size = true
-stretch_mode = 5
-script = ExtResource("10_ceuqs")
-elementsToAffect = []
-blinkValue = Vector2(0, 1)
-blinkInDuration = 0.1
-blinkOutDuration = 0.2
-sfxButtonClicked = 11
-sfxButtonFocused = 11
-
-[node name="PosAnim" type="Node" parent="Control/SoundBtn" node_paths=PackedStringArray("target")]
-script = ExtResource("5_hwvag")
-target = NodePath("..")
-initialOffset = Vector2(300, 0)
-enteringAnimDelay = 0.5
-enteringAnimDuration = 0.4
-visibleWhenStartingAnim = true
-enteringSound = 9
-focusOffset = Vector2(-75, -75)
-focusAnimDuration = 0.4
-exitOffset = Vector2(300, 0)
-exitAnimDelay = 1.0
-exitAnimDuration = 0.4
-
-[node name="TextureRect" type="TextureRect" parent="Control/SoundBtn"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.2
-anchor_right = 0.8
-anchor_bottom = 0.8
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("20_xka84")
-expand_mode = 1
-stretch_mode = 5
+theme_override_font_sizes/font_size = 100
+text = "ID_QUIT"
