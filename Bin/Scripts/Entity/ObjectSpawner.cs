@@ -41,8 +41,6 @@ namespace Com.IsartDigital.OBG
 			float lPosX = Utils.rdG.RandfRange(startPos.X, endPos.X);
 			float lPosY = Utils.rdG.RandfRange(startPos.Y, endPos.Y);
 			lObject.GlobalPosition = new Vector2(lPosX, lPosY);
-
-
 			if (lObject is Rock lRock)
 			{
 				lRock.canFall = true;

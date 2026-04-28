@@ -3,19 +3,16 @@ using System;
 
 // Author : Romain Chevalier
 
-namespace Com.IsartDigital.OBG.Entity
+namespace Com.IsartDigital.OBG.Entity.Food
 {
-	public partial class Rock : Node2D
+	public partial class Food : Node2D
 	{
 		[Export] public bool canFall = false;
 		[Export] public float fallSpeed = 200;
 
-
 		public override void _Ready()
 		{
 			base._Ready();
-
-
 		}
 		public override void _Process(double pDelta)
 		{

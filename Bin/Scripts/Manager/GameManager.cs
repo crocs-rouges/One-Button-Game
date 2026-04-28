@@ -43,6 +43,8 @@ namespace Com.IsartDigital.OBG
         }
         public void Reset()
         {
+            //reload current scene
+            
         }
         protected override void Dispose(bool pDisposing)
         {

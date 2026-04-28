@@ -3,7 +3,7 @@ using System;
 
 // Author : Romain Chevalier
 
-namespace Com.IsartDigital.OBG
+namespace Com.IsartDigital.OBG.Entity.Player
 {
 	public partial class ScoobyPlayer : Node2D
 	{
