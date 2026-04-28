@@ -1,3 +1,4 @@
+using Com.IsartDigital.OBG.Debug;
 using Com.IsartDigital.OBG.Manager;
 using Godot;
 using System;
@@ -9,7 +10,7 @@ namespace Com.IsartDigital.OBG
     public partial class Player : Node2D
     {
         private static Player instance;
-
+        [Export] private Controls controls;
 
 
         public static Player GetInstance()
@@ -21,25 +22,37 @@ namespace Com.IsartDigital.OBG
         {
             instance = this;
             base._Ready();
-            HudManager lHUD = HudManager.GetInstance();
-            lHUD.rotationLeft += TurnLeft;
-            lHUD.rotationRight += TurnRight;
+            HudManager lHud = HudManager.GetInstance();
+            GD.Print(lHud);
+            lHud.rotationLeft += TurnLeft;
+            lHud.rotationRight += TurnRight;
         }
         public override void _Process(double pDelta)
         {
             float lDelta = (float)pDelta;
             base._Process(pDelta);
+            GlobalPosition += Vector2.Up.Rotated(Rotation) * 100 * lDelta;
+            GD.Print(GlobalPosition);
+
+            if (Input.IsActionJustPressed(controls.moveLeft))
+            {
+                TurnLeft();
+            }
+            if (Input.IsActionJustPressed(controls.moveRight))
+            {
+                TurnRight();
+            }
 
 
 
         }
         private void TurnLeft()
         {
-            Rotate(Mathf.Pi / 2f);
+            Rotate(Mathf.Pi / 4f);
         }
         private void TurnRight()
         {
-            Rotate(Mathf.Pi / 2f);
+            Rotate(-Mathf.Pi / 4f);
         }
         protected override void Dispose(bool pDisposing)
         {

@@ -1,10 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://nkhkopgua6h0"]
+[gd_scene load_steps=4 format=3 uid="uid://nkhkopgua6h0"]
 
 [ext_resource type="Script" path="res://Scripts/Manager/GameManager.cs" id="1_gr585"]
 [ext_resource type="PackedScene" uid="uid://c1y7osvglu4b8" path="res://Scenes/Entity/Boat.tscn" id="2_qijx2"]
+[ext_resource type="PackedScene" uid="uid://ublr8p3pe4wq" path="res://Scenes/Entity/Rock.tscn" id="3_vqbvd"]
 
-[node name="Game" type="Node2D"]
+[node name="Boat Game" type="Node2D"]
 script = ExtResource("1_gr585")
 
 [node name="Boat" parent="." instance=ExtResource("2_qijx2")]
 position = Vector2(519, 678)
+
+[node name="Rock" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(782, 1046)
+
+[node name="Rock2" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(230, 1082)
+
+[node name="Rock3" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(678, -396)
+
+[node name="Rock4" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(176, -386)
+
+[node name="Rock5" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(374, -396)
+
+[node name="Rock6" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(912, -14)
+
+[node name="Rock7" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(512, 238)
+
+[node name="Rock8" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(850, 476)
+
+[node name="Rock9" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(-79, 1167)
+scale = Vector2(0.52, 125.104)
+
+[node name="Rock10" parent="." instance=ExtResource("3_vqbvd")]
+position = Vector2(1068, 875)
+scale = Vector2(0.52, 125.104)

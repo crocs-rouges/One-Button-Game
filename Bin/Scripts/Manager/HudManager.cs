@@ -34,8 +34,8 @@ namespace Com.IsartDigital.OBG.Manager
         public override void _Ready()
         {
             base._Ready();
-            leftBtn.Pressed += rotationLeft;
-            rightBtn.Pressed += rotationRight;
+            if (leftBtn != null) leftBtn.Pressed += () => rotationLeft?.Invoke();
+            if (rightBtn != null) rightBtn.Pressed += () => rotationRight?.Invoke();
         }
     }
 }

@@ -1,3 +1,4 @@
+using Com.IsartDigital.OBG.Tools;
 using Godot;
 using System;
 
@@ -40,8 +41,8 @@ namespace Com.IsartDigital.OBG
 		public void GoToLevel()
 		{
 			ClearContainers();
-			gameContainer.AddChild(scnGameLevel.Instantiate());
 			uiContainer.AddChild(scnHUD.Instantiate());
+			gameContainer.AddChild(scnGameLevel.Instantiate());
 		}
 		private void ClearContainers()
 		{
@@ -51,7 +52,6 @@ namespace Com.IsartDigital.OBG
 		private void KillChildredOfNode(Node pParent)
 		{
 			if (pParent == null) return;
-
 			foreach (Node lChild in pParent.GetChildren())
 				lChild.QueueFree();
 		}
