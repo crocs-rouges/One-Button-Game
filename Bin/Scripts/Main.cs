@@ -14,7 +14,8 @@ namespace Com.IsartDigital.OBG
 		[Export] private CanvasLayer uiContainer;
 		[Export] private bool skipSplashScreen;
 		static private PackedScene factory = GD.Load<PackedScene>("res://Scenes/Main.tscn");
-		private static readonly PackedScene scnGameLevel = GD.Load<PackedScene>("res://Scenes/Game.tscn");
+		// private static readonly PackedScene scnGameLevel = GD.Load<PackedScene>("res://Scenes/Game.tscn");
+		private static readonly PackedScene scnGameLevel = GD.Load<PackedScene>("res://Scenes/Scooby-Doo Game.tscn");
 		private static readonly PackedScene scnHUD = GD.Load<PackedScene>("res://Scenes/Menu/HUD.tscn");
 
 

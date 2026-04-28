@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp4suumdaioxx"]
+
+[ext_resource type="Texture2D" uid="uid://cd7oi5xxcsm4" path="res://icon.svg" id="1_66hnx"]
+[ext_resource type="Script" path="res://Scripts/Entity/ObjectSpawner.cs" id="2_7vgau"]
+[ext_resource type="PackedScene" uid="uid://ublr8p3pe4wq" path="res://Scenes/Entity/Rock.tscn" id="3_85gtm"]
+
+[node name="ObjectSpawner" type="Sprite2D"]
+texture = ExtResource("1_66hnx")
+script = ExtResource("2_7vgau")
+objectToSpawn = ExtResource("3_85gtm")

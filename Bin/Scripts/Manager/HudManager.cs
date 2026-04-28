@@ -15,6 +15,7 @@ namespace Com.IsartDigital.OBG.Manager
         [Export] private Button rightBtn;
         public Action rotationLeft;
         public Action rotationRight;
+        [Export] private Button resetBtn;
 
         private HudManager() : base()
         {
@@ -36,6 +37,8 @@ namespace Com.IsartDigital.OBG.Manager
             base._Ready();
             if (leftBtn != null) leftBtn.Pressed += () => rotationLeft?.Invoke();
             if (rightBtn != null) rightBtn.Pressed += () => rotationRight?.Invoke();
+            resetBtn.Pressed += GameManager.GetInstance().Reset;
+        
         }
     }
 }

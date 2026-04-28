@@ -7,15 +7,15 @@ using System;
 
 namespace Com.IsartDigital.OBG
 {
-    public partial class Player : Node2D
+    public partial class BoatPlayer : Node2D
     {
-        private static Player instance;
+        private static BoatPlayer instance;
         [Export] private Controls controls;
 
 
-        public static Player GetInstance()
+        public static BoatPlayer GetInstance()
         {
-            if (instance == null) instance = new Player();
+            if (instance == null) instance = new BoatPlayer();
             return instance;
         }
         public override void _Ready()

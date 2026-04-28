@@ -28,7 +28,6 @@ script = ExtResource("4_g711m")
 script = ExtResource("3_hiqw7")
 
 [node name="Label" type="Label" parent="."]
-visible = false
 offset_right = 281.0
 offset_bottom = 69.0
 theme_override_font_sizes/font_size = 50
