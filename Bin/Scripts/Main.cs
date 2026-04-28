@@ -13,7 +13,8 @@ namespace Com.IsartDigital.OBG
 		[Export] private CanvasLayer uiContainer;
 		[Export] private bool skipSplashScreen;
 		static private PackedScene factory = GD.Load<PackedScene>("res://Scenes/Main.tscn");
-		private static readonly PackedScene scnMainMenu = GD.Load<PackedScene>("res://Scenes/Menu/MainMenu.tscn");
+		private static readonly PackedScene scnGameLevel = GD.Load<PackedScene>("res://Scenes/Game.tscn");
+		private static readonly PackedScene scnHUD = GD.Load<PackedScene>("res://Scenes/Menu/HUD.tscn");
 
 
 		private Main() : base()
@@ -34,22 +35,19 @@ namespace Com.IsartDigital.OBG
 		public override void _Ready()
 		{
 			base._Ready();
-			if (skipSplashScreen)
-			{
-				GoToMainMenu();
-			}
+			if (skipSplashScreen) GoToLevel();
 		}
-		public void GoToMainMenu()
+		public void GoToLevel()
 		{
 			ClearContainers();
-			uiContainer.AddChild(scnMainMenu.Instantiate());
+			gameContainer.AddChild(scnGameLevel.Instantiate());
+			uiContainer.AddChild(scnHUD.Instantiate());
 		}
 		private void ClearContainers()
 		{
 			KillChildredOfNode(gameContainer);
 			KillChildredOfNode(uiContainer);
 		}
-
 		private void KillChildredOfNode(Node pParent)
 		{
 			if (pParent == null) return;

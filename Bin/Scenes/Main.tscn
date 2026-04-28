@@ -10,6 +10,7 @@
 script = ExtResource("1_4l0qp")
 gameContainer = NodePath("GameContainer")
 uiContainer = NodePath("UiContainer")
+skipSplashScreen = true
 
 [node name="UiContainer" type="CanvasLayer" parent="."]
 

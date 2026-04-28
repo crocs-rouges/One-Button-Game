@@ -27,9 +27,7 @@ namespace Com.IsartDigital.OBG.Menus
             if (menuNameLabel != null) menuNameLabel.Visible = pVisible;
         }
         protected virtual void Back()
-        {
-            if (GetParent() is MainMenu)
-                MainMenu.GetInstance().Open();
+        {            
             Close();
         }
         public virtual void Open()

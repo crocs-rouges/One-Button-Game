@@ -1,9 +1,10 @@
-[gd_scene format=3 uid="uid://nkhkopgua6h0"]
+[gd_scene load_steps=3 format=3 uid="uid://nkhkopgua6h0"]
 
-[node name="Game" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="Script" path="res://Scripts/Manager/GameManager.cs" id="1_gr585"]
+[ext_resource type="PackedScene" uid="uid://c1y7osvglu4b8" path="res://Scenes/Entity/Boat.tscn" id="2_qijx2"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_gr585")
+
+[node name="Boat" parent="." instance=ExtResource("2_qijx2")]
+position = Vector2(519, 678)
