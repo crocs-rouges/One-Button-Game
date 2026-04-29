@@ -7,7 +7,7 @@ namespace Com.IsartDigital.OBG.Entity.Food
 {
 	public partial class Food : Node2D
 	{
-		[Export] public bool canFall = false;
+		[Export] public bool canFall = true;
 		[Export] public float fallSpeed = 200;
 
 		public override void _Ready()

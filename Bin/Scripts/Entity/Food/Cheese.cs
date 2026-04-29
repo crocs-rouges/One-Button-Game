@@ -4,7 +4,7 @@ using System;
 
 // Author : Romain Chevalier
 
-namespace Com.IsartDigital.OBG
+namespace Com.IsartDigital.OBG.Entity.Food
 {
 	public partial class Cheese : Food
 	{

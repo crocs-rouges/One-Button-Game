@@ -15,6 +15,7 @@ rightBtn = NodePath("right")
 resetBtn = NodePath("reset")
 
 [node name="left" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -26,6 +27,7 @@ theme_override_font_sizes/font_size = 100
 text = "left"
 
 [node name="right" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -47,5 +49,5 @@ anchor_right = 1.0
 offset_left = -169.0
 offset_bottom = 145.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 40
 text = "ID_RESET"
