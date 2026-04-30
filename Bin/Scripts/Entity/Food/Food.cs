@@ -19,12 +19,12 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		{
 			float lDelta = (float)pDelta;
 			base._Process(pDelta);
-			if (canFall) GlobalPosition += Vector2.Down * fallSpeed * lDelta;
-			// if (GlobalPosition.Y > 2160 || GlobalPosition.Y < -2160)
-			// {
-			// 	GD.Print("destroy");
-			// 	QueueFree();
-			// }
+			if (canFall)
+			{
+				GlobalPosition += Vector2.Down * fallSpeed * lDelta;
+				if (GlobalPosition.Y > 2160 || GlobalPosition.Y < -2160)
+					QueueFree();
+			}
 		}
 	}
 }

@@ -1,3 +1,4 @@
+using Com.IsartDigital.OBG.Entity.Player;
 using Com.IsartDigital.OBG.Manager;
 using Godot;
 
@@ -8,8 +9,10 @@ namespace Com.IsartDigital.OBG
     public partial class GameManager : Node2D
     {
         private static readonly Script gameManagerScript = ResourceLoader.Load<Script>("res://Scripts/Manager/GameManager.cs");
-        private static GameManager instance;    
+        private static GameManager instance;
 
+        [Export] private ScoobyDooGameManager gameUp;
+        [Export] private ScoobyDooGameManager gameDown;
         private GameManager() : base()
         {
             if (instance != null)
@@ -33,9 +36,16 @@ namespace Com.IsartDigital.OBG
         public override void _Ready()
         {
             InputManager.GetInstance().OnResetInput += Reset;
+            SetupGame();
         }
         public void SetupGame()
         {
+            // gameUp            
+            gameUp.spawner.isDown = false;
+            gameUp.player.isDownPos = false;
+            // gameDown
+            gameDown.spawner.isDown = true;
+            gameDown.player.isDownPos = true;
         }
         public void ResetOnCheckpoint()
         {

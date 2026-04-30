@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbcfglo7obef2"]
+[gd_scene load_steps=4 format=3 uid="uid://dbcfglo7obef2"]
 
 [ext_resource type="PackedScene" uid="uid://ctfrownu7tkrr" path="res://Scenes/Entity/Scooby-Doo.tscn" id="1_r3um8"]
+[ext_resource type="Script" path="res://Scripts/Manager/ScoobyDooGameManager.cs" id="1_sywp3"]
 [ext_resource type="PackedScene" uid="uid://cp4suumdaioxx" path="res://Scenes/Entity/ObjectSpawner.tscn" id="4_rke08"]
 
-[node name="Scooby-dooGame" type="Node2D"]
+[node name="Scooby-dooGame" type="Node2D" node_paths=PackedStringArray("player", "spawner")]
+script = ExtResource("1_sywp3")
+player = NodePath("Scooby-doo")
+spawner = NodePath("ObjectSpawner")
 
 [node name="ObjectSpawner" parent="." instance=ExtResource("4_rke08")]
-scale = Vector2(8.48, 0.2)
-timeBetweenSpawn = 0.3
+scale = Vector2(4.24, 0.2)
+timeBetweenSpawn = 1.2
 
 [node name="Scooby-doo" parent="." instance=ExtResource("1_r3um8")]
-position = Vector2(4, 900)
+position = Vector2(0, 900)

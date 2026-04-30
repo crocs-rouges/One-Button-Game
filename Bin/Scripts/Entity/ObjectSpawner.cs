@@ -12,7 +12,7 @@ namespace Com.IsartDigital.OBG
 {
 	public partial class ObjectSpawner : Sprite2D
 	{
-		private bool fallDown;
+		public bool isDown;
 		[Export] private PackedScene[] objectToSpawn;
 		[Export] private float[] percent;
 		[Export] private float timeBetweenSpawn = 1f;
@@ -23,13 +23,13 @@ namespace Com.IsartDigital.OBG
 		public override void _Ready()
 		{
 			base._Ready();
-			if (GlobalPosition.Y > 1080) fallDown = true;
-			else fallDown = false;
+			// if (GlobalPosition.Y > 1080) fallDown = true;
+			// else fallDown = false;
 			timer = timeBetweenSpawn;
 			Vector2 lTextSize = Texture.GetSize();
 			Vector2 lScale = lTextSize * Scale / 2;
-			startPos = GlobalPosition - lScale;
-			endPos = GlobalPosition + lScale;
+			startPos = - lScale;
+			endPos = lScale;
 		}
 		public override void _Process(double pDelta)
 		{
@@ -39,7 +39,6 @@ namespace Com.IsartDigital.OBG
 			if (timer <= 0)
 			{
 				SpawnRandomObject();
-				GD.Print("spawn object");
 				timer = timeBetweenSpawn;
 			}
 		}
@@ -50,8 +49,8 @@ namespace Com.IsartDigital.OBG
 			//give random position
 			float lPosX = Utils.rdG.RandfRange(startPos.X, endPos.X);
 			lFood.GlobalPosition = new Vector2(lPosX, 0);
-			GD.Print(lFood.GlobalPosition + "" + lFood.Scale);
-			if (!fallDown) lFood.fallSpeed *= -1f;
+			if (isDown) GD.Print(lFood.GlobalPosition + "" + lFood.Scale);
+			if (!isDown) lFood.fallSpeed *= -1f;
 		}
 		private void SpawnRandomObject()
 		{
@@ -59,11 +58,7 @@ namespace Com.IsartDigital.OBG
 			if (objectToSpawn == null ||
 			percent == null ||
 			objectToSpawn.Count() == 0 ||
-			objectToSpawn.Count() != percent.Count())
-			{
-				GD.Print("something is null");
-				return;
-			}
+			objectToSpawn.Count() != percent.Count()) return;
 			//set chance variables
 			float lTotalChances = 100f;
 			float lRandomValue = Utils.rdG.RandfRange(0f, lTotalChances);
