@@ -129,7 +129,7 @@ namespace Com.IsartDigital.OBG.Manager
                 holdTimer -= pDelta;
                 if (holdTimer <= 0)
                 {
-                    GD.Print("hold");
+                    // GD.Print("hold");
                     OnHold?.Invoke();
                     isHolding = false;
                 }

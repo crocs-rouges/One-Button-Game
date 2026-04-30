@@ -1,5 +1,5 @@
 using Com.IsartDigital.OBG.Entity;
-using Com.IsartDigital.OBG.Entity.Food;
+using Com.IsartDigital.OBG.Entity.Aliments;
 using Com.IsartDigital.OBG.Tools;
 using Godot;
 using System;
@@ -12,6 +12,7 @@ namespace Com.IsartDigital.OBG
 {
 	public partial class ObjectSpawner : Sprite2D
 	{
+		private bool fallDown;
 		[Export] private PackedScene[] objectToSpawn;
 		[Export] private float[] percent;
 		[Export] private float timeBetweenSpawn = 1f;
@@ -22,10 +23,13 @@ namespace Com.IsartDigital.OBG
 		public override void _Ready()
 		{
 			base._Ready();
+			if (GlobalPosition.Y > 1080) fallDown = true;
+			else fallDown = false;
 			timer = timeBetweenSpawn;
 			Vector2 lTextSize = Texture.GetSize();
-			startPos = GlobalPosition - (lTextSize * Scale / 2);
-			endPos = GlobalPosition + (lTextSize * Scale / 2);
+			Vector2 lScale = lTextSize * Scale / 2;
+			startPos = GlobalPosition - lScale;
+			endPos = GlobalPosition + lScale;
 		}
 		public override void _Process(double pDelta)
 		{
@@ -41,12 +45,13 @@ namespace Com.IsartDigital.OBG
 		}
 		private void SpawnFood(PackedScene pFoodscn)
 		{
-			Food lObject = pFoodscn.Instantiate() as Food;
-			Main.GetInstance().gameContainer.CallDeferred(Node.MethodName.AddChild, lObject);
+			Food lFood = pFoodscn.Instantiate() as Food;
+			GetParent().CallDeferred(Node.MethodName.AddChild, lFood);
 			//give random position
 			float lPosX = Utils.rdG.RandfRange(startPos.X, endPos.X);
-			float lPosY = Utils.rdG.RandfRange(startPos.Y, endPos.Y);
-			lObject.GlobalPosition = new Vector2(lPosX, lPosY);
+			lFood.GlobalPosition = new Vector2(lPosX, 0);
+			GD.Print(lFood.GlobalPosition + "" + lFood.Scale);
+			if (!fallDown) lFood.fallSpeed *= -1f;
 		}
 		private void SpawnRandomObject()
 		{

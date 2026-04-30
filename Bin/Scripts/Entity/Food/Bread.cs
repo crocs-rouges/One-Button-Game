@@ -1,10 +1,9 @@
-using Com.IsartDigital.OBG.Entity.Food;
 using Godot;
 using System;
 
 // Author : Romain Chevalier
 
-namespace Com.IsartDigital.OBG.Entity.Food
+namespace Com.IsartDigital.OBG.Entity.Aliments
 {
 	public partial class Bread : Food
 	{

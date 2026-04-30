@@ -1,9 +1,10 @@
+using Com.IsartDigital.OBG.Tools;
 using Godot;
 using System;
 
 // Author : Romain Chevalier
 
-namespace Com.IsartDigital.OBG.Entity.Food
+namespace Com.IsartDigital.OBG.Entity.Aliments
 {
 	public partial class Food : Node2D
 	{
@@ -19,6 +20,11 @@ namespace Com.IsartDigital.OBG.Entity.Food
 			float lDelta = (float)pDelta;
 			base._Process(pDelta);
 			if (canFall) GlobalPosition += Vector2.Down * fallSpeed * lDelta;
+			// if (GlobalPosition.Y > 2160 || GlobalPosition.Y < -2160)
+			// {
+			// 	GD.Print("destroy");
+			// 	QueueFree();
+			// }
 		}
 	}
 }

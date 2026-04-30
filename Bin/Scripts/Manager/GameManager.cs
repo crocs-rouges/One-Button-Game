@@ -8,8 +8,7 @@ namespace Com.IsartDigital.OBG
     public partial class GameManager : Node2D
     {
         private static readonly Script gameManagerScript = ResourceLoader.Load<Script>("res://Scripts/Manager/GameManager.cs");
-
-        private static GameManager instance;
+        private static GameManager instance;    
 
         private GameManager() : base()
         {
@@ -44,7 +43,7 @@ namespace Com.IsartDigital.OBG
         public void Reset()
         {
             //reload current scene
-            
+
         }
         protected override void Dispose(bool pDisposing)
         {

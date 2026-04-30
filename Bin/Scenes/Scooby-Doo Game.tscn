@@ -1,36 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbcfglo7obef2"]
+[gd_scene load_steps=3 format=3 uid="uid://dbcfglo7obef2"]
 
-[ext_resource type="Script" path="res://Scripts/Manager/GameManager.cs" id="1_enbdc"]
 [ext_resource type="PackedScene" uid="uid://ctfrownu7tkrr" path="res://Scenes/Entity/Scooby-Doo.tscn" id="1_r3um8"]
-[ext_resource type="PackedScene" uid="uid://ublr8p3pe4wq" path="res://Scenes/Entity/Rock.tscn" id="2_lbnyt"]
 [ext_resource type="PackedScene" uid="uid://cp4suumdaioxx" path="res://Scenes/Entity/ObjectSpawner.tscn" id="4_rke08"]
 
 [node name="Scooby-dooGame" type="Node2D"]
-script = ExtResource("1_enbdc")
-
-[node name="Scooby-doo" parent="." instance=ExtResource("1_r3um8")]
-position = Vector2(584, 957)
-
-[node name="Rock" parent="." instance=ExtResource("2_lbnyt")]
-position = Vector2(158, 455)
-canFall = true
-
-[node name="Rock2" parent="." instance=ExtResource("2_lbnyt")]
-position = Vector2(566, 595)
-canFall = true
-
-[node name="Rock3" parent="." instance=ExtResource("2_lbnyt")]
-position = Vector2(960, 276)
-canFall = true
-
-[node name="Rock4" parent="." instance=ExtResource("2_lbnyt")]
-position = Vector2(328, 622)
-canFall = true
-
-[node name="Rock5" parent="." instance=ExtResource("2_lbnyt")]
-position = Vector2(932, 740)
-canFall = true
 
 [node name="ObjectSpawner" parent="." instance=ExtResource("4_rke08")]
-position = Vector2(541, 11)
-scale = Vector2(8.48, 1)
+scale = Vector2(8.48, 0.2)
+timeBetweenSpawn = 0.3
+
+[node name="Scooby-doo" parent="." instance=ExtResource("1_r3um8")]
+position = Vector2(4, 900)

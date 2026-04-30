@@ -63,6 +63,11 @@ namespace Com.IsartDigital.OBG.Tools
             GD.Print("Screen Size : " + screenSize);
             return screenSize;
         }
+        public static bool IsInScreenDown(Vector2 pPos)
+        {
+            if(pPos.Y > 1080) return true;
+            return false;
+        }
         public static float GetAngleTo(Node2D pNode, Vector2 pTargetPos)
         {
             Vector2 lPos = pTargetPos - pNode.GlobalPosition;
