@@ -46,6 +46,7 @@ namespace Com.IsartDigital.OBG
             // gameDown
             gameDown.spawner.isDown = true;
             gameDown.player.isDownPos = true;
+            GD.Print("game down player down "+gameDown.player.isDownPos);
         }
         public void ResetOnCheckpoint()
         {

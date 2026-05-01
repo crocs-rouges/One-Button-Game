@@ -31,18 +31,46 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		{
 			float lDelta = (float)pDelta;
 			base._Process(pDelta);
-			if (Input.IsActionPressed(PRESS) &&
-			isDownPos == Utils.IsInScreenDown(GetGlobalMousePosition()))
+			// if (Input.IsActionPressed(PRESS) &&
+			// isDownPos == Utils.IsInScreenDown(GetGlobalMousePosition()))
+			// {
+			// 	MovePlayer(GetGlobalMousePosition());
+			// }
+			// GD.Print($"mouse position {GetGlobalMousePosition()} and it's {Utils.IsInScreenDown(GetGlobalMousePosition())}");
+			MoveFood();
+		}
+		public override void _Input(InputEvent pEvent)
+		{
+			if (pEvent is InputEventScreenDrag lDrag)
 			{
-				float lPosX = GetGlobalMousePosition().X;
-				float lPosY = GlobalPosition.Y;
-				GlobalPosition = new Vector2(lPosX, lPosY);
+				// Vector2 lMousePos = lDrag.Position - new Vector2(
+				// 	Utils.GetInstance().screenSize.X / 2,
+				// 	1080);
+				Vector2 lMousePos = GetCanvasTransform().AffineInverse() * lDrag.Position;
+				GD.Print($"mouse position {lMousePos} and globalpos {GlobalPosition} and is down {isDownPos}");
+				if (isDownPos == Utils.IsInScreenDown(lMousePos))
+				{
+					if (isDownPos && lMousePos.X < 0) return;
+					else if (!isDownPos && lMousePos.X > 0) return;
+					// Vector2 lGlobalTouchPos = GetCanvasTransform().AffineInverse() * lDrag.Position;
+					MovePlayer(lMousePos);
+				}
 			}
+		}
+		private void MovePlayer(Vector2 pPos)
+		{
+			float lPosX = pPos.X;
+			float lPosY = GlobalPosition.Y;
+			GlobalPosition = new Vector2(lPosX, lPosY);
+		}
+		private void MoveFood()
+		{
 			int lFoodCount = foods.Count;
 			if (lFoodCount == 0) return;
 			multiply = isDownPos ? 1 : -1;
 			for (int i = lFoodCount - 1; i >= 0; i--)
 				foods[i].GlobalPosition = GlobalPosition + (Vector2.Up * (FOOD_POSITION * i) * multiply);
+
 		}
 		private void CheckEnterArea(Area2D pArea)
 		{

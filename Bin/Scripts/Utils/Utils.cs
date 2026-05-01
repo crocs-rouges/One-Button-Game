@@ -65,7 +65,7 @@ namespace Com.IsartDigital.OBG.Tools
         }
         public static bool IsInScreenDown(Vector2 pPos)
         {
-            if(pPos.Y > 1080) return true;
+            if (pPos.Y > 0) return true;
             return false;
         }
         public static float GetAngleTo(Node2D pNode, Vector2 pTargetPos)
