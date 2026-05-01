@@ -12,3 +12,4 @@ texture = ExtResource("1_66hnx")
 script = ExtResource("2_7vgau")
 objectToSpawn = Array[PackedScene]([ExtResource("3_1kiu4"), ExtResource("4_jgilg"), ExtResource("5_cahn8"), ExtResource("6_hsrhg")])
 percent = PackedFloat32Array(40, 20, 20, 20)
+timeBetweenSpawn = 0.2

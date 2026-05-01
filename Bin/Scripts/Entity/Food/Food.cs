@@ -6,10 +6,15 @@ using System;
 
 namespace Com.IsartDigital.OBG.Entity.Aliments
 {
+	public enum FoodType
+	{
+		Bread, Ham, Salad, Cheese,
+	}
 	public partial class Food : Node2D
 	{
+		[Export] public FoodType type;
 		[Export] public bool canFall = true;
-		[Export] public float fallSpeed = 200;
+		[Export] public float fallSpeed = 1000;
 
 		public override void _Ready()
 		{
