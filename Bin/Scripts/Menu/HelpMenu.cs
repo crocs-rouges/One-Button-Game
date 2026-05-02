@@ -22,20 +22,19 @@ namespace Com.IsartDigital.OBG.Menus
 		}
 		public override void _Process(double pDelta)
 		{
-			float lDelta = (float)pDelta;
-			base._Process(pDelta);
-
-
+			if (Input.IsActionJustPressed(PRESS)) Close();
 		}
-		public override void _Input(InputEvent pEvent)
+		public override void Open()
 		{
-			base._Input(pEvent);
-			if (Input.IsActionJustPressed(PRESS))
-			{
-
-			}
-
+			base.Open();
+			//add animation
 		}
+		public override void Close()
+		{
+			base.Close();
+			//add animation
+		}
+
 
 	}
 }

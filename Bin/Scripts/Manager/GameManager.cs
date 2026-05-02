@@ -35,7 +35,6 @@ namespace Com.IsartDigital.OBG
         }
         public override void _Ready()
         {
-            InputManager.GetInstance().OnResetInput += Reset;
             SetupGame();
         }
         public void SetupGame()
