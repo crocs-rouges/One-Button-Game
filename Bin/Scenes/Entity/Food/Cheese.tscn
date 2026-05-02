@@ -10,6 +10,7 @@ size = Vector2(126, 126)
 modulate = Color(1, 0.296284, 0.799998, 1)
 texture = ExtResource("1_oocx3")
 script = ExtResource("2_qk3o5")
+type = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 
