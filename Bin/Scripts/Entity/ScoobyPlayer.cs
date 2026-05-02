@@ -12,8 +12,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 	public partial class ScoobyPlayer : Node2D
 	{
 		[Export] private Area2D area;
-		private const string PRESS = "Press";
-		public bool isDownPos = false;
+				public bool isDownPos = false;
 
 		[Export] private const float FOOD_DIVIDE_SIZE = 1.2f;
 		[Export] private const float FOOD_POSITION = 20f;
@@ -32,13 +31,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		{
 			float lDelta = (float)pDelta;
 			base._Process(pDelta);
-			// if (Input.IsActionPressed(PRESS) &&
-			// isDownPos == Utils.IsInScreenDown(GetGlobalMousePosition()))
-			// {
-			// 	MovePlayer(GetGlobalMousePosition());
-			// }
-			// GD.Print($"mouse position {GetGlobalMousePosition()} and it's {Utils.IsInScreenDown(GetGlobalMousePosition())}");
-			MoveFood();
+			MoveFoodStack();
 		}
 		public override void _Input(InputEvent pEvent)
 		{
@@ -66,7 +59,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			GlobalPosition = new Vector2(lPos.X, lPlayerPosY);
 			area.GlobalPosition = lPos;
 		}
-		private void MoveFood()
+		private void MoveFoodStack()
 		{
 			int lFoodCount = foods.Count;
 			if (lFoodCount == 0) return;
