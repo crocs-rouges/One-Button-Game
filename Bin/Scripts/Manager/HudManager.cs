@@ -37,7 +37,6 @@ namespace Com.IsartDigital.OBG.Manager
             base._Ready();
             if (leftBtn != null) leftBtn.Pressed += () => rotationLeft?.Invoke();
             if (rightBtn != null) rightBtn.Pressed += () => rotationRight?.Invoke();
-            resetBtn.Pressed += GameManager.GetInstance().Reset;
         }
     }
 }

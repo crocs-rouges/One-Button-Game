@@ -31,6 +31,7 @@ namespace Com.IsartDigital.OBG.Menus
 			base.Close();
 			GoLeft(false);
 			//launch game
+			Main.GetInstance().GoToLevel();
 		}
 		private void GoLeft(bool pIsEnter)
 		{

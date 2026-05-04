@@ -16,6 +16,8 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		[Export] public bool canFall = true;
 		[Export] public float fallSpeed = 1000;
 
+		[Export] private const float FOOD_DIVIDE_SIZE = 1.2f;
+
 		public override void _Ready()
 		{
 			base._Ready();
@@ -30,6 +32,14 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 				if (GlobalPosition.Y > 2160 || GlobalPosition.Y < -2160)
 					QueueFree();
 			}
+		}
+		public void Capture()
+		{
+			canFall = false;
+			Scale /= FOOD_DIVIDE_SIZE;
+			Area2D lArea = GetChild<Area2D>(0);
+			lArea.SetDeferred(Area2D.PropertyName.Monitorable, false);
+			lArea.SetDeferred(Area2D.PropertyName.Monitoring, false);
 		}
 	}
 }

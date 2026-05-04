@@ -17,6 +17,7 @@ namespace Com.IsartDigital.OBG
 		private static readonly PackedScene scnGameLevel = GD.Load<PackedScene>("res://Scenes/Game.tscn");
 		// private static readonly PackedScene scnGameLevel = GD.Load<PackedScene>("res://Scenes/Scooby-Doo Game.tscn");
 		private static readonly PackedScene scnHUD = GD.Load<PackedScene>("res://Scenes/Menu/HUD.tscn");
+		private static readonly PackedScene scnHelpMenu = GD.Load<PackedScene>("res://Scenes/Menu/HelpMenu.tscn");
 
 
 		private Main() : base()
@@ -37,13 +38,18 @@ namespace Com.IsartDigital.OBG
 		public override void _Ready()
 		{
 			base._Ready();
-			if (skipSplashScreen) GoToLevel();
+			if (skipSplashScreen) GoToHelpMenu();
 		}
 		public void GoToLevel()
 		{
 			ClearContainers();
 			uiContainer.AddChild(scnHUD.Instantiate());
 			gameContainer.AddChild(scnGameLevel.Instantiate());
+		}
+		public void GoToHelpMenu()
+		{
+			ClearContainers();
+			uiContainer.AddChild(scnHelpMenu.Instantiate());
 		}
 		private void ClearContainers()
 		{

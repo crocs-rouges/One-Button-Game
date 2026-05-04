@@ -12,9 +12,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 	public partial class ScoobyPlayer : Node2D
 	{
 		[Export] private Area2D area;
-				public bool isDownPos = false;
-
-		[Export] private const float FOOD_DIVIDE_SIZE = 1.2f;
+		public bool isDownPos = false;
 		[Export] private const float FOOD_POSITION = 20f;
 		public List<Food> foods = new List<Food>();
 		private int multiply = 1;
@@ -75,8 +73,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				lManager.TryAddFood(lFood.type))
 				{
 					foods.Add(lFood);
-					lFood.canFall = false;
-					lFood.Scale /= FOOD_DIVIDE_SIZE;
+					lFood.Capture();
 					// DropPlayer();
 				}
 				else
