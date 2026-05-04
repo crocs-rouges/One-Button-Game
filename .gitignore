@@ -3,6 +3,7 @@
 # =========================
 .godot/
 !.godot/extension_list.cfg
+.import/
 export_presets.cfg
 *.translation
 
@@ -15,7 +16,7 @@ export_presets.cfg
 # =========================
 # IDEs (VS Code & VS 2022)
 # =========================
-.vscode/
+.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -31,5 +32,4 @@ export_presets.cfg
 [Dd]ebug/
 [Rr]elease/
 [Xx]64/
-[Bb]in/
 [Oo]bj/
