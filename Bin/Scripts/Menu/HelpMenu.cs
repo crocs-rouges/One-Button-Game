@@ -9,6 +9,12 @@ namespace Com.IsartDigital.OBG.Menus
 	public partial class HelpMenu : MenuBase
 	{
 		private const string PRESS = "Press";
+		[Export] private TextureRect backgroundUp;
+		[Export] private TextureRect backgroundDown;
+		/// <summary>
+		/// rotation speed in degrees per second
+		/// </summary>
+		[Export] private float rotationSpeed = 360f;
 
 		private Vector2 startAnimPos = new Vector2(1080 + 540, 0);
 
@@ -20,6 +26,8 @@ namespace Com.IsartDigital.OBG.Menus
 		public override void _Process(double pDelta)
 		{
 			if (Input.IsActionJustPressed(PRESS)) Close();
+			backgroundUp.RotationDegrees += rotationSpeed * (float)pDelta;
+			backgroundDown.RotationDegrees += rotationSpeed * (float)pDelta;
 		}
 		public override void Open()
 		{
