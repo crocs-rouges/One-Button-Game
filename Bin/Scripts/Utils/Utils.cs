@@ -9,6 +9,10 @@ namespace Com.IsartDigital.OBG.Tools
     {
         private static Utils instance;
 
+
+        public const string PRESS = "Press";
+
+
         private const string IMPORT_FILE_EXTENSION = ".import";
         /// <summary>
         /// For APK

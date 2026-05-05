@@ -38,5 +38,11 @@ namespace Com.IsartDigital.OBG.Manager
             if (leftBtn != null) leftBtn.Pressed += () => rotationLeft?.Invoke();
             if (rightBtn != null) rightBtn.Pressed += () => rotationRight?.Invoke();
         }
+        protected override void Dispose(bool pDisposing)
+        {
+            base.Dispose(pDisposing);
+            instance = null;
+        }
+
     }
 }

@@ -8,7 +8,7 @@ namespace Com.IsartDigital.OBG.Menus
 {
 	public partial class HelpMenu : MenuBase
 	{
-		private const string PRESS = "Press";
+
 		[Export] private TextureRect backgroundUp;
 		[Export] private TextureRect backgroundDown;
 		/// <summary>
@@ -25,7 +25,7 @@ namespace Com.IsartDigital.OBG.Menus
 		}
 		public override void _Process(double pDelta)
 		{
-			if (Input.IsActionJustPressed(PRESS)) Close();
+			if (Input.IsActionJustPressed(Utils.PRESS)) Close();
 			backgroundUp.RotationDegrees += rotationSpeed * (float)pDelta;
 			backgroundDown.RotationDegrees += rotationSpeed * (float)pDelta;
 		}
@@ -37,11 +37,12 @@ namespace Com.IsartDigital.OBG.Menus
 		public override void Close()
 		{
 			base.Close();
+			Main lMain = Main.GetInstance();
+			lMain.GoToBeforeGame();
 			GoLeft(false);
-			//launch game
-			Main.GetInstance().GoToLevel();
+			// GoLeft(false).Finished += lMain.GoToLevel;
 		}
-		private void GoLeft(bool pIsEnter)
+		private Tween GoLeft(bool pIsEnter)
 		{
 			Vector2 lEndPos = pIsEnter ? GlobalPosition : startAnimPos;
 			Vector2 lStartPos = pIsEnter ? startAnimPos : GlobalPosition;
@@ -52,6 +53,7 @@ namespace Com.IsartDigital.OBG.Menus
 			.From(lStartPos)
 			.SetTrans(Tween.TransitionType.Bounce)
 			.SetEase(Tween.EaseType.Out);
+			return lTween;
 		}
 	}
 }
