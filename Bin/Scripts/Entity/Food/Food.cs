@@ -12,7 +12,7 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 	{
 		[Export] public FoodType type;
 		[Export] public bool canFall = true;
-		[Export] public float fallSpeed = 1000;
+		[Export] public float fallSpeed = 700;
 
 		[Export] private const float FOOD_DIVIDE_SIZE = 1.2f;
 

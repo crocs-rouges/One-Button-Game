@@ -15,7 +15,7 @@ namespace Com.IsartDigital.OBG
 		public bool isDown;
 		[Export] private PackedScene[] objectToSpawn;
 		[Export] private float[] percent;
-		[Export] private float timeBetweenSpawn = 1f;
+		[Export] private float timeBetweenSpawn = 0.6f;
 		private float timer;
 		private Vector2 startPos;
 		private Vector2 endPos;
@@ -28,7 +28,7 @@ namespace Com.IsartDigital.OBG
 			timer = timeBetweenSpawn;
 			Vector2 lTextSize = Texture.GetSize();
 			Vector2 lScale = lTextSize * Scale / 2;
-			startPos = - lScale;
+			startPos = -lScale;
 			endPos = lScale;
 		}
 		public override void _Process(double pDelta)

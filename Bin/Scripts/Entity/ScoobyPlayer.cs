@@ -13,23 +13,30 @@ namespace Com.IsartDigital.OBG.Entity.Player
 	{
 		[Export] private Area2D area;
 		public bool isDownPos = false;
+
+
+		[ExportGroup("Food")]
 		[Export] private const float FOOD_POSITION = 20f;
 		public List<Food> foods = new List<Food>();
 		private int multiply = 1;
+		[Export] private const float FOOD_FOLLOW_SPEED = 50f;
+		[Export] private const float FOOD_MOVE_AMPLITUDE = 8f;
+		[Export] private const float FOOD_MOVE_SPEED = 25f;
+		private float time;
 
-
+		private float previousX = 0f;
 
 		public override void _Ready()
 		{
 			base._Ready();
 			area.AreaEntered += CheckEnterArea;
-			// isDownPos = Utils.IsInScreenDown(GlobalPosition);
+			previousX = GlobalPosition.X;
 		}
 		public override void _Process(double pDelta)
 		{
 			float lDelta = (float)pDelta;
 			base._Process(pDelta);
-			MoveFoodStack();
+			MoveFoodStack(lDelta);
 		}
 		public override void _Input(InputEvent pEvent)
 		{
@@ -55,16 +62,44 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			Vector2 lPos = GlobalPosition;
 			float lPlayerPosY = lPos.Y + FOOD_POSITION;
 			GlobalPosition = new Vector2(lPos.X, lPlayerPosY);
-			//place area on top of the foods
-			area.GlobalPosition = lPos + (Vector2.Up * foods.Count * FOOD_POSITION * multiply);
 		}
-		private void MoveFoodStack()
+		private void MoveFoodStack(float pDelta)
 		{
 			int lFoodCount = foods.Count;
 			if (lFoodCount == 0) return;
+
+			float lVelocityX = Mathf.Abs(GlobalPosition.X - previousX) / pDelta;
+			previousX = GlobalPosition.X;
+
+			float lMoveFactor = Mathf.Clamp(lVelocityX / 300f, 0f, 1f);
+
+
+			time += pDelta;
 			multiply = isDownPos ? 1 : -1;
+
+			float lFoodShakePosX;
+			float lFoodTargetPosX;
+			Vector2 lFoodTargetPos;
 			for (int i = lFoodCount - 1; i >= 0; i--)
-				foods[i].GlobalPosition = GlobalPosition + (Vector2.Up * (FOOD_POSITION * i) * multiply);
+			{
+				//previous food position
+				lFoodTargetPosX = (i == 0) ? GlobalPosition.X : foods[i - 1].GlobalPosition.X;
+				//adding SIN shake to food
+				lFoodShakePosX = Mathf.Sin(time * FOOD_MOVE_SPEED + i) * (FOOD_MOVE_AMPLITUDE * i) * lMoveFactor;
+
+				// Lerp to create trail effect
+				float lCurrentX = foods[i].GlobalPosition.X;
+				float lLerpedX = Mathf.Lerp(lCurrentX, lFoodTargetPosX + lFoodShakePosX, FOOD_FOLLOW_SPEED * pDelta);
+
+				//placing food on the right height based on position on the list
+				lFoodTargetPos = GlobalPosition + (Vector2.Up * (FOOD_POSITION * i) * multiply);
+				//take the lerp pos for the X pos
+				lFoodTargetPos.X = lLerpedX;
+				foods[i].GlobalPosition = lFoodTargetPos;
+			}
+			//place area on top of the foods
+			area.GlobalPosition = foods[foods.Count - 1].GlobalPosition;
+
 		}
 		private void CheckEnterArea(Area2D pArea)
 		{
