@@ -1,6 +1,4 @@
 using System;
-using Com.IsartDigital.OBG;
-using Com.IsartDigital.OBG.Tools;
 using Godot;
 
 // Author : Romain Chevalier
@@ -40,8 +38,8 @@ namespace Com.IsartDigital.OBG.Manager
         }
         protected override void Dispose(bool pDisposing)
         {
-            base.Dispose(pDisposing);
             instance = null;
+            base.Dispose(pDisposing);
         }
 
     }

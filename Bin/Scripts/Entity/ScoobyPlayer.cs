@@ -80,15 +80,21 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				{
 					lFood.Explode();
 					//apply penality to player
-					lManager.RemoveFood();
 					RemoveOneFood();
+					lManager.RemoveFood();
 				}
 			}
 		}
 		private void RemoveOneFood()
 		{
-			Food lFood = foods[-1];
-			foods.RemoveAt(-1);
+			int lFoodIndex = foods.Count - 1;
+			if (lFoodIndex < 0)
+			{
+				GD.Print("No Food inside list");
+				return;
+			}
+			Food lFood = foods[lFoodIndex];
+			foods.RemoveAt(lFoodIndex);
 			lFood.Explode();
 		}
 		private void RemoveSandwich()

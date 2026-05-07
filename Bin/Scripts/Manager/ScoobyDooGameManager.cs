@@ -1,8 +1,6 @@
-using Com.IsartDigital.OBG;
 using Com.IsartDigital.OBG.Entity.Aliments;
 using Com.IsartDigital.OBG.Entity.Player;
 using Godot;
-using System;
 using System.Collections.Generic;
 
 // Author : Romain Chevalier
@@ -26,9 +24,6 @@ namespace Com.IsartDigital.OBG.Manager
 		private int currentFoodIndex = 0;
 		#endregion
 
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <returns>the next food in the list</returns>
 		public FoodType GetNextFood()
 		{
@@ -38,6 +33,11 @@ namespace Com.IsartDigital.OBG.Manager
 		public void RemoveFood()
 		{
 			currentFoodIndex--;
+			if (player.foods.Count == 0)
+			{
+				currentFoodIndex = 0;
+				return;
+			}
 			if (currentFoodIndex < 0) currentFoodIndex = foodOrder.Count - 1;
 		}
 		/// <summary>

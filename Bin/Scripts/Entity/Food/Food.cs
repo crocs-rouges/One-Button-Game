@@ -1,6 +1,4 @@
-using Com.IsartDigital.OBG.Tools;
 using Godot;
-using System;
 
 // Author : Romain Chevalier
 
