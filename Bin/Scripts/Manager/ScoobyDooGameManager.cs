@@ -35,8 +35,11 @@ namespace Com.IsartDigital.OBG.Manager
 			FoodType lNextFood = foodOrder[currentFoodIndex];
 			return lNextFood;
 		}
-
-		// Call this when the player touches a food to check if it's the right one
+		public void RemoveFood()
+		{
+			currentFoodIndex--;
+			if (currentFoodIndex < 0) currentFoodIndex = foodOrder.Count - 1;
+		}
 		/// <summary>
 		/// when player touches a food object it search wether or not the food is the right one, next in the list
 		/// </summary>

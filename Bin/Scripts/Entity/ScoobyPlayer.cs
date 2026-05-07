@@ -53,9 +53,10 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		private void DropPlayer()
 		{
 			Vector2 lPos = GlobalPosition;
-			float lPlayerPosY = lPos.Y + FOOD_POSITION / 1.4f;
+			float lPlayerPosY = lPos.Y + FOOD_POSITION;
 			GlobalPosition = new Vector2(lPos.X, lPlayerPosY);
-			area.GlobalPosition = lPos;
+			//place area on top of the foods
+			area.GlobalPosition = lPos + (Vector2.Up * foods.Count * FOOD_POSITION * multiply);
 		}
 		private void MoveFoodStack()
 		{
@@ -67,21 +68,28 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		}
 		private void CheckEnterArea(Area2D pArea)
 		{
-			if (pArea.GetParent() is Food lFood)
+			if (pArea.GetParent() is Food lFood && GetParent() is ScoobyDooGameManager lManager)
 			{
-				if (GetParent() is ScoobyDooGameManager lManager &&
-				lManager.TryAddFood(lFood.type))
+				if (lManager.TryAddFood(lFood.type))
 				{
 					foods.Add(lFood);
 					lFood.Capture();
-					// DropPlayer();
+					DropPlayer();
 				}
 				else
 				{
-					lFood.QueueFree();
+					lFood.Explode();
 					//apply penality to player
+					lManager.RemoveFood();
+					RemoveOneFood();
 				}
 			}
+		}
+		private void RemoveOneFood()
+		{
+			Food lFood = foods[-1];
+			foods.RemoveAt(-1);
+			lFood.Explode();
 		}
 		private void RemoveSandwich()
 		{

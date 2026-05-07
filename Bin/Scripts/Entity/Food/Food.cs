@@ -41,5 +41,9 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 			lArea.SetDeferred(Area2D.PropertyName.Monitorable, false);
 			lArea.SetDeferred(Area2D.PropertyName.Monitoring, false);
 		}
+		public void Explode()
+		{
+			QueueFree();
+		}
 	}
 }
