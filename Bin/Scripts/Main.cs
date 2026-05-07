@@ -1,3 +1,4 @@
+using Com.IsartDigital.OBG.Tools;
 using Godot;
 using System;
 
@@ -15,7 +16,8 @@ namespace Com.IsartDigital.OBG
 		static private PackedScene factory = GD.Load<PackedScene>("res://Scenes/Main.tscn");
 		private static readonly PackedScene scnGameLevel = GD.Load<PackedScene>("res://Scenes/Game.tscn");
 		private static readonly PackedScene scnHUD = GD.Load<PackedScene>("res://Scenes/Menu/HUD.tscn");
-
+		private static readonly PackedScene scnHelpMenu = GD.Load<PackedScene>("res://Scenes/Menu/HelpMenu.tscn");
+		private static readonly PackedScene scnBeforeGame = GD.Load<PackedScene>("res://Scenes/Menu/BeforeGame.tscn");
 
 		private Main() : base()
 		{
@@ -35,13 +37,23 @@ namespace Com.IsartDigital.OBG
 		public override void _Ready()
 		{
 			base._Ready();
-			if (skipSplashScreen) GoToLevel();
+			if (skipSplashScreen) GoToHelpMenu();
 		}
 		public void GoToLevel()
 		{
 			ClearContainers();
-			gameContainer.AddChild(scnGameLevel.Instantiate());
 			uiContainer.AddChild(scnHUD.Instantiate());
+			gameContainer.AddChild(scnGameLevel.Instantiate());
+		}
+		public void GoToHelpMenu()
+		{
+			ClearContainers();
+			uiContainer.AddChild(scnHelpMenu.Instantiate());
+		}
+		public void GoToBeforeGame()
+		{
+			uiContainer.AddChild(scnHUD.Instantiate());
+			gameContainer.AddChild(scnBeforeGame.Instantiate());
 		}
 		private void ClearContainers()
 		{
@@ -51,7 +63,6 @@ namespace Com.IsartDigital.OBG
 		private void KillChildredOfNode(Node pParent)
 		{
 			if (pParent == null) return;
-
 			foreach (Node lChild in pParent.GetChildren())
 				lChild.QueueFree();
 		}

@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://w76pm7sop57j"]
+
+[ext_resource type="Texture2D" uid="uid://cjqfpwo5ettbg" path="res://Assets/Mucho Party/painting.png" id="1_mjxht"]
+[ext_resource type="Script" path="res://Scripts/Menu/BeforeGame.cs" id="1_ph8ed"]
+[ext_resource type="PackedScene" uid="uid://dbcfglo7obef2" path="res://Scenes/Scooby-Doo Game.tscn" id="2_bylvb"]
+
+[node name="BeforeGame" type="Control" node_paths=PackedStringArray("camera")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ph8ed")
+camera = NodePath("Camera2D")
+movementDuration = 0.4
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+z_index = -50
+position = Vector2(444, 1111)
+scale = Vector2(0.29181, 0.403892)
+texture = ExtResource("1_mjxht")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10549.0
+offset_top = -7705.0
+offset_right = 10534.0
+offset_bottom = 7705.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(540, 1080)
+
+[node name="Node2D" type="Node2D" parent="."]
+process_mode = 4
+scale = Vector2(0.5, 0.5)
+
+[node name="gameUp" parent="Node2D" instance=ExtResource("2_bylvb")]
+position = Vector2(586, 3246)
+rotation = 3.14159
+
+[node name="gameDown" parent="Node2D" instance=ExtResource("2_bylvb")]
+position = Vector2(1140, 1118)

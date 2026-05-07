@@ -1,0 +1,15 @@
+[gd_scene load_steps=7 format=3 uid="uid://cp4suumdaioxx"]
+
+[ext_resource type="Texture2D" uid="uid://cd7oi5xxcsm4" path="res://icon.svg" id="1_66hnx"]
+[ext_resource type="Script" path="res://Scripts/Entity/ObjectSpawner.cs" id="2_7vgau"]
+[ext_resource type="PackedScene" uid="uid://5ui26nsgywmb" path="res://Scenes/Entity/Food/Bread.tscn" id="3_1kiu4"]
+[ext_resource type="PackedScene" uid="uid://d3524r8jnlyi7" path="res://Scenes/Entity/Food/Salad.tscn" id="4_jgilg"]
+[ext_resource type="PackedScene" uid="uid://b78o615sr6xsi" path="res://Scenes/Entity/Food/Ham.tscn" id="5_cahn8"]
+[ext_resource type="PackedScene" uid="uid://bgvslcde2hlae" path="res://Scenes/Entity/Food/Cheese.tscn" id="6_hsrhg"]
+
+[node name="ObjectSpawner" type="Sprite2D"]
+texture = ExtResource("1_66hnx")
+script = ExtResource("2_7vgau")
+objectToSpawn = Array[PackedScene]([ExtResource("3_1kiu4"), ExtResource("4_jgilg"), ExtResource("5_cahn8"), ExtResource("6_hsrhg")])
+percent = PackedFloat32Array(40, 20, 20, 20)
+timeBetweenSpawn = 0.2

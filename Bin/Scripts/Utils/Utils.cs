@@ -9,6 +9,10 @@ namespace Com.IsartDigital.OBG.Tools
     {
         private static Utils instance;
 
+
+        public const string PRESS = "Press";
+
+
         private const string IMPORT_FILE_EXTENSION = ".import";
         /// <summary>
         /// For APK
@@ -19,7 +23,7 @@ namespace Com.IsartDigital.OBG.Tools
         public const string GRAB_FOCUS = "grab_focus";
 
         [ExportGroup("Tweens")]
-        public const string TWEEN_POSITION = "position";
+        public const string TWEEN_POSITION = "position";        
         public const string TWEEN_GLOBALPOSITION = "global_position";
         public const string TWEEN_SCALE = "scale";
         public const string TWEEN_ROTATION = "rotation";
@@ -62,6 +66,11 @@ namespace Com.IsartDigital.OBG.Tools
             middleScreenVertical = screenSize.Y / 2f;
             GD.Print("Screen Size : " + screenSize);
             return screenSize;
+        }
+        public static bool IsInScreenDown(Vector2 pPos)
+        {
+            if (pPos.Y > 0) return true;
+            return false;
         }
         public static float GetAngleTo(Node2D pNode, Vector2 pTargetPos)
         {

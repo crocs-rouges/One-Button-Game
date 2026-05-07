@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8t1by23fiuf1"]
+[gd_scene load_steps=4 format=3 uid="uid://b8t1by23fiuf1"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_4l0qp"]
 [ext_resource type="PackedScene" uid="uid://27k7i5s3ix5m" path="res://Scenes/Menu/SplashScreen.tscn" id="2_2h4q6"]
-[ext_resource type="Script" path="res://Scripts/Manager/InputManager.cs" id="3_hiqw7"]
 [ext_resource type="Script" path="res://Scripts/Utils/Utils.cs" id="4_g711m"]
-[ext_resource type="Script" path="res://Scripts/Utils/DebugInput.cs" id="5_pwd6d"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("gameContainer", "uiContainer")]
 script = ExtResource("1_4l0qp")
@@ -13,6 +11,7 @@ uiContainer = NodePath("UiContainer")
 skipSplashScreen = true
 
 [node name="UiContainer" type="CanvasLayer" parent="."]
+layer = 128
 
 [node name="SplashScreen" parent="UiContainer" instance=ExtResource("2_2h4q6")]
 
@@ -22,13 +21,3 @@ skipSplashScreen = true
 
 [node name="Utils" type="Node2D" parent="UtilsContainer"]
 script = ExtResource("4_g711m")
-
-[node name="InputManager" type="Node2D" parent="UtilsContainer"]
-script = ExtResource("3_hiqw7")
-
-[node name="Label" type="Label" parent="."]
-offset_right = 281.0
-offset_bottom = 69.0
-theme_override_font_sizes/font_size = 50
-text = "debug label"
-script = ExtResource("5_pwd6d")

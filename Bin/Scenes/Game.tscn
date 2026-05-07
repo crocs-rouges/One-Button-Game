@@ -1,10 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://nkhkopgua6h0"]
 
 [ext_resource type="Script" path="res://Scripts/Manager/GameManager.cs" id="1_gr585"]
-[ext_resource type="PackedScene" uid="uid://c1y7osvglu4b8" path="res://Scenes/Entity/Boat.tscn" id="2_qijx2"]
+[ext_resource type="PackedScene" uid="uid://dbcfglo7obef2" path="res://Scenes/Scooby-Doo Game.tscn" id="2_xfll2"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("gameUp", "gameDown")]
 script = ExtResource("1_gr585")
+gameUp = NodePath("gameUp")
+gameDown = NodePath("gameDown")
 
-[node name="Boat" parent="." instance=ExtResource("2_qijx2")]
-position = Vector2(519, 678)
+[node name="gameDown" parent="." instance=ExtResource("2_xfll2")]
+position = Vector2(270, -1080)
+
+[node name="gameUp" parent="." instance=ExtResource("2_xfll2")]
+position = Vector2(-270, 1080)
+rotation = 3.14159
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d141e5prq31gc"]
+[gd_scene load_steps=3 format=3 uid="uid://d141e5prq31gc"]
 
 [ext_resource type="Script" path="res://Scripts/Manager/HudManager.cs" id="1_8jysg"]
+[ext_resource type="Texture2D" uid="uid://b2y1faplhh8ku" path="res://Assets/Mucho Party/Side_Lights.png" id="2_82ouc"]
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("leftBtn", "rightBtn")]
+[node name="Hud" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,30 +11,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8jysg")
-leftBtn = NodePath("left")
-rightBtn = NodePath("right")
 
-[node name="left" type="Button" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -30
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -31.0
-offset_right = 45.0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 100
-text = "left"
-
-[node name="right" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 3
+anchors_preset = 11
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -31.0
+offset_left = -132.0
 grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 100
-text = "right"
+grow_vertical = 2
+texture = ExtResource("2_82ouc")
+expand_mode = 1

@@ -15,6 +15,7 @@ namespace Com.IsartDigital.OBG.Manager
         [Export] private Button rightBtn;
         public Action rotationLeft;
         public Action rotationRight;
+        [Export] private Button resetBtn;
 
         private HudManager() : base()
         {
@@ -34,8 +35,14 @@ namespace Com.IsartDigital.OBG.Manager
         public override void _Ready()
         {
             base._Ready();
-            leftBtn.Pressed += rotationLeft;
-            rightBtn.Pressed += rotationRight;
+            if (leftBtn != null) leftBtn.Pressed += () => rotationLeft?.Invoke();
+            if (rightBtn != null) rightBtn.Pressed += () => rotationRight?.Invoke();
         }
+        protected override void Dispose(bool pDisposing)
+        {
+            base.Dispose(pDisposing);
+            instance = null;
+        }
+
     }
 }
