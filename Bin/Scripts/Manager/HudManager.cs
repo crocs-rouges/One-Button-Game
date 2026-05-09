@@ -9,11 +9,8 @@ namespace Com.IsartDigital.OBG.Manager
     {
         static private HudManager instance;
         static private PackedScene factory = GD.Load<PackedScene>("res://Scenes/Menu/HUD.tscn");
-        [Export] private Button leftBtn;
-        [Export] private Button rightBtn;
-        public Action rotationLeft;
-        public Action rotationRight;
-        [Export] private Button resetBtn;
+        [Export] private Label timerLabel;
+        private const string TIME = "0 : ";
 
         private HudManager() : base()
         {
@@ -33,14 +30,15 @@ namespace Com.IsartDigital.OBG.Manager
         public override void _Ready()
         {
             base._Ready();
-            if (leftBtn != null) leftBtn.Pressed += () => rotationLeft?.Invoke();
-            if (rightBtn != null) rightBtn.Pressed += () => rotationRight?.Invoke();
+        }
+        public void ChangeTimer(float pTime)
+        {
+            timerLabel.Text = TIME + (int)pTime;
         }
         protected override void Dispose(bool pDisposing)
         {
             instance = null;
             base.Dispose(pDisposing);
         }
-
     }
 }

@@ -23,7 +23,6 @@ namespace Com.IsartDigital.OBG.Manager
 			FoodType.Bread
 		};
 		private int currentFoodIndex = 0;
-		private const int FOOD_VICTORY_INDEX = 15;
 		#endregion
 
 		/// <returns>the next food in the list</returns>
@@ -62,14 +61,6 @@ namespace Com.IsartDigital.OBG.Manager
 				return true;
 			}
 			return false;
-		}
-		public void CheckWin()
-		{
-			if (player.foods.Count == FOOD_VICTORY_INDEX)
-			{
-				//win signals
-				GD.Print("Win");
-			}
 		}
 	}
 }

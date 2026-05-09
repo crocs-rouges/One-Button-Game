@@ -18,6 +18,7 @@ namespace Com.IsartDigital.OBG
 		private static readonly PackedScene scnHUD = GD.Load<PackedScene>("res://Scenes/Menu/HUD.tscn");
 		private static readonly PackedScene scnHelpMenu = GD.Load<PackedScene>("res://Scenes/Menu/HelpMenu.tscn");
 		private static readonly PackedScene scnBeforeGame = GD.Load<PackedScene>("res://Scenes/Menu/BeforeGame.tscn");
+		private static readonly PackedScene scnWin = GD.Load<PackedScene>("res://Scenes/Menu/WinScreen.tscn");
 
 		private Main() : base()
 		{
@@ -54,6 +55,13 @@ namespace Com.IsartDigital.OBG
 		{
 			uiContainer.AddChild(scnHUD.Instantiate());
 			gameContainer.AddChild(scnBeforeGame.Instantiate());
+		}
+		public Control GoToWin()
+		{
+			Control lWin = scnWin.Instantiate() as Control;
+			uiContainer.AddChild(lWin);
+			GetTree().Paused = true;
+			return lWin;
 		}
 		private void ClearContainers()
 		{

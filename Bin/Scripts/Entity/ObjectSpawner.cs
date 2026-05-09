@@ -23,8 +23,6 @@ namespace Com.IsartDigital.OBG
 		public override void _Ready()
 		{
 			base._Ready();
-			// if (GlobalPosition.Y > 1080) fallDown = true;
-			// else fallDown = false;
 			timer = timeBetweenSpawn;
 			Vector2 lTextSize = Texture.GetSize();
 			Vector2 lScale = lTextSize * Scale / 2;
@@ -49,7 +47,6 @@ namespace Com.IsartDigital.OBG
 			//give random position
 			float lPosX = Utils.rdG.RandfRange(startPos.X, endPos.X);
 			lFood.GlobalPosition = new Vector2(lPosX, 0);
-			if (isDown) GD.Print(lFood.GlobalPosition + "" + lFood.Scale);
 			if (!isDown) lFood.fallSpeed *= -1f;
 		}
 		private void SpawnRandomObject()

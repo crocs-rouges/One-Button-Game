@@ -108,6 +108,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				if (lManager.TryAddFood(lFood.type))
 				{
 					foods.Add(lFood);
+					if (foods.Count == Utils.FOOD_VICTORY_INDEX) GameManager.GetInstance().CheckWin();
 					lFood.Capture();
 					DropPlayer();
 				}

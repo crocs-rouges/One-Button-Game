@@ -8,11 +8,7 @@ namespace Com.IsartDigital.OBG.Tools
     public partial class Utils : Node2D
     {
         private static Utils instance;
-
-
         public const string PRESS = "Press";
-
-
         private const string IMPORT_FILE_EXTENSION = ".import";
         /// <summary>
         /// For APK
@@ -23,7 +19,7 @@ namespace Com.IsartDigital.OBG.Tools
         public const string GRAB_FOCUS = "grab_focus";
 
         [ExportGroup("Tweens")]
-        public const string TWEEN_POSITION = "position";        
+        public const string TWEEN_POSITION = "position";
         public const string TWEEN_GLOBALPOSITION = "global_position";
         public const string TWEEN_SCALE = "scale";
         public const string TWEEN_ROTATION = "rotation";
@@ -45,6 +41,9 @@ namespace Com.IsartDigital.OBG.Tools
         public Vector2 screenSize;
         public float middleScreenVertical;
         public const float ONE_SECOND = 1f;
+        // public const int FOOD_VICTORY_INDEX = 14;
+        public const int FOOD_VICTORY_INDEX = 4;
+        public const float GAME_DURATION_IN_SECONDS = 45;
 
         public static Utils GetInstance()
         {
