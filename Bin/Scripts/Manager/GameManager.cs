@@ -47,14 +47,6 @@ namespace Com.IsartDigital.OBG
             gameDown.player.isDownPos = true;
             GD.Print("game down player down "+gameDown.player.isDownPos);
         }
-        public void ResetOnCheckpoint()
-        {
-        }
-        public void Reset()
-        {
-            //reload current scene
-
-        }
         protected override void Dispose(bool pDisposing)
         {
             instance = null;

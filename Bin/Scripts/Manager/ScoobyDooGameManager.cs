@@ -11,6 +11,7 @@ namespace Com.IsartDigital.OBG.Manager
 	{
 		[Export] public ScoobyPlayer player;
 		[Export] public ObjectSpawner spawner;
+		[Export] public FoodIngredients foodIngredients;
 
 		#region Food Variables
 		public List<FoodType> foodOrder = new List<FoodType>
@@ -22,6 +23,7 @@ namespace Com.IsartDigital.OBG.Manager
 			FoodType.Bread
 		};
 		private int currentFoodIndex = 0;
+		private const int FOOD_VICTORY_INDEX = 15;
 		#endregion
 
 		/// <returns>the next food in the list</returns>
@@ -36,9 +38,11 @@ namespace Com.IsartDigital.OBG.Manager
 			if (player.foods.Count == 0)
 			{
 				currentFoodIndex = 0;
+				foodIngredients.ChangeElement(currentFoodIndex);
 				return;
 			}
 			if (currentFoodIndex < 0) currentFoodIndex = foodOrder.Count - 1;
+			foodIngredients.ChangeElement(currentFoodIndex);
 		}
 		/// <summary>
 		/// when player touches a food object it search wether or not the food is the right one, next in the list
@@ -54,9 +58,18 @@ namespace Com.IsartDigital.OBG.Manager
 				currentFoodIndex++;
 				if (currentFoodIndex >= foodOrder.Count)
 					currentFoodIndex = 0;
+				foodIngredients.ChangeElement(currentFoodIndex);
 				return true;
 			}
 			return false;
+		}
+		public void CheckWin()
+		{
+			if (player.foods.Count == FOOD_VICTORY_INDEX)
+			{
+				//win signals
+				GD.Print("Win");
+			}
 		}
 	}
 }

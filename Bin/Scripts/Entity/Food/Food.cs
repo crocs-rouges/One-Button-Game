@@ -16,6 +16,8 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 
 		[Export] private const float FOOD_DIVIDE_SIZE = 1.2f;
 
+		private const float ROTATION_SPEED = 360f;
+
 		public override void _Ready()
 		{
 			base._Ready();
@@ -29,6 +31,7 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 				GlobalPosition += Vector2.Down * fallSpeed * lDelta;
 				if (GlobalPosition.Y > 2160 || GlobalPosition.Y < -2160)
 					QueueFree();
+				RotationDegrees += ROTATION_SPEED * lDelta;
 			}
 		}
 		public void Capture()
