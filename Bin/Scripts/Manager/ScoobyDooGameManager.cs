@@ -24,7 +24,11 @@ namespace Com.IsartDigital.OBG.Manager
 		};
 		private int currentFoodIndex = 0;
 		#endregion
-
+		public override void _Ready()
+		{
+			base._Ready();
+			foodIngredients.ChangeElement(currentFoodIndex);
+		}
 		/// <returns>the next food in the list</returns>
 		public FoodType GetNextFood()
 		{

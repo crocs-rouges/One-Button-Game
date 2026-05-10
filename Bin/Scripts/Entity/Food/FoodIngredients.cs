@@ -7,9 +7,7 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 {
 	public partial class FoodIngredients : Node2D
 	{
-		[Export] private Sprite2D[] listFoodItem;
-
-
+		[Export] private Food[] listFoodItem;
 		public override void _Ready()
 		{
 			base._Ready();
@@ -22,7 +20,7 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		}
 		private void HideElements()
 		{
-			foreach (Sprite2D lFoodText in listFoodItem)
+			foreach (Food lFoodText in listFoodItem)
 				lFoodText.Visible = false;
 		}
 	}

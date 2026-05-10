@@ -1,28 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2aa3ib3vmkq3"]
+[gd_scene load_steps=6 format=3 uid="uid://b2aa3ib3vmkq3"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Food/FoodIngredients.cs" id="1_5jad6"]
-[ext_resource type="Texture2D" uid="uid://dhgxvjjy67bjx" path="res://Assets/Food/Bread.png" id="1_tepoi"]
-[ext_resource type="Texture2D" uid="uid://cd7oi5xxcsm4" path="res://icon.svg" id="2_m85jl"]
-[ext_resource type="Texture2D" uid="uid://de4bohpvwcmvr" path="res://Assets/Food/Salad.png" id="3_u2hry"]
+[ext_resource type="PackedScene" uid="uid://5ui26nsgywmb" path="res://Scenes/Entity/Food/Bread.tscn" id="2_2aq68"]
+[ext_resource type="PackedScene" uid="uid://bgvslcde2hlae" path="res://Scenes/Entity/Food/Cheese.tscn" id="3_m7xal"]
+[ext_resource type="PackedScene" uid="uid://b78o615sr6xsi" path="res://Scenes/Entity/Food/Ham.tscn" id="4_wm0mv"]
+[ext_resource type="PackedScene" uid="uid://d3524r8jnlyi7" path="res://Scenes/Entity/Food/Salad.tscn" id="5_ycfbh"]
 
 [node name="FoodIngredient" type="Node2D" node_paths=PackedStringArray("listFoodItem")]
 script = ExtResource("1_5jad6")
-listFoodItem = [NodePath("Bread"), NodePath("Cheese"), NodePath("Ham"), NodePath("Salad"), NodePath("Bread2")]
+listFoodItem = [NodePath("Bread3"), NodePath("Cheese"), NodePath("Ham"), NodePath("Salad"), NodePath("Bread")]
 
-[node name="Bread" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_tepoi")
+[node name="Bread3" parent="." instance=ExtResource("2_2aq68")]
+position = Vector2(0, 4)
+canFall = false
 
-[node name="Cheese" type="Sprite2D" parent="."]
-texture = ExtResource("2_m85jl")
+[node name="Cheese" parent="." instance=ExtResource("3_m7xal")]
+position = Vector2(93, 6)
+canFall = false
 
-[node name="Ham" type="Sprite2D" parent="."]
-texture = ExtResource("2_m85jl")
+[node name="Ham" parent="." instance=ExtResource("4_wm0mv")]
+position = Vector2(206, 7)
+canFall = false
 
-[node name="Salad" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_u2hry")
+[node name="Salad" parent="." instance=ExtResource("5_ycfbh")]
+position = Vector2(319, 6)
+canFall = false
 
-[node name="Bread2" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_tepoi")
+[node name="Bread" parent="." instance=ExtResource("2_2aq68")]
+position = Vector2(427, 9)
+canFall = false
