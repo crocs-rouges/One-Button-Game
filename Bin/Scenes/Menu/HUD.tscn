@@ -28,15 +28,15 @@ texture = ExtResource("2_82ouc")
 expand_mode = 1
 
 [node name="WhiteMiddleBar" type="TextureRect" parent="."]
-visible = false
 z_index = -30
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
+anchors_preset = -1
+anchor_left = 0.519
+anchor_right = 0.519
 anchor_bottom = 1.0
-offset_left = -132.0
-grow_horizontal = 0
+offset_left = -60.5201
+offset_right = -40.5201
+grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_4nmos")
 expand_mode = 1

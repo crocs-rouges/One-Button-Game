@@ -62,7 +62,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-z_index = -100
+z_index = -1
 custom_minimum_size = Vector2(1080, 1080)
 layout_mode = 1
 anchors_preset = -1
@@ -77,13 +77,15 @@ size = Vector2i(1080, 1080)
 render_target_update_mode = 4
 
 [node name="GameName" type="Label" parent="SubViewportContainer/SubViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 400.0
-offset_bottom = -555.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_top = 600.0
+offset_right = 540.0
+offset_bottom = 725.0
 grow_horizontal = 2
-grow_vertical = 2
+rotation = 3.14159
 pivot_offset = Vector2(540, 62)
 theme_override_colors/font_color = Color(0.298039, 0.764706, 0.87451, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -97,17 +99,19 @@ uppercase = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -540.0
-offset_top = 600.0
-offset_right = 540.0
-offset_bottom = 683.0
+offset_left = -240.0
+offset_top = 400.0
+offset_right = 260.0
+offset_bottom = 483.0
 grow_horizontal = 2
-pivot_offset = Vector2(540, 0)
+rotation = 3.14159
+pivot_offset = Vector2(250, 41)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
 text = "ID_GAME_INFO"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport"]
 z_index = -20
@@ -126,7 +130,7 @@ pivot_offset = Vector2(1080, 1080)
 texture = ExtResource("2_qwhy7")
 
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
-z_index = -100
+z_index = -1
 custom_minimum_size = Vector2(1080, 1080)
 layout_mode = 1
 anchors_preset = -1
@@ -164,17 +168,18 @@ uppercase = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -540.0
+offset_left = -240.0
 offset_top = 600.0
-offset_right = 540.0
+offset_right = 260.0
 offset_bottom = 683.0
 grow_horizontal = 2
-pivot_offset = Vector2(540, 0)
+pivot_offset = Vector2(250, 0)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
 text = "ID_GAME_INFO"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="SubViewportContainer2/SubViewport"]
 z_index = -20

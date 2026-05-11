@@ -1,6 +1,29 @@
-[gd_scene format=3 uid="uid://cqpxnp7f11t3k"]
+[gd_scene load_steps=6 format=3 uid="uid://cqpxnp7f11t3k"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/WinMenu.cs" id="1_ykclf"]
+[ext_resource type="Texture2D" uid="uid://h1yxta3asrhy" path="res://Assets/Star.png" id="2_anqop"]
+
+[sub_resource type="Gradient" id="Gradient_lbjuh"]
+offsets = PackedFloat32Array(0, 0.502392, 0.760766, 0.942584, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 0.480769, 0.519231, 1, 0, 0, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q30t6"]
+gradient = SubResource("Gradient_lbjuh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f7v00"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(400, 1, 1)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, -2000, 0)
+scale_min = 0.1
+scale_max = 0.1
+color_initial_ramp = SubResource("GradientTexture1D_q30t6")
 
 [node name="WinScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -8,32 +31,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(540, 1080)
+script = ExtResource("1_ykclf")
 
 [node name="Win" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.299
-offset_top = 434.0
-offset_bottom = 1.15997
-grow_horizontal = 2
-rotation = 3.14159
-pivot_offset = Vector2(540, 106)
+offset_top = 400.0
+offset_right = 1080.0
+offset_bottom = 613.0
+scale = Vector2(-1, -1)
+pivot_offset = Vector2(540, 106.5)
 theme_override_font_sizes/font_size = 156
 text = "ID_WIN"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Loose" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.799
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = 0.159912
-offset_bottom = -221.0
-grow_horizontal = 2
+offset_top = -613.0
+offset_right = 1080.0
+offset_bottom = -400.0
 grow_vertical = 0
-pivot_offset = Vector2(540, 106)
+pivot_offset = Vector2(540, 106.5)
 theme_override_font_sizes/font_size = 156
 text = "ID_LOOSE"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Up" type="GPUParticles2D" parent="."]
+position = Vector2(540, 50)
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_f7v00")
+texture = ExtResource("2_anqop")
+local_coords = true

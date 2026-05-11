@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpx2xxvmwxqno"]
+
+[ext_resource type="Texture2D" uid="uid://h1yxta3asrhy" path="res://Assets/Star.png" id="1_25nu4"]
+
+[sub_resource type="Gradient" id="Gradient_u1hlf"]
+offsets = PackedFloat32Array(0, 0.502392, 0.760766, 0.942584, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 0.480769, 0.519231, 1, 0, 0, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_873mb"]
+gradient = SubResource("Gradient_u1hlf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8u3bd"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(400, 1, 1)
+direction = Vector3(0, -500, 0)
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 2000, 0)
+scale_min = 0.1
+scale_max = 0.1
+color_initial_ramp = SubResource("GradientTexture1D_873mb")
+
+[node name="Win Particle" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_8u3bd")
+texture = ExtResource("1_25nu4")

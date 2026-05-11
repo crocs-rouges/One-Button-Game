@@ -143,5 +143,9 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				foods[i].QueueFree();
 			}
 		}
+		public void VictoryAnimation()
+		{
+			
+		}
 	}
 }

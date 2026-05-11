@@ -76,10 +76,9 @@ namespace Com.IsartDigital.OBG
             {
                 //place Particle Under
                 GD.Print("Win Under");
-                Main.GetInstance().GoToWin().RotationDegrees =180;
+                Main.GetInstance().GoToWin().RotationDegrees = 180;
             }
         }
-
         protected override void Dispose(bool pDisposing)
         {
             instance = null;

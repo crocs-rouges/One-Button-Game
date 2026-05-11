@@ -70,6 +70,10 @@ p2_Right={
 
 pointing/emulate_touch_from_mouse=true
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Scripts/Utils/Localization/Game Traduction.Colonne 12.translation", "res://Scripts/Utils/Localization/Game Traduction.csv", "res://Scripts/Utils/Localization/Game Traduction.de.translation", "res://Scripts/Utils/Localization/Game Traduction.en.translation", "res://Scripts/Utils/Localization/Game Traduction.es.translation", "res://Scripts/Utils/Localization/Game Traduction.fr.translation", "res://Scripts/Utils/Localization/Game Traduction.it.translation", "res://Scripts/Utils/Localization/Game Traduction.ja.translation", "res://Scripts/Utils/Localization/Game Traduction.ko.translation", "res://Scripts/Utils/Localization/Game Traduction.pt.translation", "res://Scripts/Utils/Localization/Game Traduction.ru.translation", "res://Scripts/Utils/Localization/Game Traduction.zh.translation")
+
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
