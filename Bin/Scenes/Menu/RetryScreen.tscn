@@ -1,0 +1,120 @@
+[gd_scene load_steps=6 format=3 uid="uid://gkngicc42gnu"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/RetryScreen.cs" id="1_p2n2l"]
+[ext_resource type="Texture2D" uid="uid://d1eht4v43rspl" path="res://Assets/Menu/Background/background.png" id="1_r387p"]
+[ext_resource type="PackedScene" uid="uid://ctfrownu7tkrr" path="res://Scenes/Entity/Scooby-Doo.tscn" id="2_esbkx"]
+[ext_resource type="Texture2D" uid="uid://bpxe445hut61b" path="res://Assets/Mucho Party/RetryButton.png" id="2_jnql6"]
+[ext_resource type="Material" uid="uid://b42w60ykibpqs" path="res://Shader/GrayScale.tres" id="5_etpt0"]
+
+[node name="RetryScreen" type="Control" node_paths=PackedStringArray("retrybtn", "backgroundUp", "backgroundDown", "upPlayer", "downPlayer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(540, 1080)
+script = ExtResource("1_p2n2l")
+retrybtn = NodePath("TextureButton")
+backgroundUp = NodePath("Up/SubViewport/Background")
+backgroundDown = NodePath("Down/SubViewport/Background")
+upPlayer = [NodePath("Down/SubViewport/Up"), NodePath("Up/SubViewport/Up")]
+downPlayer = [NodePath("Down/SubViewport/Down"), NodePath("Up/SubViewport/Down")]
+
+[node name="Down" type="SubViewportContainer" parent="."]
+z_index = -1
+custom_minimum_size = Vector2(1080, 1080)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+pivot_offset = Vector2(540, 540)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Down"]
+handle_input_locally = false
+size = Vector2i(1080, 1080)
+render_target_update_mode = 4
+
+[node name="Background" type="TextureRect" parent="Down/SubViewport"]
+z_index = -20
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1080.0
+offset_top = -1080.0
+offset_right = 1080.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1080, 1080)
+texture = ExtResource("1_r387p")
+
+[node name="Up" parent="Down/SubViewport" instance=ExtResource("2_esbkx")]
+position = Vector2(308, 607)
+scale = Vector2(2, 2)
+
+[node name="Down" parent="Down/SubViewport" instance=ExtResource("2_esbkx")]
+position = Vector2(775, 594)
+scale = Vector2(3.5, 3.5)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = -104.0
+offset_bottom = 104.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("2_jnql6")
+
+[node name="Up" type="SubViewportContainer" parent="."]
+z_index = -1
+custom_minimum_size = Vector2(1080, 1080)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+pivot_offset = Vector2(540, 540)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Up"]
+handle_input_locally = false
+size = Vector2i(1080, 1080)
+render_target_update_mode = 4
+
+[node name="Background" type="TextureRect" parent="Up/SubViewport"]
+z_index = -20
+material = ExtResource("5_etpt0")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1080.0
+offset_top = -1080.0
+offset_right = 1080.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1080, 1080)
+texture = ExtResource("1_r387p")
+
+[node name="Up" parent="Up/SubViewport" node_paths=PackedStringArray("area") instance=ExtResource("2_esbkx")]
+position = Vector2(750, 607)
+rotation = 3.14159
+scale = Vector2(2, 2)
+area = NodePath("../../../Down/SubViewport/Up/Area2D")
+
+[node name="Down" parent="Up/SubViewport" node_paths=PackedStringArray("area") instance=ExtResource("2_esbkx")]
+position = Vector2(350, 594)
+rotation = 3.14159
+scale = Vector2(3.5, 3.5)
+area = NodePath("../../../Down/SubViewport/Down/Area2D")

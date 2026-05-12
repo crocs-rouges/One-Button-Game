@@ -10,6 +10,7 @@ namespace Com.IsartDigital.OBG
 	{
 		static private Main instance;
 
+		public bool winnerIsDown;
 		[Export] public Node gameContainer;
 		[Export] private CanvasLayer uiContainer;
 		[Export] private bool skipSplashScreen;
@@ -19,6 +20,7 @@ namespace Com.IsartDigital.OBG
 		private static readonly PackedScene scnHelpMenu = GD.Load<PackedScene>("res://Scenes/Menu/HelpMenu.tscn");
 		private static readonly PackedScene scnBeforeGame = GD.Load<PackedScene>("res://Scenes/Menu/BeforeGame.tscn");
 		private static readonly PackedScene scnWin = GD.Load<PackedScene>("res://Scenes/Menu/WinScreen.tscn");
+		private static readonly PackedScene scnRetryScreen = GD.Load<PackedScene>("res://Scenes/Menu/RetryScreen.tscn");
 
 		private Main() : base()
 		{
@@ -62,6 +64,11 @@ namespace Com.IsartDigital.OBG
 			uiContainer.AddChild(lWin);
 			GetTree().Paused = true;
 			return lWin;
+		}
+		public void GoToRetry()
+		{
+			ClearContainers();
+			uiContainer.AddChild(scnRetryScreen.Instantiate());
 		}
 		private void ClearContainers()
 		{

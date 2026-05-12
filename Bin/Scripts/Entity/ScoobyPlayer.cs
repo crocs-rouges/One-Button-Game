@@ -13,6 +13,12 @@ namespace Com.IsartDigital.OBG.Entity.Player
 	{
 		[Export] private Area2D area;
 		public bool isDownPos = false;
+		public bool canMove = true;
+
+		[ExportGroup("Sprite")]
+		[Export] private Sprite2D normalSpt;
+		[Export] private Sprite2D happySpt;
+		[Export] private Sprite2D sadSpt;
 
 
 		[ExportGroup("Food")]
@@ -38,6 +44,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			base._Process(pDelta);
 			MoveFoodStack(lDelta);
 		}
+		#region Player Movement
 		public override void _Input(InputEvent pEvent)
 		{
 			if (pEvent is InputEventScreenDrag lDrag)
@@ -53,6 +60,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		}
 		private void MovePlayer(Vector2 pPos)
 		{
+			if (!canMove) return;
 			float lPosX = pPos.X;
 			float lPosY = GlobalPosition.Y;
 			GlobalPosition = new Vector2(lPosX, lPosY);
@@ -63,6 +71,8 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			float lPlayerPosY = lPos.Y + FOOD_POSITION;
 			GlobalPosition = new Vector2(lPos.X, lPlayerPosY);
 		}
+		#endregion
+		#region Food
 		private void MoveFoodStack(float pDelta)
 		{
 			int lFoodCount = foods.Count;
@@ -143,9 +153,22 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				foods[i].QueueFree();
 			}
 		}
+		#endregion
+		#region Animation
 		public void VictoryAnimation()
 		{
-			
+			//set sad sprite
+			normalSpt.Visible = false;
+			happySpt.Visible = true;
+			//set winjump animation
 		}
+		public void LooseAnimation()
+		{
+			//set sad sprite
+			normalSpt.Visible = false;
+			sadSpt.Visible = true;
+			//set cry particle and giggle effect
+		}
+		#endregion
 	}
 }

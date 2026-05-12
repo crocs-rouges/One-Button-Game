@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxqii4bcn8noc"
-path="res://.godot/imported/QuitButton.png-a9eefe9be8904f1c7e20587555013eb6.ctex"
+uid="uid://bpxe445hut61b"
+path="res://.godot/imported/RetryButton.png-5ac0e06943a2472ae6f83d688fccdca0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Mucho Party/QuitButton.png"
-dest_files=["res://.godot/imported/QuitButton.png-a9eefe9be8904f1c7e20587555013eb6.ctex"]
+source_file="res://Assets/Mucho Party/RetryButton.png"
+dest_files=["res://.godot/imported/RetryButton.png-5ac0e06943a2472ae6f83d688fccdca0.ctex"]
 
 [params]
 

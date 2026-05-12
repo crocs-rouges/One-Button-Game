@@ -1,19 +1,26 @@
+using Com.IsartDigital.OBG.Menus;
 using Com.IsartDigital.OBG.Tools;
 using Godot;
 using System;
 
 // Author : Romain Chevalier
 
-namespace Com.IsartDigital.OBG
+namespace Com.IsartDigital.OBG.Menus
 {
-	public partial class WinMenu : Control
+	public partial class WinMenu : MenuBase
 	{
-		[Export] private TextureButton quitbtn;
 		public override void _Ready()
 		{
 			base._Ready();
 			ProcessMode = ProcessModeEnum.Always;
-			quitbtn.Pressed += () => GetTree().Quit();
+		}
+		public override void _Process(double pDelta)
+		{
+			if (Input.IsActionJustPressed(Utils.PRESS)) Close();
+		}
+		public override void Close()
+		{
+			Main.GetInstance().GoToRetry();
 		}
 	}
 }

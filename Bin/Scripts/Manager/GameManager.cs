@@ -5,7 +5,7 @@ using Godot;
 
 // Author : Romain Chevalier
 
-namespace Com.IsartDigital.OBG
+namespace Com.IsartDigital.OBG.Manager
 {
     public partial class GameManager : Node2D
     {
@@ -76,7 +76,9 @@ namespace Com.IsartDigital.OBG
             {
                 //place Particle Under
                 GD.Print("Win Under");
-                Main.GetInstance().GoToWin().RotationDegrees = 180;
+                Main lMain = Main.GetInstance();
+                lMain.GoToWin().RotationDegrees = 180;
+                lMain.winnerIsDown = true;
                 SetProcess(false);
             }
         }

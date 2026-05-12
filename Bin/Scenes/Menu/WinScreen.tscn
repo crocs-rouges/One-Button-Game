@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Menu/WinMenu.cs" id="1_ykclf"]
 [ext_resource type="Texture2D" uid="uid://h1yxta3asrhy" path="res://Assets/Star.png" id="2_anqop"]
-[ext_resource type="Texture2D" uid="uid://cxqii4bcn8noc" path="res://Assets/Mucho Party/QuitButton.png" id="3_22b8j"]
+[ext_resource type="Texture2D" path="res://Assets/Mucho Party/QuitButton.png" id="3_22b8j"]
 
 [sub_resource type="Gradient" id="Gradient_lbjuh"]
 offsets = PackedFloat32Array(0, 0.502392, 0.760766, 0.942584, 1)

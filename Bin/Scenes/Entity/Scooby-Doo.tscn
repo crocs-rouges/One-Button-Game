@@ -6,11 +6,20 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t7tbq"]
 size = Vector2(126, 126)
 
-[node name="Scooby-doo" type="Node2D" node_paths=PackedStringArray("area")]
+[node name="Scooby-doo" type="Node2D" node_paths=PackedStringArray("area", "normalSpt", "happySpt", "sadSpt")]
 script = ExtResource("1_ksm4f")
 area = NodePath("Area2D")
+normalSpt = NodePath("Normal")
+happySpt = NodePath("Happy")
+sadSpt = NodePath("Sad")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Normal" type="Sprite2D" parent="."]
+texture = ExtResource("2_acpql")
+
+[node name="Happy" type="Sprite2D" parent="."]
+texture = ExtResource("2_acpql")
+
+[node name="Sad" type="Sprite2D" parent="."]
 texture = ExtResource("2_acpql")
 
 [node name="Area2D" type="Area2D" parent="."]
