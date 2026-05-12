@@ -63,7 +63,6 @@ namespace Com.IsartDigital.OBG
         }
         public void CheckWin(bool pEndTimer = false)
         {
-            SetProcess(false);
             int lUpFoodCount = gameUp.player.foods.Count;
             int lDownFoodCount = gameDown.player.foods.Count;
             if (lUpFoodCount == Utils.FOOD_VICTORY_INDEX || (pEndTimer && lUpFoodCount > lDownFoodCount))
@@ -71,12 +70,14 @@ namespace Com.IsartDigital.OBG
                 //place Particle on Top
                 GD.Print("Win On Top");
                 Main.GetInstance().GoToWin();
+                SetProcess(false);
             }
             else if (lDownFoodCount == Utils.FOOD_VICTORY_INDEX || (pEndTimer && lDownFoodCount > lUpFoodCount))
             {
                 //place Particle Under
                 GD.Print("Win Under");
                 Main.GetInstance().GoToWin().RotationDegrees = 180;
+                SetProcess(false);
             }
         }
         protected override void Dispose(bool pDisposing)
