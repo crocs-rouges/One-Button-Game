@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://d141e5prq31gc"]
+[gd_scene load_steps=5 format=3 uid="uid://d141e5prq31gc"]
 
 [ext_resource type="Script" path="res://Scripts/Manager/HudManager.cs" id="1_8jysg"]
 [ext_resource type="Texture2D" uid="uid://b2y1faplhh8ku" path="res://Assets/Mucho Party/Side_Lights.png" id="2_82ouc"]
 [ext_resource type="Texture2D" uid="uid://lemuybkfbqay" path="res://Assets/Mucho Party/Progress.png" id="3_4nmos"]
+[ext_resource type="Texture2D" uid="uid://2ylwhhu4ekt0" path="res://Assets/Mucho Party/BottomProgress.png" id="4_d84uk"]
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("timerLabel")]
+[node name="Hud" type="Control" node_paths=PackedStringArray("topWhiteBar", "bottomWhiteBar", "timerLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +13,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8jysg")
+topWhiteBar = NodePath("Top/White")
+bottomWhiteBar = NodePath("Bottom/White2")
 timerLabel = NodePath("Timer")
 
 [node name="YellowSideBar" type="TextureRect" parent="."]
@@ -59,3 +62,86 @@ rotation = 1.5708
 theme_override_font_sizes/font_size = 46
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Top" type="Control" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Black" type="TextureRect" parent="Top"]
+z_index = -30
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_right = -78.0
+offset_bottom = -1117.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(25, 521)
+texture = ExtResource("4_d84uk")
+expand_mode = 1
+
+[node name="White" type="TextureRect" parent="Top"]
+z_index = -30
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_right = -78.0
+offset_bottom = -1131.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(25, 0)
+texture = ExtResource("3_4nmos")
+expand_mode = 1
+
+[node name="Bottom" type="Control" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Black2" type="TextureRect" parent="Bottom"]
+z_index = -30
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = 1043.0
+offset_right = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(25, 558)
+texture = ExtResource("4_d84uk")
+expand_mode = 1
+
+[node name="White2" type="TextureRect" parent="Bottom"]
+z_index = -30
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = 1135.0
+offset_right = -78.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(25, 1114)
+texture = ExtResource("3_4nmos")
+expand_mode = 1

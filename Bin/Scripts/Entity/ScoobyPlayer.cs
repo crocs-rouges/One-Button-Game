@@ -31,6 +31,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		[Export] private const float FOOD_MOVE_SPEED = 25f;
 		private float time;
 		private float previousX = 0f;
+		public Action<int, bool> OnFoodCatch { get; set; }
 
 		[ExportGroup("Animation")]
 		[Export] private Node2D cryParticle;
@@ -72,8 +73,8 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				Vector2 lMousePos = GetCanvasTransform().AffineInverse() * lDrag.Position;
 				if (isDownPos == Utils.IsInScreenDown(lMousePos))
 				{
-					if (isDownPos && lMousePos.X < 0) return;
-					else if (!isDownPos && lMousePos.X > 0) return;
+					// if (isDownPos && lMousePos.X < 0) return;
+					// else if (!isDownPos && lMousePos.X > 0) return;
 					MovePlayer(lMousePos);
 				}
 			}
@@ -138,7 +139,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				if (lManager.TryAddFood(lFood.type))
 				{
 					foods.Add(lFood);
-					if (foods.Count == Utils.FOOD_VICTORY_INDEX) GameManager.GetInstance().CheckWin();
+					if (foods.Count == Utils.FOOD_VICTORY_COUNT) GameManager.GetInstance().CheckWin();
 					lFood.Capture();
 					DropPlayer();
 				}
@@ -149,6 +150,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 					RemoveOneFood();
 					lManager.RemoveFood();
 				}
+				OnFoodCatch?.Invoke(foods.Count, isDownPos);
 			}
 		}
 		private void RemoveOneFood()

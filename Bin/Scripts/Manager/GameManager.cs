@@ -39,17 +39,20 @@ namespace Com.IsartDigital.OBG.Manager
         }
         public override void _Ready()
         {
-            SetupGame();
             hud = HudManager.GetInstance();
+            SetupGame();
         }
         public void SetupGame()
         {
             // gameUp            
             gameUp.spawner.isDown = false;
             gameUp.player.isDownPos = false;
+            gameUp.player.OnFoodCatch += (pCount, pIsDown) => hud.UpdateBar(pCount, pIsDown);
+
             // gameDown
             gameDown.spawner.isDown = true;
             gameDown.player.isDownPos = true;
+            gameDown.player.OnFoodCatch += (pCount, pIsDown) => hud.UpdateBar(pCount, pIsDown);
 
             //timer for game
             timer = Utils.GAME_DURATION_IN_SECONDS;
@@ -67,8 +70,8 @@ namespace Com.IsartDigital.OBG.Manager
             int lDownFoodCount = gameDown.player.foods.Count;
 
             //check win conditions
-            bool lUpWins = lUpFoodCount == Utils.FOOD_VICTORY_INDEX || (pEndTimer && lUpFoodCount > lDownFoodCount);
-            bool lDownWins = lDownFoodCount == Utils.FOOD_VICTORY_INDEX || (pEndTimer && lDownFoodCount > lUpFoodCount);
+            bool lUpWins = lUpFoodCount == Utils.FOOD_VICTORY_COUNT || (pEndTimer && lUpFoodCount > lDownFoodCount);
+            bool lDownWins = lDownFoodCount == Utils.FOOD_VICTORY_COUNT || (pEndTimer && lDownFoodCount > lUpFoodCount);
 
             if (!lUpWins && !lDownWins) return;
             ScoobyPlayer lWinningPlayer = lDownWins ? gameDown.player : gameUp.player;

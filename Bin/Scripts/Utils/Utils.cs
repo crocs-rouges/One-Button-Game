@@ -43,9 +43,8 @@ namespace Com.IsartDigital.OBG.Tools
         public Vector2 screenSize;
         public float middleScreenVertical;
         public const float ONE_SECOND = 1f;
-        // public const int FOOD_VICTORY_INDEX = 14;
-        public const int FOOD_VICTORY_INDEX = 4;
-        public const float GAME_DURATION_IN_SECONDS = 5;
+        public const int FOOD_VICTORY_COUNT = 15;
+        public const float GAME_DURATION_IN_SECONDS = 45;
 
         public static Utils GetInstance()
         {
