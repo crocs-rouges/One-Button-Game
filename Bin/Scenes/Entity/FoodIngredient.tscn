@@ -21,32 +21,26 @@ foodCountLbl = NodePath("Label")
 
 [node name="Bread3" parent="." instance=ExtResource("2_2aq68")]
 position = Vector2(316, 126)
-type = null
 canFall = false
-fallSpeed = null
 
 [node name="Cheese" parent="." instance=ExtResource("3_m7xal")]
 position = Vector2(409, 128)
 canFall = false
-fallSpeed = null
 
 [node name="Ham" parent="." instance=ExtResource("4_wm0mv")]
 position = Vector2(522, 129)
 canFall = false
-fallSpeed = null
 
 [node name="Salad" parent="." instance=ExtResource("5_ycfbh")]
 position = Vector2(635, 128)
 canFall = false
-fallSpeed = null
 
 [node name="Bread" parent="." instance=ExtResource("2_2aq68")]
 position = Vector2(743, 131)
-type = null
 canFall = false
-fallSpeed = null
 
 [node name="Label" type="Label" parent="."]
+z_index = 10
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -56,5 +50,7 @@ offset_top = 189.0
 offset_right = 40.0
 offset_bottom = 273.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 61
 text = "3/5"
