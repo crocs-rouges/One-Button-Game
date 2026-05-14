@@ -41,7 +41,14 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		[Export] private const float JUMP_DURATION = 0.3f;
 		[Export] private const float FALL_DURATION = 0.25f;
 		[Export] private const float BACK_DURATION = 0.15f;
-		private float victoryGroundY;
+		private float posGroundX;
+		private float posGroundY;
+
+		[Export] private const float CRY_DISTANCE = 60f;
+		[Export] private const float CRY_DURATION = 0.25f;
+		[Export] private const float CRY_ROTATION = 15f;
+		[Export] private const float CRY_SMALL_SCALE = 0.85f;
+		[Export] private const float CRY_BIG_SCALE = 1.1f;
 
 
 		public override void _Ready()
@@ -185,18 +192,17 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			foods.Clear();
 			lTween.Finished += VictoryAnimation;
 		}
-
 		public void VictoryAnimation()
 		{
 			canMove = false;
-			victoryGroundY = Position.Y;
+			posGroundX = Position.X;
+			posGroundY = Position.Y;
 			//set happy sprite
 			normalSpt.Visible = false;
 			happySpt.Visible = true;
 
 			StartVictoryLoop(true);
 		}
-
 		private void StartVictoryLoop(bool pJumpLeft)
 		{
 			Tween lTween = CreateTween();
@@ -208,7 +214,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 
 			//jump
 			lTween.SetParallel(true);
-			lTween.TweenProperty(this, Utils.TWEEN_POSITION_Y, victoryGroundY + lJumpHeight, JUMP_DURATION)
+			lTween.TweenProperty(this, Utils.TWEEN_POSITION_Y, posGroundY + lJumpHeight, JUMP_DURATION)
 				.SetTrans(Tween.TransitionType.Cubic)
 				.SetEase(Tween.EaseType.Out);
 			lTween.TweenProperty(this, Utils.TWEEN_ROTATION, lTargetRotation, JUMP_DURATION)
@@ -219,7 +225,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				.SetEase(Tween.EaseType.Out);
 			//fall
 			lTween.Chain().SetParallel(true);
-			lTween.TweenProperty(this, Utils.TWEEN_POSITION_Y, victoryGroundY, FALL_DURATION)
+			lTween.TweenProperty(this, Utils.TWEEN_POSITION_Y, posGroundY, FALL_DURATION)
 				.SetTrans(Tween.TransitionType.Quad)
 				.SetEase(Tween.EaseType.In);
 			lTween.TweenProperty(this, Utils.TWEEN_ROTATION, 0f, FALL_DURATION)
@@ -237,11 +243,50 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		}
 		public void LooseAnimation()
 		{
+			canMove = false;
+			posGroundX = Position.X;
+			posGroundY = Position.Y;
+
 			//set sad sprite
 			normalSpt.Visible = false;
 			sadSpt.Visible = true;
-			//set cry particle and giggle effect
+			//set cry particle
 			cryParticle.Visible = true;
+
+			StartLooseLoop(true);
+		}
+		private void StartLooseLoop(bool pWalkLeft)
+		{
+			Tween lTween = CreateTween();
+			float lWalkDir = pWalkLeft ? -1f : 1f;
+			Vector2 lBaseScale = Scale;
+
+			//startmovement
+			//position move from one side to the other
+			lTween.TweenProperty(this, Utils.TWEEN_POSITION_X, posGroundX + (CRY_DISTANCE * lWalkDir), 1f)
+				.SetTrans(Tween.TransitionType.Sine)
+				.SetEase(Tween.EaseType.InOut);
+			lTween.Parallel().TweenProperty(this, Utils.TWEEN_ROTATION, Mathf.DegToRad(CRY_ROTATION * lWalkDir), CRY_DURATION)
+				.SetTrans(Tween.TransitionType.Sine);
+			lTween.Parallel().TweenProperty(this, Utils.TWEEN_SCALE, new Vector2(CRY_BIG_SCALE, CRY_SMALL_SCALE) * lBaseScale, CRY_DURATION)
+				.SetTrans(Tween.TransitionType.Sine);
+			//back to normal
+			lTween.Chain().TweenProperty(this, Utils.TWEEN_ROTATION, Mathf.DegToRad(5f * lWalkDir), CRY_DURATION)
+				.SetTrans(Tween.TransitionType.Sine);
+			lTween.Parallel().TweenProperty(this, Utils.TWEEN_SCALE, lBaseScale, CRY_DURATION)
+				.SetTrans(Tween.TransitionType.Sine);
+			//cry effect
+			lTween.Chain().TweenProperty(this, Utils.TWEEN_ROTATION, Mathf.DegToRad(CRY_ROTATION * lWalkDir), CRY_DURATION)
+				.SetTrans(Tween.TransitionType.Sine);
+			lTween.Parallel().TweenProperty(this, Utils.TWEEN_SCALE, new Vector2(CRY_BIG_SCALE, CRY_SMALL_SCALE) * lBaseScale, CRY_DURATION)
+				.SetTrans(Tween.TransitionType.Sine);
+			//back to normal
+			lTween.Chain().TweenProperty(this, Utils.TWEEN_ROTATION, 0f, CRY_DURATION)
+				.SetTrans(Tween.TransitionType.Sine);
+			lTween.Parallel().TweenProperty(this, Utils.TWEEN_SCALE, lBaseScale, CRY_DURATION)
+				.SetTrans(Tween.TransitionType.Sine);
+
+			lTween.Finished += () => StartLooseLoop(!pWalkLeft);
 		}
 		#endregion
 	}
