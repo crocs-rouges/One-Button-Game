@@ -20,6 +20,7 @@ namespace Com.IsartDigital.OBG.Tools
 
         [ExportGroup("Tweens")]
         public const string TWEEN_POSITION = "position";
+        public const string TWEEN_POSITION_Y = "position:y";
         public const string TWEEN_GLOBALPOSITION = "global_position";
         public const string TWEEN_SCALE = "scale";
         public const string TWEEN_ROTATION = "rotation";

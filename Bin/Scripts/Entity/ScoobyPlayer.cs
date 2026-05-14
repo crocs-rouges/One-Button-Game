@@ -12,16 +12,14 @@ namespace Com.IsartDigital.OBG.Entity.Player
 	public partial class ScoobyPlayer : Node2D
 	{
 		[Export] private Area2D area;
-		public bool isDownPos = false;
-		public bool canMove = true;
+		[Export] public bool isDownPos = false;
+		[Export] public bool canMove = true;
 
 		[ExportGroup("Sprite")]
 		[Export] private Sprite2D normalSpt;
 		[Export] private Sprite2D happySpt;
 		[Export] private Sprite2D sadSpt;
 
-		[ExportGroup("Animation")]
-		[Export] private Node2D cryParticle;
 
 
 		[ExportGroup("Food")]
@@ -32,8 +30,19 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		[Export] private const float FOOD_MOVE_AMPLITUDE = 8f;
 		[Export] private const float FOOD_MOVE_SPEED = 25f;
 		private float time;
-
 		private float previousX = 0f;
+
+		[ExportGroup("Animation")]
+		[Export] private Node2D cryParticle;
+		[Export] private const float JUMP_HEIGHT = 120f;
+		[Export] private const float JUMP_ROTATION = 15f;
+		[Export] private const float JUMP_SMALL_SCALE = 0.8f;
+		[Export] private const float JUMP_BIG_SCALE = 1.2f;
+		[Export] private const float JUMP_DURATION = 0.3f;
+		[Export] private const float FALL_DURATION = 0.25f;
+		[Export] private const float BACK_DURATION = 0.15f;
+		private float victoryGroundY;
+
 
 		public override void _Ready()
 		{
@@ -161,6 +170,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		#region Animation
 		public void EatAnimation()
 		{
+			canMove = false;
 			Tween lTween = CreateTween();
 			int lFoodCount = foods.Count;
 			for (int i = 0; i < lFoodCount; i++)
@@ -175,12 +185,55 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			foods.Clear();
 			lTween.Finished += VictoryAnimation;
 		}
+
 		public void VictoryAnimation()
 		{
-			//set sad sprite
+			canMove = false;
+			victoryGroundY = Position.Y;
+			//set happy sprite
 			normalSpt.Visible = false;
 			happySpt.Visible = true;
-			//set winjump animation
+
+			StartVictoryLoop(true);
+		}
+
+		private void StartVictoryLoop(bool pJumpLeft)
+		{
+			Tween lTween = CreateTween();
+			Vector2 lBaseScale = Scale;
+			float lJumpDirection = pJumpLeft ? -1f : 1f;
+			float lJumpHeight = isDownPos ? -JUMP_HEIGHT : JUMP_HEIGHT;
+			GD.Print(lJumpHeight);
+			float lTargetRotation = Mathf.DegToRad(JUMP_ROTATION * lJumpDirection);
+
+			//jump
+			lTween.SetParallel(true);
+			lTween.TweenProperty(this, Utils.TWEEN_POSITION_Y, victoryGroundY + lJumpHeight, JUMP_DURATION)
+				.SetTrans(Tween.TransitionType.Cubic)
+				.SetEase(Tween.EaseType.Out);
+			lTween.TweenProperty(this, Utils.TWEEN_ROTATION, lTargetRotation, JUMP_DURATION)
+				.SetTrans(Tween.TransitionType.Cubic)
+				.SetEase(Tween.EaseType.Out);
+			lTween.TweenProperty(this, Utils.TWEEN_SCALE, new Vector2(JUMP_SMALL_SCALE, JUMP_BIG_SCALE) * lBaseScale, JUMP_DURATION)
+				.SetTrans(Tween.TransitionType.Cubic)
+				.SetEase(Tween.EaseType.Out);
+			//fall
+			lTween.Chain().SetParallel(true);
+			lTween.TweenProperty(this, Utils.TWEEN_POSITION_Y, victoryGroundY, FALL_DURATION)
+				.SetTrans(Tween.TransitionType.Quad)
+				.SetEase(Tween.EaseType.In);
+			lTween.TweenProperty(this, Utils.TWEEN_ROTATION, 0f, FALL_DURATION)
+				.SetTrans(Tween.TransitionType.Quad)
+				.SetEase(Tween.EaseType.In);
+			lTween.TweenProperty(this, Utils.TWEEN_SCALE, new Vector2(JUMP_BIG_SCALE, JUMP_SMALL_SCALE) * lBaseScale, FALL_DURATION)
+				.SetTrans(Tween.TransitionType.Quad)
+				.SetEase(Tween.EaseType.In);
+			//back to normal
+			lTween.Chain().TweenProperty(this, Utils.TWEEN_SCALE, lBaseScale, BACK_DURATION)
+				.SetTrans(Tween.TransitionType.Back)
+				.SetEase(Tween.EaseType.Out);
+			//change jump side
+			lTween.Finished += () => StartVictoryLoop(!pJumpLeft);
 		}
 		public void LooseAnimation()
 		{

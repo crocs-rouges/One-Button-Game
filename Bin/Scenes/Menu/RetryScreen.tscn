@@ -56,15 +56,15 @@ texture = ExtResource("1_r387p")
 
 [node name="Up" parent="Up/SubViewport" node_paths=PackedStringArray("area") instance=ExtResource("2_esbkx")]
 position = Vector2(750, 607)
-rotation = 3.14159
-scale = Vector2(2, 2)
+scale = Vector2(2, -2)
 area = NodePath("../../../Down/SubViewport/Up/Area2D")
+canMove = false
 
 [node name="Down" parent="Up/SubViewport" node_paths=PackedStringArray("area") instance=ExtResource("2_esbkx")]
 position = Vector2(350, 594)
-rotation = 3.14159
-scale = Vector2(3.5, 3.5)
+scale = Vector2(3.5, -3.5)
 area = NodePath("../../../Down/SubViewport/Down/Area2D")
+canMove = false
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 1
@@ -115,7 +115,11 @@ texture = ExtResource("1_r387p")
 [node name="Up" parent="Down/SubViewport" instance=ExtResource("2_esbkx")]
 position = Vector2(308, 607)
 scale = Vector2(2, 2)
+isDownPos = true
+canMove = false
 
 [node name="Down" parent="Down/SubViewport" instance=ExtResource("2_esbkx")]
 position = Vector2(775, 594)
 scale = Vector2(3.5, 3.5)
+isDownPos = true
+canMove = false
