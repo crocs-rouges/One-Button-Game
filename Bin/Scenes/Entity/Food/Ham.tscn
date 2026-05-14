@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://b78o615sr6xsi"]
+[gd_scene load_steps=5 format=3 uid="uid://b78o615sr6xsi"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Food/Ham.cs" id="2_bg0gr"]
 [ext_resource type="Texture2D" uid="uid://bwnlyvq3a5s17" path="res://Assets/Food/Ham.png" id="2_cwufl"]
+[ext_resource type="Texture2D" uid="uid://baenplf6kapof" path="res://Assets/CheckMark.png" id="3_1ce3x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1m8u"]
 size = Vector2(126, 126)
 
-[node name="Ham" type="Sprite2D"]
+[node name="Ham" type="Sprite2D" node_paths=PackedStringArray("foodSpt", "checkmarkSpt")]
 script = ExtResource("2_bg0gr")
 type = 1
+foodSpt = NodePath("Ham")
+checkmarkSpt = NodePath("CheckMark")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -31,6 +34,11 @@ text = "HAM"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Ham" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_cwufl")
+
+[node name="CheckMark" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.120332, 0.120332)
+texture = ExtResource("3_1ce3x")

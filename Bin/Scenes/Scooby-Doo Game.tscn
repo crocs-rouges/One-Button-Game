@@ -18,4 +18,12 @@ scale = Vector2(4.24, 0.2)
 position = Vector2(0, 1300)
 
 [node name="FoodIngredient" parent="." instance=ExtResource("4_lk6bm")]
-position = Vector2(-230, 47)
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -537.0
+offset_top = 43.0
+offset_right = 537.0
+offset_bottom = 333.0
+grow_horizontal = 1
+grow_vertical = 1

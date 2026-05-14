@@ -5,23 +5,27 @@ using System;
 
 namespace Com.IsartDigital.OBG.Entity.Aliments
 {
-	public partial class FoodIngredients : Node2D
+	public partial class FoodIngredients : Control
 	{
 		[Export] private Food[] listFoodItem;
+		[Export] private Label foodCountLbl;
+		private const string FOOD_COUNT = "/5";
+
 		public override void _Ready()
 		{
 			base._Ready();
-			HideElements();
+			ChangeElement(0);
 		}
 		public void ChangeElement(int pNewIndex)
 		{
-			HideElements();
-			listFoodItem[pNewIndex].Visible = true;
-		}
-		private void HideElements()
-		{
-			foreach (Food lFoodText in listFoodItem)
-				lFoodText.Visible = false;
+			for (int lIndex = 0; lIndex < listFoodItem.Length; lIndex++)
+			{
+				Food lCurrentFood = listFoodItem[lIndex];
+				if (lIndex < pNewIndex) lCurrentFood.Collected();
+				else if (lIndex == pNewIndex) lCurrentFood.Next();
+				else lCurrentFood.Normal();
+			}
+			foodCountLbl.Text = pNewIndex + FOOD_COUNT;
 		}
 	}
 }

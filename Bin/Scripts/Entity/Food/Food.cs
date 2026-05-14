@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 // Author : Romain Chevalier
 
@@ -8,6 +9,7 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 	{
 		Bread, Ham, Salad, Cheese,
 	}
+
 	public partial class Food : Node2D
 	{
 		[Export] public FoodType type;
@@ -17,6 +19,12 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		[Export] private const float FOOD_DIVIDE_SIZE = 1.2f;
 
 		private const float ROTATION_SPEED = 360f;
+
+		// Visual elements for UI states
+		[Export] private CanvasItem foodSpt;
+		[Export] private Sprite2D checkmarkSpt;
+		private Material glowMaterial = GD.Load<Material>("res://Shader/GlowMaterial.tres");
+		private Material grayScaleMaterial = GD.Load<Material>("res://Shader/GrayScale.tres");
 
 		public override void _Ready()
 		{
@@ -45,6 +53,30 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		public void Explode()
 		{
 			QueueFree();
+		}
+		/// <summary>
+		/// the food has been already collected
+		/// </summary>
+		public void Collected()
+		{
+			if (foodSpt != null) foodSpt.Material = grayScaleMaterial;
+			if (checkmarkSpt != null) checkmarkSpt.Visible = true;
+		}
+		/// <summary>
+		/// show the next food to be collected
+		/// </summary>
+		public void Next()
+		{
+			if (foodSpt != null) foodSpt.Material = glowMaterial;
+			if (checkmarkSpt != null) checkmarkSpt.Visible = false;
+		}
+		/// <summary>
+		/// normal for upcoming food
+		/// </summary>
+		public void Normal()
+		{
+			if (foodSpt != null) foodSpt.Material = null;
+			if (checkmarkSpt != null) checkmarkSpt.Visible = false;
 		}
 	}
 }

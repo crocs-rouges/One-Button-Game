@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3524r8jnlyi7"]
+[gd_scene load_steps=5 format=3 uid="uid://d3524r8jnlyi7"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Food/Salad.cs" id="2_lmjcp"]
+[ext_resource type="Texture2D" uid="uid://baenplf6kapof" path="res://Assets/CheckMark.png" id="3_pyjmu"]
 [ext_resource type="Texture2D" uid="uid://de4bohpvwcmvr" path="res://Assets/Food/Salad.png" id="3_tseod"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1m8u"]
 size = Vector2(126, 126)
 
-[node name="Salad" type="Sprite2D"]
+[node name="Salad" type="Sprite2D" node_paths=PackedStringArray("foodSpt", "checkmarkSpt")]
 script = ExtResource("2_lmjcp")
 type = 2
+foodSpt = NodePath("Salad")
+checkmarkSpt = NodePath("CheckMark")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -31,6 +34,11 @@ text = "SALAD"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Salad" type="Sprite2D" parent="."]
 scale = Vector2(0.155556, 0.155556)
 texture = ExtResource("3_tseod")
+
+[node name="CheckMark" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.120332, 0.120332)
+texture = ExtResource("3_pyjmu")

@@ -28,6 +28,7 @@ namespace Com.IsartDigital.OBG
 			Vector2 lScale = lTextSize * Scale / 2;
 			startPos = -lScale;
 			endPos = lScale;
+			Texture = null;
 		}
 		public override void _Process(double pDelta)
 		{

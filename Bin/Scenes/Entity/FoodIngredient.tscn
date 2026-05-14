@@ -6,26 +6,48 @@
 [ext_resource type="PackedScene" uid="uid://b78o615sr6xsi" path="res://Scenes/Entity/Food/Ham.tscn" id="4_wm0mv"]
 [ext_resource type="PackedScene" uid="uid://d3524r8jnlyi7" path="res://Scenes/Entity/Food/Salad.tscn" id="5_ycfbh"]
 
-[node name="FoodIngredient" type="Node2D" node_paths=PackedStringArray("listFoodItem")]
+[node name="FoodIngredient" type="Control" node_paths=PackedStringArray("listFoodItem", "foodCountLbl")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1835.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(540, 0)
 script = ExtResource("1_5jad6")
 listFoodItem = [NodePath("Bread3"), NodePath("Cheese"), NodePath("Ham"), NodePath("Salad"), NodePath("Bread")]
+foodCountLbl = NodePath("Label")
 
 [node name="Bread3" parent="." instance=ExtResource("2_2aq68")]
-position = Vector2(0, 4)
+position = Vector2(316, 126)
 canFall = false
 
 [node name="Cheese" parent="." instance=ExtResource("3_m7xal")]
-position = Vector2(93, 6)
+position = Vector2(409, 128)
 canFall = false
 
 [node name="Ham" parent="." instance=ExtResource("4_wm0mv")]
-position = Vector2(206, 7)
+position = Vector2(522, 129)
 canFall = false
 
 [node name="Salad" parent="." instance=ExtResource("5_ycfbh")]
-position = Vector2(319, 6)
+position = Vector2(635, 128)
 canFall = false
 
 [node name="Bread" parent="." instance=ExtResource("2_2aq68")]
-position = Vector2(427, 9)
+position = Vector2(743, 131)
 canFall = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_top = 189.0
+offset_right = 40.0
+offset_bottom = 273.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 61
+text = "3/5"
