@@ -183,12 +183,10 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			for (int i = 0; i < lFoodCount; i++)
 			{
 				Food lFood = foods[i];
-				// Move the food smoothly to the player's position over 0.15 seconds
-				lTween.TweenProperty(lFood, "global_position", GlobalPosition, 0.15f);
-				// Explode the food once it reaches the player
+				//move the food to the player
+				lTween.TweenProperty(lFood, Utils.TWEEN_GLOBALPOSITION, GlobalPosition, 0.15f);
 				lTween.TweenCallback(Callable.From(lFood.Explode));
 			}
-			// Clear the list after setting up the sequence
 			foods.Clear();
 			lTween.Finished += VictoryAnimation;
 		}
@@ -209,7 +207,6 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			Vector2 lBaseScale = Scale;
 			float lJumpDirection = pJumpLeft ? -1f : 1f;
 			float lJumpHeight = isDownPos ? -JUMP_HEIGHT : JUMP_HEIGHT;
-			GD.Print(lJumpHeight);
 			float lTargetRotation = Mathf.DegToRad(JUMP_ROTATION * lJumpDirection);
 
 			//jump
