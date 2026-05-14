@@ -12,6 +12,8 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		[Export] private Label foodCountLbl;
 		private const string FOOD_COUNT = "/5";
 		private int previousIndex = 0;
+		private const float LABEL_ANIMATION_DURATION = 0.1f;
+		private const float LABEL_BACK_DURATION = 0.2f;
 
 		public override void _Ready()
 		{
@@ -35,7 +37,7 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 			// Main UI Pop effect
 			Tween lTween = CreateTween();
 			lTween.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
-			lTween.TweenProperty(this, Utils.TWEEN_SCALE, Vector2.One * 1.05f, 0.1f);
+			lTween.TweenProperty(this, Utils.TWEEN_SCALE, Vector2.One * 1.1f, 0.1f);
 			lTween.Chain().TweenProperty(this, Utils.TWEEN_SCALE, Vector2.One, 0.15f);
 
 			// choose text color
@@ -49,12 +51,11 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 			Tween lLabelTween = CreateTween();
 			// Scale up and change color to the target color
 			lLabelTween.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
-			lLabelTween.TweenProperty(foodCountLbl, Utils.TWEEN_SCALE, Vector2.One * 1.4f, 0.1f);
-			lLabelTween.Parallel().TweenProperty(foodCountLbl, Utils.TWEEN_MODULATE, lTargetColor, 0.1f);
+			lLabelTween.TweenProperty(foodCountLbl, Utils.TWEEN_SCALE, Vector2.One * 1.4f, LABEL_ANIMATION_DURATION);
+			lLabelTween.Parallel().TweenProperty(foodCountLbl, Utils.TWEEN_MODULATE, lTargetColor, LABEL_ANIMATION_DURATION);
 			// back to normal
-			lLabelTween.Chain().TweenProperty(foodCountLbl, Utils.TWEEN_SCALE, Vector2.One, 0.2f);
-			lLabelTween.Parallel().TweenProperty(foodCountLbl, Utils.TWEEN_MODULATE, Colors.White, 0.2f);
-
+			lLabelTween.Chain().TweenProperty(foodCountLbl, Utils.TWEEN_SCALE, Vector2.One, LABEL_BACK_DURATION);
+			lLabelTween.Parallel().TweenProperty(foodCountLbl, Utils.TWEEN_MODULATE, Colors.White, LABEL_BACK_DURATION);
 		}
 	}
 }

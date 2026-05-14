@@ -41,7 +41,6 @@ namespace Com.IsartDigital.OBG.Menus
 				lScaleYMultiply = lPlayer.isDownPos ? 1f : -1f;
 				lPlayer.Scale = new Vector2(PLAYER_WIN_SCALE, PLAYER_WIN_SCALE * lScaleYMultiply);
 				lPlayer.VictoryAnimation();
-				lPlayer.Modulate = Colors.Red;
 			}
 			foreach (ScoobyPlayer lPlayer in lLooseScoobies)
 			{
