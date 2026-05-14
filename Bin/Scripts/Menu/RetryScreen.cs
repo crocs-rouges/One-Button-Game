@@ -25,12 +25,15 @@ namespace Com.IsartDigital.OBG.Menus
 		public override void _Ready()
 		{
 			base._Ready();
+			PivotOffset = Size / 2f;
+
+
 			GetTree().Paused = false;
 			retrybtn.Pressed += Main.GetInstance().GoToHelpMenu;
 
 			bool lWinnerIsDown = Main.GetInstance().winnerIsDown;
 			ScoobyPlayer[] lWinScoobies = lWinnerIsDown ? downPlayer : upPlayer;
-			ScoobyPlayer[] lLooseScoobies = !lWinnerIsDown ? upPlayer : downPlayer;
+			ScoobyPlayer[] lLooseScoobies = lWinnerIsDown ? upPlayer : downPlayer;
 
 			foreach (ScoobyPlayer lPlayer in lWinScoobies)
 			{
@@ -43,7 +46,11 @@ namespace Com.IsartDigital.OBG.Menus
 				lPlayer.Scale = Vector2.One * PLAYER_LOOSE_SCALE;
 				lPlayer.LooseAnimation();
 			}
-			if (!lWinnerIsDown) RotationDegrees += 180;
+			if (!lWinnerIsDown)
+			{
+				backgroundDown.Material = backgroundUp.Material;
+				backgroundUp.Material = null;
+			}
 		}
 		public override void _Process(double pDelta)
 		{

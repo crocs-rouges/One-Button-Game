@@ -20,6 +20,9 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		[Export] private Sprite2D happySpt;
 		[Export] private Sprite2D sadSpt;
 
+		[ExportGroup("Animation")]
+		[Export] private Node2D cryParticle;
+
 
 		[ExportGroup("Food")]
 		[Export] private const float FOOD_POSITION = 20f;
@@ -37,6 +40,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			base._Ready();
 			area.AreaEntered += CheckEnterArea;
 			previousX = GlobalPosition.X;
+			ProcessMode = ProcessModeEnum.Always;
 		}
 		public override void _Process(double pDelta)
 		{
@@ -155,6 +159,22 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		}
 		#endregion
 		#region Animation
+		public void EatAnimation()
+		{
+			Tween lTween = CreateTween();
+			int lFoodCount = foods.Count;
+			for (int i = 0; i < lFoodCount; i++)
+			{
+				Food lFood = foods[i];
+				// Move the food smoothly to the player's position over 0.15 seconds
+				lTween.TweenProperty(lFood, "global_position", GlobalPosition, 0.15f);
+				// Explode the food once it reaches the player
+				lTween.TweenCallback(Callable.From(lFood.Explode));
+			}
+			// Clear the list after setting up the sequence
+			foods.Clear();
+			lTween.Finished += VictoryAnimation;
+		}
 		public void VictoryAnimation()
 		{
 			//set sad sprite
@@ -168,6 +188,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			normalSpt.Visible = false;
 			sadSpt.Visible = true;
 			//set cry particle and giggle effect
+			cryParticle.Visible = true;
 		}
 		#endregion
 	}

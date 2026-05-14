@@ -65,22 +65,32 @@ namespace Com.IsartDigital.OBG.Manager
         {
             int lUpFoodCount = gameUp.player.foods.Count;
             int lDownFoodCount = gameDown.player.foods.Count;
-            if (lUpFoodCount == Utils.FOOD_VICTORY_INDEX || (pEndTimer && lUpFoodCount > lDownFoodCount))
+
+            //check win conditions
+            bool lUpWins = lUpFoodCount == Utils.FOOD_VICTORY_INDEX || (pEndTimer && lUpFoodCount > lDownFoodCount);
+            bool lDownWins = lDownFoodCount == Utils.FOOD_VICTORY_INDEX || (pEndTimer && lDownFoodCount > lUpFoodCount);
+
+            if (!lUpWins && !lDownWins) return;
+            ScoobyPlayer lWinningPlayer = lDownWins ? gameDown.player : gameUp.player;
+            ScoobyPlayer lLooserPlayer = lDownWins ? gameUp.player : gameDown.player;
+
+            Utils.CreateOneSecTimer(lWinningPlayer).Timeout += () =>
             {
-                //place Particle on Top
-                GD.Print("Win On Top");
-                Main.GetInstance().GoToWin();
-                SetProcess(false);
-            }
-            else if (lDownFoodCount == Utils.FOOD_VICTORY_INDEX || (pEndTimer && lDownFoodCount > lUpFoodCount))
+                lWinningPlayer.EatAnimation();
+                lLooserPlayer.LooseAnimation();
+            };
+            GD.Print(lDownWins ? "Win Under" : "Win On Top");
+
+            //show win screen
+            Main lMain = Main.GetInstance();
+            Control lWinScreen = lMain.GoToWin();
+            if (lDownWins)
             {
-                //place Particle Under
-                GD.Print("Win Under");
-                Main lMain = Main.GetInstance();
-                lMain.GoToWin().RotationDegrees = 180;
+                lWinScreen.RotationDegrees = 180;
                 lMain.winnerIsDown = true;
-                SetProcess(false);
             }
+            else lMain.winnerIsDown = false;
+            SetProcess(false);
         }
         protected override void Dispose(bool pDisposing)
         {
