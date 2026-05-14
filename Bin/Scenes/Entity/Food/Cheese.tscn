@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgvslcde2hlae"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/Food/Cheese.cs" id="2_qk3o5"]
+[ext_resource type="Script" path="res://Scripts/Entity/Food/Food.cs" id="1_sbjne"]
 [ext_resource type="Texture2D" uid="uid://pmdfx8c5exu1" path="res://Assets/Food/Cheese.png" id="2_y0bh8"]
 [ext_resource type="Texture2D" uid="uid://baenplf6kapof" path="res://Assets/CheckMark.png" id="3_oysk0"]
 
@@ -8,7 +8,7 @@
 size = Vector2(126, 126)
 
 [node name="Cheese" type="Sprite2D" node_paths=PackedStringArray("foodSpt", "checkmarkSpt")]
-script = ExtResource("2_qk3o5")
+script = ExtResource("1_sbjne")
 type = 3
 foodSpt = NodePath("Cheese")
 checkmarkSpt = NodePath("CheckMark")

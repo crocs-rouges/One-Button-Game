@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://5ui26nsgywmb"]
 
+[ext_resource type="Script" path="res://Scripts/Entity/Food/Food.cs" id="1_oeuks"]
 [ext_resource type="Texture2D" uid="uid://dhgxvjjy67bjx" path="res://Assets/Food/Bread.png" id="2_d3s1p"]
-[ext_resource type="Script" path="res://Scripts/Entity/Food/Bread.cs" id="2_u7ut3"]
 [ext_resource type="Texture2D" uid="uid://baenplf6kapof" path="res://Assets/CheckMark.png" id="3_oliqo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1m8u"]
 size = Vector2(126, 126)
 
 [node name="Bread" type="Sprite2D" node_paths=PackedStringArray("foodSpt", "checkmarkSpt")]
-script = ExtResource("2_u7ut3")
+script = ExtResource("1_oeuks")
 foodSpt = NodePath("Bread")
 checkmarkSpt = NodePath("CheckMark")
 

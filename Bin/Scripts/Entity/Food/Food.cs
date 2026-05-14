@@ -1,3 +1,4 @@
+using Com.IsartDigital.OBG.Tools;
 using Godot;
 using System;
 
@@ -15,20 +16,28 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		[Export] public FoodType type;
 		[Export] public bool canFall = true;
 		[Export] public float fallSpeed = 700;
-
 		[Export] private const float FOOD_DIVIDE_SIZE = 1.2f;
-
 		private const float ROTATION_SPEED = 360f;
 
-		// Visual elements for UI states
+		[ExportGroup("UI Ingredient")]
 		[Export] private CanvasItem foodSpt;
 		[Export] private Sprite2D checkmarkSpt;
 		private Material glowMaterial = GD.Load<Material>("res://Shader/GlowMaterial.tres");
 		private Material grayScaleMaterial = GD.Load<Material>("res://Shader/GrayScale.tres");
 
+		[ExportGroup("Animation")]
+		private Tween juiceTween;
+		private Vector2 baseScale;
+		private Vector2 checkMarkbaseScale;
+		private const float POP_INTENSITY = 1.3f;
+		private const float CHECKMARK_APPIRATION_DURATION = 0.3f;
+		private const float BREATHIN_DURATION = 0.6f;
+
 		public override void _Ready()
 		{
 			base._Ready();
+			baseScale = Scale;
+			checkMarkbaseScale = checkmarkSpt.Scale;
 		}
 		public override void _Process(double pDelta)
 		{
@@ -37,8 +46,7 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 			if (canFall)
 			{
 				GlobalPosition += Vector2.Down * fallSpeed * lDelta;
-				if (GlobalPosition.Y > 2160 || GlobalPosition.Y < -2160)
-					QueueFree();
+				if (GlobalPosition.Y > 2160 || GlobalPosition.Y < -2160) QueueFree();
 				RotationDegrees += ROTATION_SPEED * lDelta;
 			}
 		}
@@ -54,13 +62,19 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		{
 			QueueFree();
 		}
+		#region UI Ingredient
 		/// <summary>
 		/// the food has been already collected
 		/// </summary>
 		public void Collected()
 		{
 			if (foodSpt != null) foodSpt.Material = grayScaleMaterial;
-			if (checkmarkSpt != null) checkmarkSpt.Visible = true;
+			if (checkmarkSpt == null || checkmarkSpt.Visible) return;
+			checkmarkSpt.Visible = true;
+			Tween lTween = CreateTween();
+			lTween.TweenProperty(checkmarkSpt, Utils.TWEEN_SCALE, checkMarkbaseScale, CHECKMARK_APPIRATION_DURATION).From(Vector2.Zero)
+			.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+			PlayPopEffect(POP_INTENSITY);
 		}
 		/// <summary>
 		/// show the next food to be collected
@@ -69,14 +83,43 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		{
 			if (foodSpt != null) foodSpt.Material = glowMaterial;
 			if (checkmarkSpt != null) checkmarkSpt.Visible = false;
+			StartBreathing();
 		}
 		/// <summary>
 		/// normal for upcoming food
 		/// </summary>
 		public void Normal()
 		{
+			KillJuiceTween();
+			Scale = baseScale;
 			if (foodSpt != null) foodSpt.Material = null;
 			if (checkmarkSpt != null) checkmarkSpt.Visible = false;
 		}
+		#endregion
+		#region Animation
+		private void KillJuiceTween()
+		{
+			if (juiceTween != null && juiceTween.IsValid())
+				juiceTween.Kill();
+		}
+		public void PlayPopEffect(float pIntensity = 1.2f)
+		{
+			KillJuiceTween();
+			juiceTween = CreateTween();
+			juiceTween.TweenProperty(this, Utils.TWEEN_SCALE, baseScale * pIntensity, 0.1f)
+			.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+			juiceTween.Chain().TweenProperty(this, Utils.TWEEN_SCALE, baseScale, 0.2f)
+			.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+		}
+		public void StartBreathing()
+		{
+			KillJuiceTween();
+			juiceTween = CreateTween().SetLoops();
+			juiceTween.TweenProperty(this, Utils.TWEEN_SCALE, baseScale * 1.1f, BREATHIN_DURATION)
+			.SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
+			juiceTween.TweenProperty(this, Utils.TWEEN_SCALE, baseScale, BREATHIN_DURATION)
+			.SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
+		}
+		#endregion
 	}
 }

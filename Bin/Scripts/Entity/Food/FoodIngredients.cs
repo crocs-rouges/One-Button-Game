@@ -1,3 +1,4 @@
+using Com.IsartDigital.OBG.Tools;
 using Godot;
 using System;
 
@@ -18,6 +19,12 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		}
 		public void ChangeElement(int pNewIndex)
 		{
+			// UI Pop effect
+			Tween lTween = CreateTween();
+			lTween.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+			lTween.TweenProperty(this, Utils.TWEEN_SCALE, Vector2.One * 1.05f, 0.1f);
+			lTween.Chain().TweenProperty(this, Utils.TWEEN_SCALE, Vector2.One, 0.15f);
+
 			for (int lIndex = 0; lIndex < listFoodItem.Length; lIndex++)
 			{
 				Food lCurrentFood = listFoodItem[lIndex];
