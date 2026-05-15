@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://nkhkopgua6h0"]
+[gd_scene load_steps=6 format=3 uid="uid://nkhkopgua6h0"]
 
 [ext_resource type="Script" path="res://Scripts/Manager/GameManager.cs" id="1_gr585"]
 [ext_resource type="PackedScene" uid="uid://dbcfglo7obef2" path="res://Scenes/Scooby-Doo Game.tscn" id="2_xfll2"]
+[ext_resource type="Texture2D" uid="uid://bkoiqv8jv7yyl" path="res://Assets/Player/PommeBasic.png" id="3_xrj72"]
+[ext_resource type="Texture2D" uid="uid://ddhnfdh7icssr" path="res://Assets/Player/PommeSad.png" id="4_c33ve"]
+[ext_resource type="Texture2D" uid="uid://bolm3f0vb44wn" path="res://Assets/Mucho Party/bg_simpleplay.jpg" id="5_loivv"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("gameUp", "gameDown")]
 script = ExtResource("1_gr585")
@@ -9,10 +12,47 @@ gameUp = NodePath("gameUp")
 gameDown = NodePath("gameDown")
 
 [node name="gameDown" parent="." instance=ExtResource("2_xfll2")]
-position = Vector2(270, -1080)
+position = Vector2(200, -1150)
+
+[node name="Scooby-doo" parent="gameDown" index="1"]
+position = Vector2(0, 1500)
 
 [node name="gameUp" parent="." instance=ExtResource("2_xfll2")]
-position = Vector2(-270, 1080)
+position = Vector2(-270, 1150)
 rotation = 3.14159
 
+[node name="Scooby-doo" parent="gameUp" index="1"]
+position = Vector2(0, 1500)
+
+[node name="Normal" parent="gameUp/Scooby-doo" index="0"]
+texture = ExtResource("3_xrj72")
+
+[node name="Sad" parent="gameUp/Scooby-doo" index="2"]
+texture = ExtResource("4_c33ve")
+
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+z_index = -100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_loivv")
+
+[editable path="gameDown"]
+[editable path="gameUp"]
+[editable path="gameUp/Scooby-doo"]

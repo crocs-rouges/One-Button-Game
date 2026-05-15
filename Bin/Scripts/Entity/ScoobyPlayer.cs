@@ -17,7 +17,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 
 		[ExportGroup("Sprite")]
 		[Export] private Sprite2D normalSpt;
-		[Export] private Sprite2D happySpt;
+		// [Export] private Sprite2D happySpt;
 		[Export] private Sprite2D sadSpt;
 
 
@@ -58,6 +58,9 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			area.AreaEntered += CheckEnterArea;
 			previousX = GlobalPosition.X;
 			ProcessMode = ProcessModeEnum.Always;
+			normalSpt.Visible = true;
+			// happySpt.Visible = false;
+			sadSpt.Visible = false;
 		}
 		public override void _Process(double pDelta)
 		{
@@ -198,8 +201,8 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			posGroundX = Position.X;
 			posGroundY = Position.Y;
 			//set happy sprite
-			normalSpt.Visible = false;
-			happySpt.Visible = true;
+			// normalSpt.Visible = false;
+			// happySpt.Visible = true;
 
 			StartVictoryLoop(true);
 		}

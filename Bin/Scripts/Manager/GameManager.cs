@@ -1,3 +1,4 @@
+using System;
 using Com.IsartDigital.OBG.Entity.Player;
 using Com.IsartDigital.OBG.Manager;
 using Com.IsartDigital.OBG.Tools;
@@ -44,7 +45,7 @@ namespace Com.IsartDigital.OBG.Manager
         }
         public void SetupGame()
         {
-            // gameUp            
+            // gameUp      
             gameUp.spawner.isDown = false;
             gameUp.player.isDownPos = false;
             gameUp.player.OnFoodCatch += (pCount, pIsDown) => hud.UpdateBar(pCount, pIsDown);

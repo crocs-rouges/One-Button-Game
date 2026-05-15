@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2aa3ib3vmkq3"]
+[gd_scene load_steps=7 format=3 uid="uid://b2aa3ib3vmkq3"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Food/FoodIngredients.cs" id="1_5jad6"]
 [ext_resource type="PackedScene" uid="uid://5ui26nsgywmb" path="res://Scenes/Entity/Food/Bread.tscn" id="2_2aq68"]
 [ext_resource type="PackedScene" uid="uid://bgvslcde2hlae" path="res://Scenes/Entity/Food/Cheese.tscn" id="3_m7xal"]
 [ext_resource type="PackedScene" uid="uid://b78o615sr6xsi" path="res://Scenes/Entity/Food/Ham.tscn" id="4_wm0mv"]
 [ext_resource type="PackedScene" uid="uid://d3524r8jnlyi7" path="res://Scenes/Entity/Food/Salad.tscn" id="5_ycfbh"]
+[ext_resource type="Texture2D" uid="uid://3k1p4rcoksy1" path="res://Assets/Food/Plate.png" id="6_75jri"]
 
 [node name="FoodIngredient" type="Control" node_paths=PackedStringArray("listFoodItem", "foodCountLbl")]
 layout_mode = 3
@@ -54,3 +55,17 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 61
 text = "3/5"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -345
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -336.0
+offset_top = -76.0
+offset_right = 314.0
+offset_bottom = 483.0
+grow_horizontal = 2
+texture = ExtResource("6_75jri")
+expand_mode = 1

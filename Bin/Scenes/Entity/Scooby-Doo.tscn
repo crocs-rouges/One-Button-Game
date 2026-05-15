@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctfrownu7tkrr"]
+[gd_scene load_steps=10 format=3 uid="uid://ctfrownu7tkrr"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/ScoobyPlayer.cs" id="1_ksm4f"]
 [ext_resource type="Texture2D" uid="uid://cd7oi5xxcsm4" path="res://icon.svg" id="2_acpql"]
+[ext_resource type="Texture2D" uid="uid://cdpa4xwywjgku" path="res://Assets/Player/PinguBasic.png" id="2_yro1a"]
+[ext_resource type="Texture2D" uid="uid://dag37rpf3yfcj" path="res://Assets/Player/PinguSad.png" id="4_n76p1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t7tbq"]
 size = Vector2(126, 126)
@@ -14,8 +16,9 @@ gradient = SubResource("Gradient_wvmhy")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n44cr"]
 particle_flag_disable_z = true
-initial_velocity_min = 100.0
-initial_velocity_max = 100.0
+direction = Vector3(1, -1, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
 gravity = Vector3(0, 98, 0)
 scale_min = 2.0
 scale_max = 20.0
@@ -23,30 +26,32 @@ color_initial_ramp = SubResource("GradientTexture1D_vmr8t")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hbf3f"]
 particle_flag_disable_z = true
-direction = Vector3(-1, 0, 0)
-initial_velocity_min = 100.0
-initial_velocity_max = 100.0
+direction = Vector3(-1, -1, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
 gravity = Vector3(0, 98, 0)
 scale_min = 2.0
 scale_max = 20.0
 color_initial_ramp = SubResource("GradientTexture1D_vmr8t")
 
-[node name="Scooby-doo" type="Node2D" node_paths=PackedStringArray("area", "normalSpt", "happySpt", "sadSpt", "cryParticle")]
+[node name="Scooby-doo" type="Node2D" node_paths=PackedStringArray("area", "normalSpt", "sadSpt", "cryParticle")]
 script = ExtResource("1_ksm4f")
 area = NodePath("Area2D")
 normalSpt = NodePath("Normal")
-happySpt = NodePath("Happy")
 sadSpt = NodePath("Sad")
 cryParticle = NodePath("Cry Particle")
 
 [node name="Normal" type="Sprite2D" parent="."]
-texture = ExtResource("2_acpql")
+scale = Vector2(0.118519, 0.118519)
+texture = ExtResource("2_yro1a")
 
 [node name="Happy" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_acpql")
 
 [node name="Sad" type="Sprite2D" parent="."]
-texture = ExtResource("2_acpql")
+scale = Vector2(0.112963, 0.112963)
+texture = ExtResource("4_n76p1")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -57,13 +62,13 @@ shape = SubResource("RectangleShape2D_t7tbq")
 visible = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Cry Particle"]
-position = Vector2(54, -55)
-amount = 20
+position = Vector2(36, -12)
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_n44cr")
 local_coords = true
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="Cry Particle"]
-position = Vector2(-59, -56)
-amount = 20
+position = Vector2(-35, -9)
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_hbf3f")
 local_coords = true

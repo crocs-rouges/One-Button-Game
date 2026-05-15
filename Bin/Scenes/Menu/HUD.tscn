@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://lemuybkfbqay" path="res://Assets/Mucho Party/Progress.png" id="3_4nmos"]
 [ext_resource type="Texture2D" uid="uid://2ylwhhu4ekt0" path="res://Assets/Mucho Party/BottomProgress.png" id="4_d84uk"]
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("topWhiteBar", "bottomWhiteBar", "timerLabel")]
+[node name="Hud" type="Control" node_paths=PackedStringArray("timerLabel", "topWhiteBar", "bottomWhiteBar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,9 +13,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8jysg")
+timerLabel = NodePath("Timer")
 topWhiteBar = NodePath("Top/White")
 bottomWhiteBar = NodePath("Bottom/White2")
-timerLabel = NodePath("Timer")
 
 [node name="YellowSideBar" type="TextureRect" parent="."]
 z_index = -30
@@ -144,6 +144,6 @@ offset_right = -78.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(25, 1114)
+pivot_offset = Vector2(25, 1024)
 texture = ExtResource("3_4nmos")
 expand_mode = 1

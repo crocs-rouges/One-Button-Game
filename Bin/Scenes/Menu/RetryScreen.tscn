@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://gkngicc42gnu"]
+[gd_scene load_steps=8 format=3 uid="uid://gkngicc42gnu"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/RetryScreen.cs" id="1_p2n2l"]
 [ext_resource type="Texture2D" uid="uid://d1eht4v43rspl" path="res://Assets/Menu/Background/background.png" id="1_r387p"]
 [ext_resource type="PackedScene" uid="uid://ctfrownu7tkrr" path="res://Scenes/Entity/Scooby-Doo.tscn" id="2_esbkx"]
 [ext_resource type="Texture2D" uid="uid://bpxe445hut61b" path="res://Assets/Mucho Party/RetryButton.png" id="2_jnql6"]
 [ext_resource type="Material" uid="uid://b42w60ykibpqs" path="res://Shader/GrayScale.tres" id="5_etpt0"]
+[ext_resource type="Texture2D" uid="uid://bkoiqv8jv7yyl" path="res://Assets/Player/PommeBasic.png" id="5_rjb7w"]
+[ext_resource type="Texture2D" uid="uid://ddhnfdh7icssr" path="res://Assets/Player/PommeSad.png" id="6_vhwpd"]
 
 [node name="RetryScreen" type="Control" node_paths=PackedStringArray("retrybtn", "backgroundUp", "backgroundDown", "upPlayer", "downPlayer")]
 layout_mode = 3
@@ -59,6 +61,12 @@ position = Vector2(750, 607)
 scale = Vector2(2, -2)
 area = NodePath("../../../Down/SubViewport/Up/Area2D")
 canMove = false
+
+[node name="Normal" parent="Up/SubViewport/Up" index="0"]
+texture = ExtResource("5_rjb7w")
+
+[node name="Sad" parent="Up/SubViewport/Up" index="2"]
+texture = ExtResource("6_vhwpd")
 
 [node name="Down" parent="Up/SubViewport" node_paths=PackedStringArray("area") instance=ExtResource("2_esbkx")]
 position = Vector2(350, 594)
@@ -118,8 +126,17 @@ scale = Vector2(2, 2)
 isDownPos = true
 canMove = false
 
+[node name="Normal" parent="Down/SubViewport/Up" index="0"]
+texture = ExtResource("5_rjb7w")
+
+[node name="Sad" parent="Down/SubViewport/Up" index="2"]
+texture = ExtResource("6_vhwpd")
+
 [node name="Down" parent="Down/SubViewport" instance=ExtResource("2_esbkx")]
 position = Vector2(775, 594)
 scale = Vector2(3.5, 3.5)
 isDownPos = true
 canMove = false
+
+[editable path="Up/SubViewport/Up"]
+[editable path="Down/SubViewport/Up"]
