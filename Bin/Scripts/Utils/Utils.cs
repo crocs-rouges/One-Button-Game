@@ -27,6 +27,7 @@ namespace Com.IsartDigital.OBG.Tools
         public const string TWEEN_ROTATION = "rotation";
         public const string TWEEN_VISIBLE = "visible";
         public const string TWEEN_MODULATE = "modulate";
+        public const string TWEEN_MODULATE_A = "modulate:a";
         public const string TWEEN_WIDTH = "width";
         public const string TWEEN_VALUE = "value";
         public const string TWEEN_ZOOM = "zoom";
