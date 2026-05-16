@@ -9,12 +9,11 @@ namespace Com.IsartDigital.OBG.Menus
 {
 	public partial class WinMenu : MenuBase
 	{
+		[ExportGroup("Label")]
 		[Export] private Label winLbl;
 		[Export] private Label looseLbl;
 		private Vector2 upPosition;
 		private Vector2 downPosition;
-
-
 
 		[Export] private GpuParticles2D starParticles;
 		private const float PARTICLE_MARGIN = 200f;

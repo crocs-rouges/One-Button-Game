@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://w76pm7sop57j"]
+[gd_scene load_steps=5 format=3 uid="uid://w76pm7sop57j"]
 
 [ext_resource type="Texture2D" uid="uid://cjqfpwo5ettbg" path="res://Assets/Mucho Party/painting.png" id="1_mjxht"]
 [ext_resource type="Script" path="res://Scripts/Menu/BeforeGame.cs" id="1_ph8ed"]
 [ext_resource type="PackedScene" uid="uid://dbcfglo7obef2" path="res://Scenes/Scooby-Doo Game.tscn" id="2_bylvb"]
+[ext_resource type="Texture2D" uid="uid://bolm3f0vb44wn" path="res://Assets/Mucho Party/bg_simpleplay.jpg" id="3_gr3xu"]
 
 [node name="BeforeGame" type="Control" node_paths=PackedStringArray("camera")]
 layout_mode = 3
@@ -15,13 +16,19 @@ script = ExtResource("1_ph8ed")
 camera = NodePath("Camera2D")
 movementDuration = 0.4
 
-[node name="TextureRect" type="Sprite2D" parent="."]
+[node name="Painting" type="Sprite2D" parent="."]
 z_index = -50
 position = Vector2(444, 1111)
 scale = Vector2(0.29181, 0.403892)
 texture = ExtResource("1_mjxht")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BlueBackground" type="Sprite2D" parent="."]
+z_index = -65
+position = Vector2(424, 1091.5)
+scale = Vector2(0.89375, 1.13229)
+texture = ExtResource("3_gr3xu")
+
+[node name="BlackBackground" type="ColorRect" parent="."]
 z_index = -100
 layout_mode = 1
 anchors_preset = 15

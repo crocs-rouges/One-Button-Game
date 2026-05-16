@@ -75,6 +75,7 @@ area = NodePath("../../../Down/SubViewport/Down/Area2D")
 canMove = false
 
 [node name="TextureButton" type="TextureButton" parent="."]
+z_index = 200
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -82,8 +83,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -188.0
-offset_top = -104.0
-offset_bottom = 104.0
+offset_top = -117.0
+offset_bottom = 91.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("2_jnql6")
@@ -137,6 +138,17 @@ position = Vector2(775, 594)
 scale = Vector2(3.5, 3.5)
 isDownPos = true
 canMove = false
+
+[node name="WhiteBar" type="ColorRect" parent="."]
+z_index = 20
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [editable path="Up/SubViewport/Up"]
 [editable path="Down/SubViewport/Up"]
