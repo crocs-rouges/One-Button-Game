@@ -1,6 +1,7 @@
 using System;
 using Com.IsartDigital.OBG.Entity.Player;
 using Com.IsartDigital.OBG.Manager;
+using Com.IsartDigital.OBG.Menus;
 using Com.IsartDigital.OBG.Tools;
 using Godot;
 
@@ -87,11 +88,12 @@ namespace Com.IsartDigital.OBG.Manager
 
             //show win screen
             Main lMain = Main.GetInstance();
-            Control lWinScreen = lMain.GoToWin();
+            WinMenu lWinScreen = lMain.GoToWin();
             if (lDownWins)
             {
-                lWinScreen.RotationDegrees = 180;
                 lMain.winnerIsDown = true;
+                // lWinScreen.RotationDegrees = 180;
+                lWinScreen.Open();
             }
             else lMain.winnerIsDown = false;
             SetProcess(false);

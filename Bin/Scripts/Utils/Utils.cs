@@ -45,7 +45,7 @@ namespace Com.IsartDigital.OBG.Tools
         public float middleScreenVertical;
         public const float ONE_SECOND = 1f;
         public const int FOOD_VICTORY_COUNT = 15;
-        public const float GAME_DURATION_IN_SECONDS = 45;
+        public const float GAME_DURATION_IN_SECONDS = 5;
 
         public static Utils GetInstance()
         {

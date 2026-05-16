@@ -56,7 +56,6 @@ namespace Com.IsartDigital.OBG.Manager
         {
             base._Ready();
             scaleYUpdate = 1.0f / Utils.FOOD_VICTORY_COUNT;
-            GD.Print($"scaleYUpdate : {scaleYUpdate}");
             topWhiteBar.Scale = new Vector2(1, scaleYUpdate);
             bottomWhiteBar.Scale = new Vector2(1, scaleYUpdate);
             if (timerLabel != null) timerLabel.PivotOffset = timerLabel.Size / 2f;

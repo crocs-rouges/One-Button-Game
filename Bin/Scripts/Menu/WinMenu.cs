@@ -9,9 +9,15 @@ namespace Com.IsartDigital.OBG.Menus
 {
 	public partial class WinMenu : MenuBase
 	{
-		[Export] private Label lblWin;
-		[Export] private Label lblLoose;
-		[Export] private GpuParticles2D particles;
+		[Export] private Label winLbl;
+		[Export] private Label looseLbl;
+		private Vector2 upPosition;
+		private Vector2 downPosition;
+
+
+
+		[Export] private GpuParticles2D starParticles;
+		private const float PARTICLE_MARGIN = 200f;
 		[Export] private ColorRect flash;
 		private const float SHAKE_STRENGTH = 30f;
 		private const float SHAKE_DURATION = 0.05f;
@@ -21,8 +27,9 @@ namespace Com.IsartDigital.OBG.Menus
 		public override void _Ready()
 		{
 			base._Ready();
-			Open();
 			ProcessMode = ProcessModeEnum.Always;
+			upPosition = winLbl.Position;
+			downPosition = looseLbl.Position;
 		}
 		public override void _Process(double pDelta)
 		{
@@ -30,8 +37,18 @@ namespace Com.IsartDigital.OBG.Menus
 		}
 		public override void Open()
 		{
+			if (Main.GetInstance().winnerIsDown)
+			{
+				winLbl.Position = downPosition;
+				winLbl.RotationDegrees += 180;
+
+				looseLbl.Position = upPosition;
+				looseLbl.RotationDegrees += 180;
+				starParticles.GlobalPosition = new Vector2(Utils.GetInstance().screenSize.X / 2, winLbl.GlobalPosition.Y + PARTICLE_MARGIN);
+				starParticles.RotationDegrees += 180;
+			}
 			base.Open();
-			if (particles != null) particles.Emitting = true;
+			if (starParticles != null) starParticles.Emitting = true;
 			if (flash != null)
 			{
 				flash.Visible = true;
@@ -40,8 +57,8 @@ namespace Com.IsartDigital.OBG.Menus
 				.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Quart);
 				lFlashTween.TweenCallback(Callable.From(() => flash.Visible = false));
 			}
-			AnimateLabel(lblWin);
-			AnimateLabel(lblLoose);
+			AnimateLabel(winLbl);
+			AnimateLabel(looseLbl);
 			ShakeScreen();
 		}
 		public override void Close()

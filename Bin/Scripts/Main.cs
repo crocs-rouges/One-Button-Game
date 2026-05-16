@@ -1,3 +1,4 @@
+using Com.IsartDigital.OBG.Menus;
 using Com.IsartDigital.OBG.Tools;
 using Godot;
 using System;
@@ -58,9 +59,9 @@ namespace Com.IsartDigital.OBG
 			uiContainer.AddChild(scnHUD.Instantiate());
 			gameContainer.AddChild(scnBeforeGame.Instantiate());
 		}
-		public Control GoToWin()
+		public WinMenu GoToWin()
 		{
-			Control lWin = scnWin.Instantiate() as Control;
+			WinMenu lWin = scnWin.Instantiate() as WinMenu;
 			uiContainer.AddChild(lWin);
 			GetTree().Paused = true;
 			return lWin;
