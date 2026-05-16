@@ -1,4 +1,5 @@
 using Com.IsartDigital.OBG.Tools;
+using Com.IsartDigital.OBG.Tools.Effects;
 using Godot;
 using System;
 
@@ -10,22 +11,23 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 	{
 		Bread, Ham, Salad, Cheese,
 	}
-
 	public partial class Food : Node2D
 	{
 		[Export] public FoodType type;
 		[Export] public bool canFall = true;
 		[Export] public float fallSpeed = 700;
-		[Export] private const float FOOD_DIVIDE_SIZE = 1.2f;
+		private const float FOOD_DIVIDE_SIZE = 1.2f;
 		private const float ROTATION_SPEED = 360f;
 
 		[ExportGroup("UI Ingredient")]
-		[Export] private CanvasItem foodSpt;
+		[Export] private Sprite2D foodSpt;
 		[Export] private Sprite2D checkmarkSpt;
-		private Material glowMaterial = GD.Load<Material>("res://Shader/GlowMaterial.tres");
-		private Material grayScaleMaterial = GD.Load<Material>("res://Shader/GrayScale.tres");
+		private static readonly Material glowMaterial = GD.Load<Material>("res://Shader/GlowOutlineMaterial.tres");
+		private static readonly Material grayScaleMaterial = GD.Load<Material>("res://Shader/GrayScale.tres");
 
 		[ExportGroup("Animation")]
+		[Export] private GpuParticles2D explosion;
+		[Export] private Trail trail;
 		private Tween juiceTween;
 		private Vector2 baseScale;
 		private Vector2 checkMarkbaseScale;
@@ -37,18 +39,20 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		{
 			base._Ready();
 			baseScale = Scale;
-			checkMarkbaseScale = checkmarkSpt.Scale;
+			if (checkmarkSpt != null) checkMarkbaseScale = checkmarkSpt.Scale;
 		}
 		public override void _Process(double pDelta)
 		{
 			float lDelta = (float)pDelta;
 			base._Process(pDelta);
-			if (canFall)
-			{
-				GlobalPosition += Vector2.Down * fallSpeed * lDelta;
-				if (GlobalPosition.Y > 2160 || GlobalPosition.Y < -2160) QueueFree();
-				RotationDegrees += ROTATION_SPEED * lDelta;
-			}
+			MoveFood(lDelta);
+		}
+		private void MoveFood(float pDelta)
+		{
+			if (!canFall) return;
+			GlobalPosition += Vector2.Down * fallSpeed * pDelta;
+			if (GlobalPosition.Y > 2160 || GlobalPosition.Y < -2160) QueueFree();
+			RotationDegrees += ROTATION_SPEED * pDelta;
 		}
 		public void Capture()
 		{
@@ -57,10 +61,22 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 			Area2D lArea = GetChild<Area2D>(0);
 			lArea.SetDeferred(Area2D.PropertyName.Monitorable, false);
 			lArea.SetDeferred(Area2D.PropertyName.Monitoring, false);
+			if (trail != null)
+			{
+				trail.QueueFree();
+				trail = null;
+			}
 		}
 		public void Explode()
 		{
-			QueueFree();
+			if (explosion != null) explosion.Emitting = true;
+			foodSpt.Visible = false;
+			explosion.Finished += QueueFree;
+			if (trail != null)
+			{
+				trail.QueueFree();
+				trail = null;
+			}
 		}
 		#region UI Ingredient
 		/// <summary>

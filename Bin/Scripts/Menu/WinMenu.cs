@@ -1,7 +1,5 @@
-using Com.IsartDigital.OBG.Menus;
 using Com.IsartDigital.OBG.Tools;
 using Godot;
-using System;
 
 // Author : Romain Chevalier
 
@@ -36,26 +34,10 @@ namespace Com.IsartDigital.OBG.Menus
 		}
 		public override void Open()
 		{
-			if (Main.GetInstance().winnerIsDown)
-			{
-				winLbl.Position = downPosition;
-				winLbl.RotationDegrees += 180;
-
-				looseLbl.Position = upPosition;
-				looseLbl.RotationDegrees += 180;
-				starParticles.GlobalPosition = new Vector2(Utils.GetInstance().screenSize.X / 2, winLbl.GlobalPosition.Y + PARTICLE_MARGIN);
-				starParticles.RotationDegrees += 180;
-			}
 			base.Open();
+			PlaceElement();
 			if (starParticles != null) starParticles.Emitting = true;
-			if (flash != null)
-			{
-				flash.Visible = true;
-				Tween lFlashTween = CreateTween();
-				lFlashTween.TweenProperty(flash, Utils.TWEEN_MODULATE_A, 0f, 0.5f).From(Utils.colorWhite)
-				.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Quart);
-				lFlashTween.TweenCallback(Callable.From(() => flash.Visible = false));
-			}
+			FlashAnimation();
 			AnimateLabel(winLbl);
 			AnimateLabel(looseLbl);
 			ShakeScreen();
@@ -64,7 +46,28 @@ namespace Com.IsartDigital.OBG.Menus
 		{
 			Main.GetInstance().GoToRetry();
 		}
+		private void PlaceElement()
+		{
+			if (!Main.GetInstance().winnerIsDown) return;
+			// win
+			winLbl.Position = downPosition;
+			winLbl.RotationDegrees += 180;
+			// loose
+			looseLbl.Position = upPosition;
+			looseLbl.RotationDegrees += 180;
+			starParticles.GlobalPosition = new Vector2(Utils.GetInstance().screenSize.X / 2, winLbl.GlobalPosition.Y + PARTICLE_MARGIN);
+			starParticles.RotationDegrees += 180;
+		}
 		#region Animation
+		private void FlashAnimation()
+		{
+			if (flash == null) return;
+			flash.Visible = true;
+			Tween lFlashTween = CreateTween();
+			lFlashTween.TweenProperty(flash, Utils.TWEEN_MODULATE_A, 0f, 0.5f).From(Colors.White)
+			.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Quart);
+			lFlashTween.TweenCallback(Callable.From(() => flash.Visible = false));
+		}
 		private void ShakeScreen()
 		{
 			Tween lTween = CreateTween();

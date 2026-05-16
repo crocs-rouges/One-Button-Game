@@ -6,7 +6,6 @@ namespace Com.IsartDigital.OBG.Menus
 {
     public partial class MenuBase : Control
     {
-        protected Tween menuTween;
         [Export] protected float movementDuration = 1f;
 
         public override void _Ready()
@@ -19,7 +18,7 @@ namespace Com.IsartDigital.OBG.Menus
             Visible = pVisible;
         }
         protected virtual void Back()
-        {            
+        {
             Close();
         }
         public virtual void Open()
@@ -28,9 +27,6 @@ namespace Com.IsartDigital.OBG.Menus
         }
         public virtual void Close()
         {
-            if (menuTween == null || !menuTween.IsValid()) menuTween = CreateTween();
-            menuTween.Parallel().TweenCallback(Callable.From(() => SetMenuVisible(false)))
-                    .SetDelay(movementDuration);
         }
         #endregion
     }

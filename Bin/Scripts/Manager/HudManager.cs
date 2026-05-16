@@ -16,7 +16,7 @@ namespace Com.IsartDigital.OBG.Manager
 
         [ExportGroup("Timer")]
         [Export] private Label timerLabel;
-        private const string TIME = "0 : ";
+        private const string TIMER_PREFIX = "0 : ";
         private int previousTime = -1;
         private const float TIMERL_ANIMATION_DURATION = 0.1f;
         private const float TIMER_BACK_DURATION = 0.2f;
@@ -65,7 +65,7 @@ namespace Com.IsartDigital.OBG.Manager
             if (timerLabel == null) return;
             int lCurrentTime = (int)pTime;
             if (lCurrentTime == previousTime) return;
-            timerLabel.Text = TIME + lCurrentTime;
+            timerLabel.Text = TIMER_PREFIX + lCurrentTime;
             previousTime = lCurrentTime;
 
             Tween lLabelTween = CreateTween();

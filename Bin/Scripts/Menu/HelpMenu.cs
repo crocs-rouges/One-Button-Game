@@ -15,7 +15,6 @@ namespace Com.IsartDigital.OBG.Menus
 		/// rotation speed in degrees per second
 		/// </summary>
 		[Export] private float rotationSpeed = 360f;
-
 		private Vector2 startAnimPos = new Vector2(1080 + 540, 0);
 
 		public override void _Ready()
@@ -25,9 +24,11 @@ namespace Com.IsartDigital.OBG.Menus
 		}
 		public override void _Process(double pDelta)
 		{
+			float lDelta = (float)pDelta;
+			base._Process(pDelta);
 			if (Input.IsActionJustPressed(Utils.PRESS)) Close();
-			backgroundUp.RotationDegrees += rotationSpeed * (float)pDelta;
-			backgroundDown.RotationDegrees += rotationSpeed * (float)pDelta;
+			backgroundUp.RotationDegrees += rotationSpeed * lDelta;
+			backgroundDown.RotationDegrees += rotationSpeed * lDelta;
 		}
 		public override void Open()
 		{
@@ -40,7 +41,6 @@ namespace Com.IsartDigital.OBG.Menus
 			Main lMain = Main.GetInstance();
 			lMain.GoToBeforeGame();
 			GoLeft(false);
-			// GoLeft(false).Finished += lMain.GoToLevel;
 		}
 		private Tween GoLeft(bool pIsEnter)
 		{

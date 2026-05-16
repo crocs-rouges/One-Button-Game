@@ -73,10 +73,10 @@ namespace Com.IsartDigital.OBG
 		}
 		private void ClearContainers()
 		{
-			KillChildredOfNode(gameContainer);
-			KillChildredOfNode(uiContainer);
+			KillChildrenOfNode(gameContainer);
+			KillChildrenOfNode(uiContainer);
 		}
-		private void KillChildredOfNode(Node pParent)
+		private void KillChildrenOfNode(Node pParent)
 		{
 			if (pParent == null) return;
 			foreach (Node lChild in pParent.GetChildren())

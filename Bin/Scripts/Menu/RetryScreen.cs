@@ -8,19 +8,17 @@ namespace Com.IsartDigital.OBG.Menus
 {
 	public partial class RetryScreen : MenuBase
 	{
-		[Export] private TextureButton retrybtn;
+		[Export] private TextureButton retryBtn;
 
 		[Export] private TextureRect backgroundUp;
 		[Export] private TextureRect backgroundDown;
 		[Export] private float rotationSpeed = 360f;
 
 		[ExportGroup("Player")]
-		[Export] private const float PLAYER_WIN_SCALE = 3.5f;
-		[Export] private const float PLAYER_LOOSE_SCALE = 2f;
+		private const float PLAYER_WIN_SCALE = 3.5f;
+		private const float PLAYER_LOOSE_SCALE = 2f;
 		[Export] private ScoobyPlayer[] upPlayer;
 		[Export] private ScoobyPlayer[] downPlayer;
-
-
 
 		public override void _Ready()
 		{
@@ -29,7 +27,7 @@ namespace Com.IsartDigital.OBG.Menus
 			PivotOffset = Size / 2f;
 
 			GetTree().Paused = false;
-			retrybtn.Pressed += Main.GetInstance().GoToHelpMenu;
+			retryBtn.Pressed += Main.GetInstance().GoToHelpMenu;
 
 			bool lWinnerIsDown = Main.GetInstance().winnerIsDown;
 			ScoobyPlayer[] lWinScoobies = lWinnerIsDown ? downPlayer : upPlayer;

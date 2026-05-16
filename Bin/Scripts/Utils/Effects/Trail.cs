@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Godot;
 
 namespace Com.IsartDigital.OBG.Tools.Effects

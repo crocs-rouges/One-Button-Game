@@ -46,7 +46,7 @@ namespace Com.IsartDigital.OBG
 			Food lFood = pFoodscn.Instantiate() as Food;
 			GetParent().CallDeferred(Node.MethodName.AddChild, lFood);
 			//give random position
-			float lPosX = Utils.rdG.RandfRange(startPos.X, endPos.X);
+			float lPosX = Utils.rnG.RandfRange(startPos.X, endPos.X);
 			lFood.GlobalPosition = new Vector2(lPosX, 0);
 			if (!isDown) lFood.fallSpeed *= -1f;
 		}
@@ -59,7 +59,7 @@ namespace Com.IsartDigital.OBG
 			objectToSpawn.Count() != percent.Count()) return;
 			//set chance variables
 			float lTotalChances = 100f;
-			float lRandomValue = Utils.rdG.RandfRange(0f, lTotalChances);
+			float lRandomValue = Utils.rnG.RandfRange(0f, lTotalChances);
 			float lCumulativeChance = 0f;
 			//loop for choosing an item
 			for (int i = 0; i < objectToSpawn.Count(); i++)

@@ -35,7 +35,8 @@ project/assembly_name="One Button Game"
 folder_colors={
 "res://Assets/": "green",
 "res://Scenes/": "yellow",
-"res://Scripts/": "blue"
+"res://Scripts/": "blue",
+"res://Shader/": "orange"
 }
 
 [input]

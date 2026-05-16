@@ -11,55 +11,52 @@ namespace Com.IsartDigital.OBG.Entity.Player
 {
 	public partial class ScoobyPlayer : Node2D
 	{
+		private float playerPreviousX = 0f;
 		[Export] private Area2D area;
 		[Export] public bool isDownPos = false;
 		[Export] public bool canMove = true;
 
 		[ExportGroup("Sprite")]
 		[Export] private Sprite2D normalSpt;
-		// [Export] private Sprite2D happySpt;
 		[Export] private Sprite2D sadSpt;
-
 
 
 		[ExportGroup("Food")]
 		[Export] private const float FOOD_POSITION = 20f;
 		public List<Food> foods = new List<Food>();
 		private int multiply = 1;
-		[Export] private const float FOOD_FOLLOW_SPEED = 50f;
-		[Export] private const float FOOD_MOVE_AMPLITUDE = 8f;
-		[Export] private const float FOOD_MOVE_SPEED = 25f;
+		private const float FOOD_FOLLOW_SPEED = 50f;
+		private const float FOOD_MOVE_AMPLITUDE = 8f;
+		private const float FOOD_MOVE_SPEED = 25f;
+		private const float VELOCITY_DIVIDE = 300f;
 		private float time;
-		private float previousX = 0f;
 		public Action<int, bool> OnFoodCatch { get; set; }
 
 		[ExportGroup("Animation")]
 		[Export] private Node2D cryParticle;
-		[Export] private const float JUMP_HEIGHT = 120f;
-		[Export] private const float JUMP_ROTATION = 15f;
-		[Export] private const float JUMP_SMALL_SCALE = 0.8f;
-		[Export] private const float JUMP_BIG_SCALE = 1.2f;
-		[Export] private const float JUMP_DURATION = 0.3f;
-		[Export] private const float FALL_DURATION = 0.25f;
-		[Export] private const float BACK_DURATION = 0.15f;
+		private const float JUMP_HEIGHT = 120f;
+		private const float JUMP_ROTATION = 15f;
+		private const float JUMP_SMALL_SCALE = 0.8f;
+		private const float JUMP_BIG_SCALE = 1.2f;
+		private const float JUMP_DURATION = 0.3f;
+		private const float FALL_DURATION = 0.25f;
+		private const float BACK_DURATION = 0.15f;
 		private float posGroundX;
 		private float posGroundY;
 
-		[Export] private const float CRY_DISTANCE = 60f;
-		[Export] private const float CRY_DURATION = 0.25f;
-		[Export] private const float CRY_ROTATION = 15f;
-		[Export] private const float CRY_SMALL_SCALE = 0.85f;
-		[Export] private const float CRY_BIG_SCALE = 1.1f;
-
+		private const float CRY_DISTANCE = 60f;
+		private const float CRY_DURATION = 0.25f;
+		private const float CRY_ROTATION = 15f;
+		private const float CRY_SMALL_SCALE = 0.85f;
+		private const float CRY_BIG_SCALE = 1.1f;
 
 		public override void _Ready()
 		{
 			base._Ready();
 			area.AreaEntered += CheckEnterArea;
-			previousX = GlobalPosition.X;
+			playerPreviousX = GlobalPosition.X;
 			ProcessMode = ProcessModeEnum.Always;
 			normalSpt.Visible = true;
-			// happySpt.Visible = false;
 			sadSpt.Visible = false;
 		}
 		public override void _Process(double pDelta)
@@ -74,12 +71,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			if (pEvent is InputEventScreenDrag lDrag)
 			{
 				Vector2 lMousePos = GetCanvasTransform().AffineInverse() * lDrag.Position;
-				if (isDownPos == Utils.IsInScreenDown(lMousePos))
-				{
-					// if (isDownPos && lMousePos.X < 0) return;
-					// else if (!isDownPos && lMousePos.X > 0) return;
-					MovePlayer(lMousePos);
-				}
+				if (isDownPos == Utils.IsInScreenDown(lMousePos)) MovePlayer(lMousePos);
 			}
 		}
 		private void MovePlayer(Vector2 pPos)
@@ -97,20 +89,24 @@ namespace Com.IsartDigital.OBG.Entity.Player
 		}
 		#endregion
 		#region Food
+		/// <summary>
+		/// make the effect of wobbling in the food stack
+		/// it moves with sin based on the player position
+		/// </summary>
+		/// <param name="pDelta"></param>
 		private void MoveFoodStack(float pDelta)
 		{
 			int lFoodCount = foods.Count;
 			if (lFoodCount == 0) return;
 
-			float lVelocityX = Mathf.Abs(GlobalPosition.X - previousX) / pDelta;
-			previousX = GlobalPosition.X;
-
-			float lMoveFactor = Mathf.Clamp(lVelocityX / 300f, 0f, 1f);
-
+			// speed of the player in this frame
+			float lVelocityX = Mathf.Abs(GlobalPosition.X - playerPreviousX) / pDelta;
+			playerPreviousX = GlobalPosition.X;
+			// multiply of the intensity of the wobble effect based on player speed
+			float lMoveFactor = Mathf.Clamp(lVelocityX / VELOCITY_DIVIDE, 0f, 1f);
 
 			time += pDelta;
 			multiply = isDownPos ? 1 : -1;
-
 			float lFoodShakePosX;
 			float lFoodTargetPosX;
 			Vector2 lFoodTargetPos;
@@ -119,11 +115,13 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				//previous food position
 				lFoodTargetPosX = (i == 0) ? GlobalPosition.X : foods[i - 1].GlobalPosition.X;
 				//adding SIN shake to food
-				lFoodShakePosX = Mathf.Sin(time * FOOD_MOVE_SPEED + i) * (FOOD_MOVE_AMPLITUDE * i) * lMoveFactor;
+				lFoodShakePosX = Mathf.Sin(time * FOOD_MOVE_SPEED + i) *
+				(FOOD_MOVE_AMPLITUDE * i) * lMoveFactor;
 
 				// Lerp to create trail effect
 				float lCurrentX = foods[i].GlobalPosition.X;
-				float lLerpedX = Mathf.Lerp(lCurrentX, lFoodTargetPosX + lFoodShakePosX, FOOD_FOLLOW_SPEED * pDelta);
+				float lLerpedX = Mathf.Lerp(lCurrentX, lFoodTargetPosX + lFoodShakePosX,
+				FOOD_FOLLOW_SPEED * pDelta);
 
 				//placing food on the right height based on position on the list
 				lFoodTargetPos = GlobalPosition + (Vector2.Up * (FOOD_POSITION * i) * multiply);
@@ -142,7 +140,8 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				if (lManager.TryAddFood(lFood.type))
 				{
 					foods.Add(lFood);
-					if (foods.Count == Utils.FOOD_VICTORY_COUNT) GameManager.GetInstance().CheckWin();
+					if (foods.Count == Utils.FOOD_VICTORY_COUNT)
+						GameManager.GetInstance().CheckWin();
 					lFood.Capture();
 					DropPlayer();
 				}
@@ -167,16 +166,6 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			Food lFood = foods[lFoodIndex];
 			foods.RemoveAt(lFoodIndex);
 			lFood.Explode();
-		}
-		private void RemoveSandwich()
-		{
-			int lFoodCount = foods.Count;
-			if (lFoodCount == 0) return;
-			for (int i = lFoodCount - 1; i >= 0; i--)
-			{
-				foods.RemoveAt(i);
-				foods[i].QueueFree();
-			}
 		}
 		#endregion
 		#region Animation

@@ -35,21 +35,18 @@ namespace Com.IsartDigital.OBG.Tools
         public const string TWEEN_VOLUME = "volume_db";
         public const string TWEEN_SIZE = "size";
 
-        [ExportGroup("Color")]
-        public static Color colorNothing = new Color(0, 0, 0, 0);
-        public static Color colorWhite = new Color(1, 1, 1, 1);
-
         [ExportGroup("Utils")]
-        public static RandomNumberGenerator rdG = new RandomNumberGenerator();
+        public static RandomNumberGenerator rnG = new RandomNumberGenerator();
         public Vector2 screenSize;
         public float middleScreenVertical;
         public const float ONE_SECOND = 1f;
         public const int FOOD_VICTORY_COUNT = 15;
-        public const float GAME_DURATION_IN_SECONDS = 5;
+        public const float GAME_DURATION_IN_SECONDS = 45;
 
         public static Utils GetInstance()
         {
             if (instance == null) instance = new Utils();
+            Main.GetInstance().AddChild(instance);
             return instance;
         }
         public override void _Ready()
@@ -112,47 +109,6 @@ namespace Com.IsartDigital.OBG.Tools
             lTimer.OneShot = true;
             lTimer.Start();
             return lTimer;
-        }
-        public static T GetRandomElementFromList<T>(List<T> pList)
-        {
-            if (pList == null || pList.Count == 0) return default;
-            int lMaxIndex = pList.Count - 1;
-            RandomNumberGenerator lRand = new RandomNumberGenerator();
-            return pList[lRand.RandiRange(0, lMaxIndex)];
-        }
-        public static T GetRandomElementFromArray<T>(T[] pList)
-        {
-            if (pList == null || pList.Length == 0) return default;
-            int lMaxIndex = pList.Length - 1;
-            RandomNumberGenerator lRand = new RandomNumberGenerator();
-            return pList[lRand.RandiRange(0, lMaxIndex)];
-        }
-        /// <summary>
-        /// Returns all the files from the given type in the given directory
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="pDirPath"></param>
-        /// <returns></returns>
-        public static List<T> GetAllFilesOfTypeInDir<T>(string pDirPath) where T : Resource
-        {
-            List<T> lList = new List<T>();
-            DirAccess lDir = DirAccess.Open(pDirPath);
-            if (lDir != null)
-            {
-                foreach (string lFileName in lDir.GetFiles())
-                {
-                    string lCleanName = lFileName;
-                    if (lFileName.EndsWith(IMPORT_FILE_EXTENSION))
-                        lCleanName = lFileName.Substring(0, lFileName.Length - IMPORT_FILE_EXTENSION.Length);
-                    else if (lFileName.EndsWith(REMAP_FILE_EXTENSION))
-                        lCleanName = lFileName.Substring(0, lFileName.Length - REMAP_FILE_EXTENSION.Length);
-                    T lRes = ResourceLoader.Load<T>(pDirPath + lCleanName);
-                    if (lRes != null && !lList.Contains(lRes))
-                        lList.Add(lRes);
-                }
-            }
-            else GD.Print("Folder does not exist.");
-            return lList;
         }
         protected override void Dispose(bool pDisposing)
         {

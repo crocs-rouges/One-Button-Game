@@ -21,7 +21,6 @@ namespace Com.IsartDigital.OBG
 		{
 			ZoomInAnimation().Finished += Main.GetInstance().GoToLevel;
 		}
-
 		private Tween ZoomInAnimation()
 		{
 			Tween lTween = CreateTween();

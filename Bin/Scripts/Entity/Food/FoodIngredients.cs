@@ -10,7 +10,7 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 	{
 		[Export] private Food[] listFoodItem;
 		[Export] private Label foodCountLbl;
-		private const string FOOD_COUNT = "/5";
+		private const string FOOD_COUNT_SUFFIX = "/5";
 		private int previousIndex = 0;
 		private const float LABEL_ANIMATION_DURATION = 0.1f;
 		private const float LABEL_BACK_DURATION = 0.2f;
@@ -45,7 +45,7 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 			if (pNewIndex > previousIndex) lTargetColor = Colors.Green;
 			else if (pNewIndex < previousIndex) lTargetColor = Colors.Red;
 			//update label and index
-			foodCountLbl.Text = pNewIndex + FOOD_COUNT;
+			foodCountLbl.Text = pNewIndex + FOOD_COUNT_SUFFIX;
 			previousIndex = pNewIndex;
 			// tween
 			Tween lLabelTween = CreateTween();

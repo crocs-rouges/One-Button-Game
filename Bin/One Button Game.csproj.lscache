@@ -61,29 +61,21 @@ Scripts/Entity/Food/
 Scripts/Entity/
  ObjectSpawner.cs
  ScoobyPlayer.cs
-Scripts/Enums/
- EMusicType.cs
- ESoundType.cs
 Scripts/
  Main.cs
  Manager/
   GameManager.cs
   HudManager.cs
   ScoobyDooGameManager.cs
-  SoundManager.cs
  Menu/
   BeforeGame.cs
   HelpMenu.cs
   MenuBase.cs
   RetryScreen.cs
-  SplashScreen.cs
   WinMenu.cs
  Utils/
-  Controls.cs
-  Effects/
-   Shaker.cs
-   Trail.cs
-  Localization/Traduction.cs
+  Effects/Trail.cs
+  Localization/Localization.cs
   Utils.cs
 
 [metadataReferences]

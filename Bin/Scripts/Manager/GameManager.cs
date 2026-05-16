@@ -63,7 +63,11 @@ namespace Com.IsartDigital.OBG.Manager
         {
             base._Process(pDelta);
             timer -= (float)pDelta;
-            if (timer <= 0) CheckWin(true);
+            if (timer <= 0)
+            {
+                CheckWin(true);
+                return;
+            }
             hud.ChangeTimer(timer);
         }
         public void CheckWin(bool pEndTimer = false)
@@ -89,13 +93,8 @@ namespace Com.IsartDigital.OBG.Manager
             //show win screen
             Main lMain = Main.GetInstance();
             WinMenu lWinScreen = lMain.GoToWin();
-            if (lDownWins)
-            {
-                lMain.winnerIsDown = true;
-                // lWinScreen.RotationDegrees = 180;
-                lWinScreen.Open();
-            }
-            else lMain.winnerIsDown = false;
+            lMain.winnerIsDown = lDownWins;
+            lWinScreen.Open();
             SetProcess(false);
         }
         protected override void Dispose(bool pDisposing)
