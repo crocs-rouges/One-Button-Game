@@ -112,6 +112,7 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			Vector2 lFoodTargetPos;
 			for (int i = lFoodCount - 1; i >= 0; i--)
 			{
+				if (!IsInstanceValid(foods[i])) continue;
 				//previous food position
 				lFoodTargetPosX = (i == 0) ? GlobalPosition.X : foods[i - 1].GlobalPosition.X;
 				//adding SIN shake to food

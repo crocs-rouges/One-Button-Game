@@ -64,7 +64,7 @@ namespace Com.IsartDigital.OBG.Menus
 			if (flash == null) return;
 			flash.Visible = true;
 			Tween lFlashTween = CreateTween();
-			lFlashTween.TweenProperty(flash, Utils.TWEEN_MODULATE_A, 0f, 0.5f).From(Colors.White)
+			lFlashTween.TweenProperty(flash, Utils.TWEEN_MODULATE_A, 0f, 0.5f).From(1f)
 			.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Quart);
 			lFlashTween.TweenCallback(Callable.From(() => flash.Visible = false));
 		}

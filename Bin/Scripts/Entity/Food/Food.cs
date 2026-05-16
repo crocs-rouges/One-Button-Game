@@ -69,6 +69,8 @@ namespace Com.IsartDigital.OBG.Entity.Aliments
 		}
 		public void Explode()
 		{
+			if (!IsInstanceValid(this) || IsQueuedForDeletion()) return;
+			SetProcess(false);
 			if (explosion != null) explosion.Emitting = true;
 			foodSpt.Visible = false;
 			explosion.Finished += QueueFree;

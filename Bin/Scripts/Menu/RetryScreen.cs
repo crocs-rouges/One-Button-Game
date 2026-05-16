@@ -27,7 +27,7 @@ namespace Com.IsartDigital.OBG.Menus
 			PivotOffset = Size / 2f;
 
 			GetTree().Paused = false;
-			retryBtn.Pressed += Main.GetInstance().GoToHelpMenu;
+			if (retryBtn != null) retryBtn.Pressed += Main.GetInstance().GoToHelpMenu;
 
 			bool lWinnerIsDown = Main.GetInstance().winnerIsDown;
 			ScoobyPlayer[] lWinScoobies = lWinnerIsDown ? downPlayer : upPlayer;

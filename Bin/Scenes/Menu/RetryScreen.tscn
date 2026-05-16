@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bkoiqv8jv7yyl" path="res://Assets/Player/PommeBasic.png" id="5_rjb7w"]
 [ext_resource type="Texture2D" uid="uid://ddhnfdh7icssr" path="res://Assets/Player/PommeSad.png" id="6_vhwpd"]
 
-[node name="RetryScreen" type="Control" node_paths=PackedStringArray("retrybtn", "backgroundUp", "backgroundDown", "upPlayer", "downPlayer")]
+[node name="RetryScreen" type="Control" node_paths=PackedStringArray("retryBtn", "backgroundUp", "backgroundDown", "upPlayer", "downPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(540, 1080)
 script = ExtResource("1_p2n2l")
-retrybtn = NodePath("TextureButton")
+retryBtn = NodePath("TextureButton")
 backgroundUp = NodePath("Up/SubViewport/Background")
 backgroundDown = NodePath("Down/SubViewport/Background")
 rotationSpeed = 180.0

@@ -31,12 +31,7 @@ namespace Com.IsartDigital.OBG.Manager
         }
         public static GameManager GetInstance()
         {
-            if (instance == null)
-            {
-                Node2D lGameManager = new Node2D();
-                lGameManager.SetScript(gameManagerScript);
-                instance = lGameManager as GameManager;
-            }
+            if (instance == null) instance = new GameManager();
             return instance;
         }
         public override void _Ready()

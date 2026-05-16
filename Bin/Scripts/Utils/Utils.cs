@@ -45,8 +45,11 @@ namespace Com.IsartDigital.OBG.Tools
 
         public static Utils GetInstance()
         {
-            if (instance == null) instance = new Utils();
-            Main.GetInstance().AddChild(instance);
+            if (instance == null)
+            {
+                instance = new Utils();
+                Main.GetInstance().CallDeferred(Node.MethodName.AddChild, instance);
+            }
             return instance;
         }
         public override void _Ready()
