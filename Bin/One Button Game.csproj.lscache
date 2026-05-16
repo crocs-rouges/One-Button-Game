@@ -239,9 +239,6 @@ Scripts/
  System.Xml.XPath.dll
  System.Xml.XPath.XDocument.dll
  WindowsBase.dll
-<NUGET>/
- godotsharp/4.2.2/lib/net6.0/GodotSharp.dll
- godotsharpeditor/4.2.2/lib/net6.0/GodotSharpEditor.dll
 
 [analyzerReferences]
 <DOTNET>/
@@ -249,7 +246,6 @@ Scripts/
  sdk/10.0.101/Sdks/Microsoft.NET.Sdk/analyzers/
   Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll
   Microsoft.CodeAnalysis.NetAnalyzers.dll
-<NUGET>/godot.sourcegenerators/4.2.2/analyzers/dotnet/cs/Godot.SourceGenerators.dll
 
 [analyzerConfigFiles]
 ../
