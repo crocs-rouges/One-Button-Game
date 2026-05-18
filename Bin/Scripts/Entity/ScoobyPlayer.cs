@@ -74,6 +74,10 @@ namespace Com.IsartDigital.OBG.Entity.Player
 				if (isDownPos == Utils.IsInScreenDown(lMousePos)) MovePlayer(lMousePos);
 			}
 		}
+		/// <summary>
+		/// move the player based on the position of the finger
+		/// </summary>
+		/// <param name="pPos"></param>
 		private void MovePlayer(Vector2 pPos)
 		{
 			if (!canMove) return;
@@ -81,6 +85,9 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			float lPosY = GlobalPosition.Y;
 			GlobalPosition = new Vector2(lPosX, lPosY);
 		}
+		/// <summary>
+		/// drop the player based on the number of food inside the list
+		/// </summary>
 		private void DropPlayer()
 		{
 			Vector2 lPos = GlobalPosition;
@@ -190,10 +197,6 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			canMove = false;
 			posGroundX = Position.X;
 			posGroundY = Position.Y;
-			//set happy sprite
-			// normalSpt.Visible = false;
-			// happySpt.Visible = true;
-
 			StartVictoryLoop(true);
 		}
 		private void StartVictoryLoop(bool pJumpLeft)
@@ -238,7 +241,6 @@ namespace Com.IsartDigital.OBG.Entity.Player
 			canMove = false;
 			posGroundX = Position.X;
 			posGroundY = Position.Y;
-
 			//set sad sprite
 			normalSpt.Visible = false;
 			sadSpt.Visible = true;
