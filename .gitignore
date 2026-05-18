@@ -27,6 +27,7 @@ export_presets.cfg
 *.rsuser
 *.suo
 *.user
+.qodo/
 *.userosscache
 *.sln.docstates
 [Dd]ebug/
